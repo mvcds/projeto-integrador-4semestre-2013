@@ -1,0 +1,11 @@
+#summary Introdução ao projeto
+
+= Introdução =
+
+Projeto Integrados da galera do 4º Semestre de TJD do SENAC (no primeiro semestre de 2013)
+
+
+= Detalhes =
+
+*Unity
+*Há uma enchete armagedônica onde é preciso sobreviver

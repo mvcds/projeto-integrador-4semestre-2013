@@ -9,8 +9,7 @@ public class GamePlay {
 	
 	private GamePlay()
 	{
-		//Setting Debugs
-		testList.Add(TestType.MoveThroughSolids, false);
+		playerQuest = null;
 	}
 	
 	/// <summary>
@@ -31,22 +30,7 @@ public class GamePlay {
 		}
 	}	
 	#endregion
-	
-	#region Game Tests and debugging	
-	private static  bool isTest = true;
-	private static Dictionary<TestType, bool> testList = new Dictionary<TestType, bool>();
-	
-	public enum TestType
-	{
-		MoveThroughSolids = 0
-	}		
-	
-	public bool isTestingFor(TestType t)
-	{
-		return (isTest && testList[t]);
-	}	
-	#endregion
-		
+			
 	#region Game Events & Progression
 	//TODO: implement game events/progression
 	/*
@@ -54,6 +38,9 @@ public class GamePlay {
 	 * Events
 	 * ...
 	 */
+	private Quest playerQuest;
+	public Quest PlayerQuest { get; set; }
+		
 	#endregion
 	
 	#region Game Settings

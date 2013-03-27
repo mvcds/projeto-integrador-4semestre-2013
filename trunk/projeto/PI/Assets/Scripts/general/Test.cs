@@ -1,21 +1,28 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using PI.General;
+
 
 public class Test : MonoBehaviour{
 	private static  bool isTest = true;
 	public bool moveThroughWalls;
 	public bool teleport;
+	public bool quest;
+	public bool hud;
 	
 	private static Dictionary<TestType, bool> testList = new Dictionary<TestType, bool>();
 	public enum TestType
 	{
 		MoveThroughSolids = 0,
-		Teleport
+		Teleport,
+		Quest,
+		HUD
 	}
 		
 	// Use this for initialization
 	void Start () {
+		GamePlay.Instance.PlayerQuest = null;
 		DontDestroyOnLoad(this);
 	}
 	
@@ -28,5 +35,7 @@ public class Test : MonoBehaviour{
 		testList.Clear();
 		testList.Add(TestType.MoveThroughSolids, moveThroughWalls);
 		testList.Add(TestType.Teleport, teleport);
+		testList.Add(TestType.Quest, quest);
+		testList.Add(TestType.HUD, hud);
 	}
 }

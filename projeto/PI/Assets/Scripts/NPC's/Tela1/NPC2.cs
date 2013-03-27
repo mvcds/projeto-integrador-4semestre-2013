@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using PI.General;
 
 public class NPC2 : MonoBehaviour {
 	

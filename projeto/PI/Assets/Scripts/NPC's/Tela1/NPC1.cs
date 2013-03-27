@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using PI.General;
+
 
 public class NPC1 : MonoBehaviour {
 	
@@ -14,7 +16,7 @@ public class NPC1 : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-	
+		
 	}
 	
 	// Update is called once per frame
@@ -49,7 +51,7 @@ public class NPC1 : MonoBehaviour {
 			GUI.Label (new Rect ( Screen.width / 2 - 100, Screen.height / 3, 100, 100), questDescription);
 			
 			if (GUI.Button (new Rect ( Screen.width / 2 - 150, Screen.height / 2, 100, 20), "Accept")) {
-				GamePlay.Instance.PlayerQuest = new Quest (questName, questDescription, questTime);
+				GamePlay.Instance.PlayerQuest = new Quest (0, questName, questDescription, questTime);
 				talk = false;
 			}
 			

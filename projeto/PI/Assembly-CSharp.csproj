@@ -44,6 +44,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Data\I_Commands.cs" />
+     <Compile Include="Assets\Scripts\Data\QuestXML.cs" />
      <Compile Include="Assets\Scripts\NPC&apos;s\Tela1\NPC1.cs" />
      <Compile Include="Assets\Scripts\NPC&apos;s\Tela1\NPC2.cs" />
      <Compile Include="Assets\Scripts\Objects\Quest.cs" />

@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using PI.Data.XML;
+using System;
 
 namespace PI.General
 {
@@ -12,12 +13,26 @@ namespace PI.General
 		
 		private GamePlay()
 		{
-			playerQuest = new Quest(-1, "Teste", "Teste de XML");
-			//TODO: load game(?)
-			//TODO: load quests		
-			//PI.Data.XML.Quest.Insert(null);
-			questControl.Create();
-			//throw new UnityException("teste");
+			string errors = "";
+			int element;
+			
+			//*Quests
+			element = 0;
+			foreach(object q in questControl.ListAll())
+			{
+				Quest quest = (Quest) q;
+				
+				foreach(Quest gQuest in Quests)
+				{
+					if (quest.ID != gQuest.ID)
+						errors += "Quest ID #" + quest.ID +  " is defined again at element " + element + "\n";
+				}
+				
+				Quests.Add(quest);
+			}
+			//*/
+			
+			XMLBase.WriteLog(errors);
 		}
 		
 		/// <summary>
@@ -51,9 +66,8 @@ namespace PI.General
 		private Quest playerQuest;
 		public Quest PlayerQuest { get; set; }
 		
-		private PI.Data.XML.Quest questControl = new PI.Data.XML.Quest();
-		
-		private List<Quest> questList;
+		private PI.Data.XML.Quest questControl = new PI.Data.XML.Quest();		
+		private List<Quest> questList = new List<Quest>();
 		
 		public List<Quest> Quests
 		{

@@ -9,51 +9,74 @@ using UnityEngine;
 
 namespace PI.Data.XML
 {
-	public class Quest: I_Commands
-	{		
-		#region Proprietirs
-		
-		private string path = "Data";
-		private string file = "Teste.txt";
-		
-		#endregion
-		
-		#region Operations
-			
-		public void Create()
+	public class Quest: XMLBase
+	{	
+		public Quest()
 		{
-			StreamWriter writter;
-			FileInfo f = new FileInfo(Application.dataPath + "/" + path + "/" + file);
-			if (f.Exists)
-				f.Delete();
-			writter = f.CreateText();
-			writter.Write("#test");
-			writter.Close();
+			path = "Data";
+			file = "quests";
 		}
 		
-		public void Insert(object o)
+		#region Overrided Methods			
+				
+		override public void Insert(object o)
 		{	
 			throw new NotImplementedException();
 		}
 		
-		public void Update(object o)
+		override public void Update(object o)
 		{
 			throw new NotImplementedException();
 		}
 		
-		public void Delete(object o)
+		override public void Delete(object o)
 		{
 			throw new NotImplementedException();
 		}
 		
-		public object Select(List<object> o)
+		override public object Select(List<object> o)
 		{
 			throw new NotImplementedException();
 		}
 		
-        public List<object> ListAll()
-		{
-			throw new NotImplementedException();
+        override public List<object> ListAll()
+		{	
+			List<object> r = new List<object>();
+			XmlDocument xml = new XmlDocument();
+			uint total = Count();
+			
+			xml.Load(FullPath());
+			for(int i = 0; i < total; i++)
+			{	
+				XmlNode node = xml.GetElementsByTagName("QUEST")[i];
+				
+				uint id = uint.Parse(node["ID"].InnerText);
+				string name = node["NAME"].InnerText;
+				string desc = node["DESCRIPTION"].InnerText;
+				int? t = null;
+					
+				//*Optional XML items
+				try
+				{
+					t = int.Parse(node["TIMER"]["SECONDS"].InnerText);
+				}
+				catch (Exception e)
+				{
+				}
+				
+			
+				if (t == null)
+				{
+					r.Add(new PI.General.Quest(id, name, desc));
+				}
+				else
+				{
+					r.Add(new PI.General.Quest(id, name, desc,(int)t));
+				}
+				//*/
+			}
+			return r;
+				
 		}
 		
 		#endregion

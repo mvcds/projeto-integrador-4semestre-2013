@@ -22,7 +22,9 @@ public class Test : MonoBehaviour{
 		
 	// Use this for initialization
 	void Start () {
-		GamePlay.Instance.PlayerQuest = null;
+		if (GamePlay.Instance.Quests.Count != Quest.Count)
+			throw new ExitGUIException();	
+		//GamePlay.Instance.PlayerQuest = null;		
 		DontDestroyOnLoad(this);
 	}
 	

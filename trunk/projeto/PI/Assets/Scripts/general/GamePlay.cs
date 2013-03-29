@@ -24,7 +24,7 @@ namespace PI.General
 				
 				foreach(Quest gQuest in Quests)
 				{
-					if (quest.ID != gQuest.ID)
+					if (quest.ID == gQuest.ID)
 						errors += "Quest ID #" + quest.ID +  " is defined again at element " + element + "\n";
 				}
 				

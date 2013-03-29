@@ -90,7 +90,7 @@ namespace PI.General
 			}
 		}	
 		
-		private QuestSituation Situation
+		public QuestSituation Situation
 		{
 			get
 			{

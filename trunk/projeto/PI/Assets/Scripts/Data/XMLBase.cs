@@ -47,7 +47,7 @@ namespace PI.Data.XML
 			return i;
 		}
 		
-		static public void WriteLog(string s)
+		static public void WriteErrorLog(string s)
 		{
 			if (s == null || s == "")
 				return;

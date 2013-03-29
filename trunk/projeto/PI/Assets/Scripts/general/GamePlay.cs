@@ -9,6 +9,7 @@ namespace PI.General
 	public class GamePlay {
 		
 		#region Singleton's Definition	
+		
 		private static GamePlay instance;
 		
 		private GamePlay()
@@ -17,7 +18,7 @@ namespace PI.General
 			int element;
 			
 			//*Quests
-			element = 0;
+			element = 1;
 			foreach(object q in questControl.ListAll())
 			{
 				Quest quest = (Quest) q;
@@ -29,10 +30,11 @@ namespace PI.General
 				}
 				
 				Quests.Add(quest);
+				element++;
 			}
 			//*/
-			
-			XMLBase.WriteLog(errors);
+						
+			XMLBase.WriteErrorLog(errors);
 		}
 		
 		/// <summary>
@@ -52,9 +54,23 @@ namespace PI.General
 				return instance;			
 			}
 		}	
+		
 		#endregion
 				
 		#region Game Events & Progression
+		
+		//TODO: implement it, loading all that was informed at game saving
+		public static void Load()
+		{
+			throw new NotImplementedException();
+		}
+		
+		//TODO: implement it, saving all needed information to continue the game
+		public static void Save()
+		{
+			throw new NotImplementedException();
+		}
+		
 		//TODO: implement game events/progression
 		/*
 		 * Mission System
@@ -62,9 +78,10 @@ namespace PI.General
 		 * ...
 		 */
 		
+		//TODO: break it on QuestControl
 		//TODO: refactor it
 		private Quest playerQuest;
-		public Quest PlayerQuest { get; set; }
+		//public Quest PlayerQuest { get; set; }
 		
 		private PI.Data.XML.Quest questControl = new PI.Data.XML.Quest();		
 		private List<Quest> questList = new List<Quest>();
@@ -79,18 +96,84 @@ namespace PI.General
 			{
 				questList = value;
 			}
-		}	
+		}
+		
+		public enum QuestError
+		{
+			NotDeclared = -1,
+			NotAvailable,
+			OtherInProgress,
+			Done
+		}
+		
+		public string Write(QuestError e)
+		{
+			switch (e)
+			{
+				case QuestError.NotDeclared:
+					break;
+				case QuestError.NotAvailable:
+				case QuestError.Done:
+					break;
+				case QuestError.OtherInProgress:
+					break;
+			}
+			return e.ToString();
+		}
+		
+		public Quest PlayerQuest{
+			get
+			{
+				return playerQuest;
+			}
+			set
+			{				
+				if (!value.IsAvailable())
+					throw new Exception(Write(QuestError.NotAvailable));
+				
+				if (value.IsDone())
+					throw new Exception(Write(QuestError.Done));					
+					
+				bool exists = false;
+				foreach (Quest quest in Quests)
+				{					
+					if (quest.IsInProgress())
+						throw new Exception(Write(QuestError.OtherInProgress));
+					if (value.ID == quest.ID)
+						exists = true;
+				}
+				
+				if (!exists)
+					throw new Exception(Write(QuestError.NotDeclared));
+				
+				playerQuest = value;
+			}
+		}
+		
+		public Quest QuestById(uint id)
+		{
+			foreach (Quest quest in Quests)
+			{			
+				if (quest.ID == id)
+					return quest;
+			}	
+			XMLBase.WriteErrorLog("Quest #" + id + ": " + Write(QuestError.NotDeclared));
+			return null;
+		}
 			
 		#endregion
 		
 		#region Game Settings
+		
 		//TODO: implement game settings
 		/*
 		 * Sound Effects
 		 * Music
 		 * Difficulty
 		 * ...
-		 */
+		 */		
+		public const int NPC_DISTANCE = 3;
+		
 		#endregion
 		
 		#region Game Inventory

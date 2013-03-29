@@ -12,6 +12,7 @@ public class Test : MonoBehaviour{
 	public bool hud;
 	
 	private static Dictionary<TestType, bool> testList = new Dictionary<TestType, bool>();
+	
 	public enum TestType
 	{
 		MoveThroughSolids = 0,
@@ -22,6 +23,7 @@ public class Test : MonoBehaviour{
 		
 	// Use this for initialization
 	void Start () {
+		//TODO: get it out of here
 		if (GamePlay.Instance.Quests.Count != Quest.Count)
 			throw new ExitGUIException();	
 		//GamePlay.Instance.PlayerQuest = null;		

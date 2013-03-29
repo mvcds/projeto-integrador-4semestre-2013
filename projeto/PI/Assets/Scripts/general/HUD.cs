@@ -46,7 +46,9 @@ namespace PI.General
 			// QUEST
 			if (GamePlay.Instance.PlayerQuest != null){
 				if (GamePlay.Instance.PlayerQuest.Timer.checkTime()){
-			    	GamePlay.Instance.PlayerQuest = null;
+			    	//TODO: timer's behaviour
+					//GamePlay.Instance.PlayerQuest = null;
+					
 				}
 			}
 		}

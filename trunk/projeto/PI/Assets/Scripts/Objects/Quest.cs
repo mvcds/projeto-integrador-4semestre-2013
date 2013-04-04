@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 namespace PI.General
 {
@@ -20,10 +21,10 @@ namespace PI.General
 		#region Proprieties
 		
 		private static uint count = 0;
-		private uint questID;
-		private string questName;
-		private string description;
-		private bool refusable;
+		private uint? questID = null;
+		private string questName = null;
+		private string description = null;
+		private bool? refusable = null;
 		//TODO: add behaviour to set when timer expires
 		private QuestTimer timer;
 		private QuestSituation situation;
@@ -34,10 +35,12 @@ namespace PI.General
 		{
 			get
 			{
-				return questID;
+				return (uint)questID;
 			}
 			private set
 			{
+				if (value == null)
+					throw new Exception("Valor nulo assinalado");
 				questID = value;
 			}
 		}
@@ -50,6 +53,8 @@ namespace PI.General
 			}
 			private set
 			{
+				if (value == null)
+					throw new Exception("Valor nulo assinalado");
 				questName = value;
 			} 
 		}
@@ -62,6 +67,8 @@ namespace PI.General
 			}
 			private set
 			{
+				if (value == null)
+					throw new Exception("Valor nulo assinalado");
 				description = value;
 			}
 		}
@@ -70,10 +77,12 @@ namespace PI.General
 		{
 			get
 			{
-				return refusable;
+				return (bool)refusable;
 			}
 			private set
 			{
+				if (value == null)
+					throw new Exception("Valor nulo assinalado");
 				refusable = value;
 			}
 		}
@@ -96,8 +105,10 @@ namespace PI.General
 			{
 				return situation;
 			}
-			set
+			private set
 			{
+				if (value == null)
+					throw new Exception("Valor nulo assinalado");
 				situation = value;
 			}
 		}
@@ -118,6 +129,10 @@ namespace PI.General
 		
 		#region Methods
 		
+		public Quest()
+		{
+		}
+		
 		public Quest(uint id, string name, string description){
 			StandardQuest(id, name, description);
 			this.Timer = null;
@@ -136,6 +151,13 @@ namespace PI.General
 			this.ID = id;
 			this.Name = name;
 			this.Description = description;
+		}
+		
+		public void SetAttr(uint id, string name, string description, int? seconds)
+		{
+			StandardQuest(id, name, description);
+			if (seconds != null)
+				this.Timer = new QuestTimer((int)seconds);			
 		}
 		
 		public bool MakeAvailable()

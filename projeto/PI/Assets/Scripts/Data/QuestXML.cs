@@ -13,8 +13,8 @@ namespace PI.Data.XML
 	{	
 		public Quest()
 		{
-			path = "Data";
-			file = "quests";
+			FilePath = "Data";
+			FileName = "quests";
 		}
 		
 		#region Overrided Methods			

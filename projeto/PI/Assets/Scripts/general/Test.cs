@@ -24,8 +24,6 @@ public class Test : MonoBehaviour{
 	// Use this for initialization
 	void Start () {
 		//TODO: get it out of here
-		if (GamePlay.Instance.Quests.Count != Quest.Count)
-			throw new ExitGUIException();	
 		//GamePlay.Instance.PlayerQuest = null;		
 		DontDestroyOnLoad(this);
 	}

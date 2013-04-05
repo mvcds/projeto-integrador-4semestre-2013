@@ -2,8 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-namespace PI.General
-{
+
 	public class Quest {
 		
 		#region Particularities
@@ -185,7 +184,29 @@ namespace PI.General
 		{
 			return (Situation == QuestSituation.Done);
 		}
+	
+		public bool Complete()
+		{
+			if (IsInProgress())
+			{
+				Situation = QuestSituation.Done;
+				return true;
+			}
+			return false;
+		}
+	
+	
+		public bool PutInProgress()
+		{
+			if (IsAvailable())
+			{
+				Situation = QuestSituation.InProgress;
+				if (timer != null)
+					timer.Run();
+				return true;
+			}
+			return false;
+		}
 		
 		#endregion
 	}
-}

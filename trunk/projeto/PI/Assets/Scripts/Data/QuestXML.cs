@@ -9,9 +9,9 @@ using UnityEngine;
 
 namespace PI.Data.XML
 {
-	public class Quest: XMLBase
+	public class QuestXML: XMLBase
 	{	
-		public Quest()
+		public QuestXML()
 		{
 			FilePath = "Data";
 			FileName = "quests";
@@ -67,11 +67,11 @@ namespace PI.Data.XML
 			
 				if (t == null)
 				{
-					r.Add(new PI.General.Quest(id, name, desc));
+					r.Add(new Quest(id, name, desc));
 				}
 				else
 				{
-					r.Add(new PI.General.Quest(id, name, desc,(int)t));
+					r.Add(new Quest(id, name, desc,(int)t));
 				}
 				//*/
 			}

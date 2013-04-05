@@ -1,8 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-namespace PI.General
-{
+
 	public class HUD : MonoBehaviour {
 		
 		public Texture2D star;
@@ -47,10 +46,10 @@ namespace PI.General
 			if (GamePlay.Instance.PlayerQuest != null){
 				if (GamePlay.Instance.PlayerQuest.Timer.checkTime()){
 			    	//TODO: timer's behaviour
+				//GamePlay.Instance.PlayerQuest.MakeAvailable();
 					//GamePlay.Instance.PlayerQuest = null;
 					
 				}
 			}
 		}
 	}
-}

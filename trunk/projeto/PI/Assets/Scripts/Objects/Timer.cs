@@ -5,11 +5,15 @@ public class QuestTimer {
 
 	private static long tempo;
 	private static int secs;
-   
+	   
     public QuestTimer(int segundos){
-        tempo = (long)Time.time;
-		secs = segundos;
+        secs = segundos;
     }
+	
+	public void Run()
+	{
+		tempo = (long)Time.time;
+	}
 	
     public bool checkTime() {
         if ((int)(secs - (Time.time - tempo))%60 <= 0){

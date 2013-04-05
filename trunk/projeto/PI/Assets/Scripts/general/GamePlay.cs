@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using PI.Data.XML;
 using System;
 
-namespace PI.General
-{
+
 	public class GamePlay {
 		
 		#region Singleton's Definition	
@@ -33,6 +32,7 @@ namespace PI.General
 				element++;
 			}
 			//*/
+			QuestById(1).MakeAvailable();
 						
 			XMLBase.WriteErrorLog(errors);
 		}
@@ -80,10 +80,10 @@ namespace PI.General
 		
 		//TODO: break it on QuestControl
 		//TODO: refactor it
-		private Quest playerQuest;
+		//private Quest playerQuest;
 		//public Quest PlayerQuest { get; set; }
-		
-		private PI.Data.XML.Quest questControl = new PI.Data.XML.Quest();		
+		private Quest playerQuest;
+		private PI.Data.XML.QuestXML questControl = new PI.Data.XML.QuestXML();		
 		private List<Quest> questList = new List<Quest>();
 		
 		public List<Quest> Quests
@@ -126,7 +126,7 @@ namespace PI.General
 			{
 				return playerQuest;
 			}
-			set
+			private set
 			{				
 				if (!value.IsAvailable())
 					throw new Exception(Write(QuestError.NotAvailable));
@@ -145,9 +145,18 @@ namespace PI.General
 				
 				if (!exists)
 					throw new Exception(Write(QuestError.NotDeclared));
-				
+					
+			
+				playerQuest.PutInProgress();
 				playerQuest = value;
 			}
+		}
+		
+	
+		public void setQuest(uint id)
+		{
+			playerQuest = QuestById(id);
+			QuestById(id).PutInProgress();
 		}
 		
 		public Quest QuestById(uint id)
@@ -196,4 +205,3 @@ namespace PI.General
 		 */
 		#endregion
 	}
-}

@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using PI.General;
 
 abstract public class NPC_Mouse : MonoBehaviour {
 	

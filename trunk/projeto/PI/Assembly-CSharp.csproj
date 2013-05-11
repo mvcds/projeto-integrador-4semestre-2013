@@ -47,6 +47,14 @@
      <Compile Include="Assets\Scripts\Data\QuestXML.cs" />
      <Compile Include="Assets\Scripts\Handler\FileHandler.cs" />
      <Compile Include="Assets\Scripts\Handler\XMLBase.cs" />
+     <Compile Include="Assets\Scripts\Menu\Button.cs" />
+     <Compile Include="Assets\Scripts\Menu\Login.cs" />
+     <Compile Include="Assets\Scripts\Menu\Menu.cs" />
+     <Compile Include="Assets\Scripts\Menu\btnComoJogar.cs" />
+     <Compile Include="Assets\Scripts\Menu\btnConfigurar.cs" />
+     <Compile Include="Assets\Scripts\Menu\btnIniciar.cs" />
+     <Compile Include="Assets\Scripts\Menu\btnSair.cs" />
+     <Compile Include="Assets\Scripts\NPC&apos;s\NPC_Accept.cs" />
      <Compile Include="Assets\Scripts\NPC&apos;s\NPC_Mouse.cs" />
      <Compile Include="Assets\Scripts\NPC&apos;s\NPC_Quest.cs" />
      <Compile Include="Assets\Scripts\Objects\Quest.cs" />

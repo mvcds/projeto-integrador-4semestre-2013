@@ -7,6 +7,7 @@ public class btnIniciar : Button {
 	
 	
 	protected override void Action(){
-		Debug.Log("No action has been implementes");
+		//Debug.Log("No action has been implementes");
+		Application.LoadLevel(1);
 	}
 }

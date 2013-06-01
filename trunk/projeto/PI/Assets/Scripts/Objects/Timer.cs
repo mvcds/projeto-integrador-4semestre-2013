@@ -3,11 +3,11 @@ using System.Collections;
 
 public class QuestTimer {
 
-	private static long tempo;
-	private static int secs;
-	   
+	private long tempo;
+	private int secs;
+	// Falta milisegundos para mais precisão   
     public QuestTimer(int segundos){
-        secs = segundos;
+        secs = segundos + 1;
     }
 	
 	public void Run()

@@ -20,11 +20,7 @@ namespace PI.Data.XML
 		#region Overrided Methods			
 				
 		override public void Insert(object o)
-		{				
-			List<object> r = new List<object>();
-			XmlDocument xml = new XmlDocument();
-			
-			
+		{	
 			throw new NotImplementedException();
 		}
 		
@@ -81,19 +77,6 @@ namespace PI.Data.XML
 			}
 			return r;
 				
-		}
-		
-		public uint LastID()
-		{
-			List<object> all = ListAll();
-			uint id = 0;
-			
-			foreach(Quest quest in all)
-			{
-				if (quest.ID > id)
-					id = quest.ID;
-			}
-			return id;
 		}
 		
 		#endregion

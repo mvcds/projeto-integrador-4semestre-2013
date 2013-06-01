@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using PI.Data.XML;
 using System;
 
-
 	public class GamePlay {
 		
 		#region Singleton's Definition	
@@ -47,10 +46,14 @@ using System;
 		{
 			get
 			{
+			
 				if (instance == null)
 				{
+				
 					instance = new  GamePlay();	
+				
 				}
+			
 				return instance;			
 			}
 		}	
@@ -124,6 +127,7 @@ using System;
 		public Quest PlayerQuest{
 			get
 			{
+			
 				return playerQuest;
 			}
 			private set
@@ -152,6 +156,9 @@ using System;
 			}
 		}
 		
+		public void removeQuest(){
+			playerQuest = null;
+		}
 	
 		public void setQuest(uint id)
 		{
@@ -183,6 +190,66 @@ using System;
 		 */		
 		public const int NPC_DISTANCE = 3;
 		
+		private bool _paused = false;
+	
+		public bool isPaused 
+		{
+			get 
+			{
+				return _paused;
+			}
+			private set
+			{
+				_paused = value;
+			}
+		}
+	
+		public void Pause(bool p) {
+			isPaused = p;
+		}
+	
+		private bool _canMove = false;
+	
+		public bool canMove
+		{
+			get {
+				return _canMove;
+			}
+			private set {
+				_canMove = value;
+			}
+		}
+	
+		public void LockPlayer(){
+			_canMove = false;
+		}
+	
+		public void UnlockPlayer(){
+			_canMove = true;
+		}
+	
+		private bool _showHUD = false;
+		
+		public bool canShowHUD
+		{
+			get {
+				return _showHUD;
+			}
+			private set {
+				_showHUD = value;
+			}
+		}
+	
+		public void HideHUD()
+		{
+			canShowHUD = false;
+		}
+	
+		public void ShowHUD()
+		{
+			canShowHUD = true;
+		}
+		
 		#endregion
 		
 		#region Game Inventory
@@ -203,5 +270,39 @@ using System;
 		 * Credits Screen
 		 * Etc
 		 */
+		#endregion
+	
+		#region Player Status
+		private int health = 100;
+		private int maxHealth = 100;
+	
+		public void applyDamage(int dmg){
+			health -= dmg;
+			if (health < 1){
+				health = 0;
+				// Dead
+			}
+		}
+	
+		public void death(){
+			health = 0;
+			//TODO
+		}
+	
+		public void recoverHealth(int amount){
+			health += amount;
+			if (health > maxHealth){
+				health = maxHealth;
+			}
+		}
+	
+		public int getHealth(){
+			return health;
+		}
+	
+		public int getMaxHealth(){
+			return maxHealth;
+		}
+	
 		#endregion
 	}

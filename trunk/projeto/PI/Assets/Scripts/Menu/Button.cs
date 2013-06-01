@@ -10,7 +10,9 @@ abstract public class Button : MonoBehaviour {
 		Hover,
 		Actived
 	}
-		
+	
+	public float t = 1;
+	
 	private States _state;
 	
 	public AudioSource actived_sound,
@@ -84,26 +86,29 @@ abstract public class Button : MonoBehaviour {
 	
 	protected abstract void Action();
 	
+	private	int x,y,width,height;
+	
 	void OnGUI()
 	{
 		if (show)
 		{
-			//TODO: MAPPING
-			int x = (int) place_size.x;
-			int y = (int) place_size.y;
-			int width = (int) place_size.width;
-			int height = (int) place_size.height;
-			
+			x = (int) (Screen.width * place_size.x/100);
+			y = (int) (Screen.height * place_size.y/100);
+			width = (int) (Screen.width * place_size.width/100);
+			height = (int)(Screen.height * place_size.height/100);
+								
 			Rect r = new Rect(x, y, width, height);
 			
-			if (GUI.RepeatButton(r, _shown_image, new GUIStyle()))
+			GUIStyle s = new GUIStyle();
+			s.border = new RectOffset(0, 0,0,0);
+			s.padding = new RectOffset(0,0,0,0);
+			
+			if (GUI.RepeatButton(r, _shown_image, s))
 				State = States.Actived;
 			else if (isMouseOver(r))
 				State = States.Hover;
 			else
 				State = States.Inactived;
-			
-		
 		}
 	}
 	

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class Apresentacao : MonoBehaviour {
 	
@@ -10,7 +11,11 @@ public class Apresentacao : MonoBehaviour {
 	void OnGUI(){	
 		if (!finished){
 			try
-			{
+			{				
+				if (GamePlay.Instance.canShowHUD)
+				{
+					throw new Exception();
+				}
 				GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), img[now]);
 			}
 			catch
@@ -30,6 +35,15 @@ public class Apresentacao : MonoBehaviour {
 					Finish();
 				}
 				now++;
+			}
+		}
+		else
+		{
+			if (Input.GetKeyDown(KeyCode.Escape))
+			{
+				GamePlay.Instance.recoverHealth(GamePlay.Instance.getMaxHealth());
+				GuardaChuva.Reset();
+				Application.LoadLevel(1);
 			}
 		}
 	}	

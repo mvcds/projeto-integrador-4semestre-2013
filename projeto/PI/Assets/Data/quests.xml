@@ -6,7 +6,7 @@
 		<DESCRIPTION>Vá até a farmácia e encontre o remédio para o Jãozinho. Você tem 2 minutos para completar esta missão</DESCRIPTION>
 		<TYPE>NONE</TYPE>
 		<TIMER>
-			<SECONDS>5</SECONDS>
+			<SECONDS>120</SECONDS>
 		</TIMER>
 		<IRRECUSABLE/>
 	</QUEST>

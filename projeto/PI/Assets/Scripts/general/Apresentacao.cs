@@ -48,7 +48,7 @@ public class Apresentacao : MonoBehaviour {
 						
 					//});
 					GamePlay.Instance.Pause(false);
-					Application.LoadLevel(1);
+					Application.LoadLevel(Application.loadedLevelName);
 				});
 			}
 		}

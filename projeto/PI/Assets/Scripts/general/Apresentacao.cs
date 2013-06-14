@@ -41,9 +41,14 @@ public class Apresentacao : MonoBehaviour {
 		{
 			if (Input.GetKeyDown(KeyCode.Escape))
 			{
-				GamePlay.Instance.recoverHealth(GamePlay.Instance.getMaxHealth());
-				GuardaChuva.Reset();
-				Application.LoadLevel(1);
+				CameraFade.StartAlphaFade( Color.white, false, 1f, 0f, () => {
+					GamePlay.Instance.recoverHealth(GamePlay.Instance.getMaxHealth());
+					//GuardaChuva.Reset();
+					//CameraFade.StartAlphaFade( Color.clear, false, 1f, 0f, () => {												
+						
+					//});
+					Application.LoadLevel(1);
+				});
 			}
 		}
 	}	

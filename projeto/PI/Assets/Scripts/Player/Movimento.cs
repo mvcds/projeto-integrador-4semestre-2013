@@ -17,8 +17,6 @@ public class Movimento : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!GamePlay.Instance.canMove)
-			return;
 		
 		if (!GamePlay.Instance.isPaused) {
 			// Updates
@@ -42,9 +40,10 @@ public class Movimento : MonoBehaviour {
 		}
 		
 		// Pause
-		if (Input.GetKeyDown(KeyCode.Return)) {
-			GamePlay.Instance.Pause(!GameObject.Find("Background Camera").camera.enabled);
-			GameObject.Find("Background Camera").camera.enabled = GamePlay.Instance.isPaused;
+		if (Input.GetKeyDown(KeyCode.Return) && GamePlay.Instance.canShowHUD) {
+			bool paused = !GameObject.Find("Background Camera").camera.enabled;
+			GamePlay.Instance.Pause(paused);
+			GameObject.Find("Background Camera").camera.enabled = paused;
 			pause.Play();
 			// Pauser Jogo Inteiro
 		}

@@ -55,14 +55,4 @@ public static class GuardaChuva{
 	public static bool getGC(){
 		return gc;
 	}
-	
-	public static void Reset()
-	{
-		gc  = false;
-		cdAtivo = false;
-		tGC  = 0;
-		tDuracao = 10;
-		tCD = 5;
-		cdGC  = 0;
-	}
 }

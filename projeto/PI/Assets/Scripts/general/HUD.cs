@@ -54,8 +54,6 @@ using System.Collections;
 		}
 		
 		void OnGUI(){
-			if (!GamePlay.Instance.canShowHUD)
-				return;
 			// QUEST
 			if (GamePlay.Instance.PlayerQuest != null){
 			

@@ -94,6 +94,6 @@ public class NPC_Quest : MonoBehaviour {
 		canClick = false;
 	}
 	
-	}
+}
 	
 

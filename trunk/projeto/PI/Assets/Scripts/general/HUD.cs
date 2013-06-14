@@ -27,6 +27,8 @@ using System.Collections;
 	
 		private Texture2D pauseContinue;
 		private Texture2D pauseExit;
+	
+		private int questTimeLimit  = 20;
 			
 		// Use this for initialization
 		void Start () {
@@ -52,45 +54,13 @@ using System.Collections;
 		}
 		
 		void OnGUI(){
-			// QUEST
 			if (!GamePlay.Instance.canShowHUD)
 				return;
-			if (GamePlay.Instance.PlayerQuest != null){
 			
-				GUIStyle myStyle = new GUIStyle();
-				myStyle.font = font;
-				myStyle.fontSize = 22;
-			
-				if (GamePlay.Instance.PlayerQuest.Timer.checkTime()){
-					// Cabo o tempo da quest
-					GamePlay.Instance.QuestById((uint)GamePlay.Instance.PlayerQuest.ID).Failure();
-				}
-				if (GamePlay.Instance.PlayerQuest.Timer.getMinutos() == 0 & GamePlay.Instance.PlayerQuest.Timer.getSegundos() < 20){
-					GUI.Label (new Rect (Screen.width / 2 - (redTimer.width / 2), 5, redTimer.width, redTimer.height), redTimer);
-					myStyle.normal.textColor = Color.white;
-				} else {
-					GUI.Label (new Rect (Screen.width / 2 - (greenTimer.width / 2), 5, greenTimer.width, greenTimer.height), greenTimer);
-			    }
-			
-				GUI.Box (new Rect (Screen.width / 2 - (greenTimer.width / 2) + 15, 23, 120, 30), GamePlay.Instance.PlayerQuest.Timer.getTempo(), myStyle);
-				
-				GUI.Box (new Rect (Screen.width - 200, Screen.height / 2, 200, 150), GamePlay.Instance.PlayerQuest.Name);
-				GUI.Label (new Rect ( Screen.width - 180, Screen.height / 2 + 20, 180, 150), GamePlay.Instance.PlayerQuest.Description);
-			} 
-			
-			// HEALTH BAR
-			if (GamePlay.Instance.getHealth() > GamePlay.Instance.getMaxHealth() / 5){
-				customBox.normal.background = greenBar;
-				customBox2.normal.background = greenBorder;	
-			
-			} else {
-				customBox.normal.background = redBar;
-				customBox2.normal.background = redBorder;	
-			}
-			GUI.Box (new Rect (Screen.width - 409, 20, (GamePlay.Instance.getHealth() * GamePlay.Instance.getMaxHealth() * 4) / 100 , 30), "", customBox);
-			GUI.Box (new Rect (Screen.width - 410, 10, 400, 50), "", customBox2);
-			
-			// INVENTORY
+			Quest();			
+			HealthBar();
+		
+			//* INVENTORY
 			if (GuardaChuva.getGC()){
 				if (GUI.Button (new Rect ( 20, Screen.height - 20 - umbOn.height, umbOn.width, umbOn.height), umbOn, new GUIStyle() )){
 					umbDisplay = false;
@@ -120,8 +90,9 @@ using System.Collections;
 					diveDisplay = true;
 				}
 			}
+			//*/
 		
-			// PAUSE
+			//* PAUSE
 		
 			
 			if (GamePlay.Instance.isPaused){				
@@ -129,10 +100,12 @@ using System.Collections;
 					GamePlay.Instance.Pause(false);
 				}
 				if (GUI.Button (new Rect ( Screen.width / 2 - (pauseExit.width / 2) + 100, Screen.height / 2 - 80, pauseExit.width, pauseExit.height), pauseExit, new GUIStyle())){
-					Application.Quit();
+					//Application.Quit();
+					GamePlay.Instance.Pause(false);
+					Application.LoadLevel(0);
 				}
 			}
-		
+			//*/
 		
 		}
 		
@@ -153,5 +126,49 @@ using System.Collections;
 					
 				}
 			}
+		}
+	
+		void Quest() {		
+			if (GamePlay.Instance.PlayerQuest != null){
+			
+				GUIStyle myStyle = new GUIStyle();
+				myStyle.font = font;
+				myStyle.fontSize = 22;
+			
+				if (GamePlay.Instance.PlayerQuest.Timer != null){
+					if (GamePlay.Instance.PlayerQuest.Timer.checkTime()){
+						// Acabo o tempo da quest
+						GamePlay.Instance.QuestById((uint)GamePlay.Instance.PlayerQuest.ID).Failure();
+						return;
+					}
+					else 
+					{
+						if (GamePlay.Instance.PlayerQuest.Timer.getMinutos() == 0 & GamePlay.Instance.PlayerQuest.Timer.getSegundos() < questTimeLimit){
+							GUI.Label (new Rect (Screen.width / 2 - (redTimer.width / 2), 5, redTimer.width, redTimer.height), redTimer);
+							myStyle.normal.textColor = Color.white;
+						} else {
+							GUI.Label (new Rect (Screen.width / 2 - (greenTimer.width / 2), 5, greenTimer.width, greenTimer.height), greenTimer);
+					    }
+					}
+					GUI.Box (new Rect (Screen.width / 2 - (greenTimer.width / 2) + 15, 23, 120, 30), GamePlay.Instance.PlayerQuest.Timer.getTempo(), myStyle);
+				}
+				GUI.Box (new Rect (Screen.width - 200, Screen.height / 2, 200, 150), GamePlay.Instance.PlayerQuest.Name);
+				GUI.Label (new Rect ( Screen.width - 180, Screen.height / 2 + 20, 180, 150), GamePlay.Instance.PlayerQuest.Description);			
+			}	
+		}
+	
+		void HealthBar(){
+			//* HEALTH BAR
+			if (GamePlay.Instance.getHealth() > GamePlay.Instance.getMaxHealth() / 5){
+				customBox.normal.background = greenBar;
+				customBox2.normal.background = greenBorder;	
+			
+			} else {
+				customBox.normal.background = redBar;
+				customBox2.normal.background = redBorder;	
+			}
+			GUI.Box (new Rect (Screen.width - 409, 20, (GamePlay.Instance.getHealth() * GamePlay.Instance.getMaxHealth() * 4) / 100 , 30), "", customBox);
+			GUI.Box (new Rect (Screen.width - 410, 10, 400, 50), "", customBox2);
+			//*/
 		}
 	}

@@ -66,17 +66,15 @@
      <Compile Include="Assets\Scripts\Player\Movimento.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMove.cs" />
      <Compile Include="Assets\Scripts\Player\Quest.cs" />
-     <Compile Include="Assets\Scripts\Tools\Grid.cs" />
-     <Compile Include="Assets\Scripts\Tools\QuestTool.cs" />
-     <Compile Include="Assets\Scripts\Tools\SceneDumper.cs" />
      <Compile Include="Assets\Scripts\general\Apresentacao.cs" />
+     <Compile Include="Assets\Scripts\general\CameraFade.cs" />
      <Compile Include="Assets\Scripts\general\GameDesignTester.cs" />
      <Compile Include="Assets\Scripts\general\GamePlay.cs" />
      <Compile Include="Assets\Scripts\general\HUD.cs" />
      <Compile Include="Assets\Scripts\general\MiniMap.cs" />
      <Compile Include="Assets\Scripts\general\Test.cs" />
-     <None Include="Assets\ErrorLog.txt" />
      <None Include="Assets\Objects.txt" />
+     <None Include="Assets\ErrorLog.txt" />
      <None Include="Assets\Standard Assets\Water (Basic)\Sources\Shaders\FX-Water Simple.shader" />
      <None Include="Assets\Data\quests.xml" />
   </ItemGroup>

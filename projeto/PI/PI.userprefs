@@ -1,9 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Menu\Button.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\general\HUD.cs">
     <Files>
-      <File FileName="Assets\Scripts\Menu\btnComoJogar.cs" Line="13" Column="1" />
-      <File FileName="Assets\Scripts\Menu\Button.cs" Line="52" Column="29" />
+      <File FileName="Assets\Scripts\Editor\InsertQuest.cs" Line="52" Column="4" />
+      <File FileName="Assets\Scripts\general\HUD.cs" Line="153" Column="6" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

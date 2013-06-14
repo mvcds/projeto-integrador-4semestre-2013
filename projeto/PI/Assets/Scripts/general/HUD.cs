@@ -49,12 +49,12 @@ using System.Collections;
 		
 			pauseContinue = (Texture2D)Resources.Load("Images/HUD/Pause/pauseContinue");
 			pauseExit = (Texture2D)Resources.Load("Images/HUD/Pause/pauseExit");
-		
-		
 		}
 		
 		void OnGUI(){
 			// QUEST
+			if (!GamePlay.Instance.canShowHUD)
+				return;
 			if (GamePlay.Instance.PlayerQuest != null){
 			
 				GUIStyle myStyle = new GUIStyle();
@@ -122,12 +122,11 @@ using System.Collections;
 			}
 		
 			// PAUSE
-			if (GamePlay.Instance.isPaused){
-				
+		
+			
+			if (GamePlay.Instance.isPaused){				
 				if (GUI.Button( new Rect ( Screen.width / 2 - (pauseContinue.width / 2) - 100, Screen.height / 2 - 80, pauseContinue.width, pauseContinue.height), pauseContinue, new GUIStyle())){
 					GamePlay.Instance.Pause(false);
-					GameObject.Find("Background Camera").camera.enabled = GamePlay.Instance.isPaused;
-			
 				}
 				if (GUI.Button (new Rect ( Screen.width / 2 - (pauseExit.width / 2) + 100, Screen.height / 2 - 80, pauseExit.width, pauseExit.height), pauseExit, new GUIStyle())){
 					Application.Quit();
@@ -143,7 +142,7 @@ using System.Collections;
 			/*if (vida >= 0){
 				vida--;
 			}*/
-			
+			GameObject.Find("Background Camera").camera.enabled = GamePlay.Instance.isPaused;
 			
 			// QUEST
 			if (GamePlay.Instance.PlayerQuest != null){

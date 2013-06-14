@@ -47,6 +47,7 @@ public class Apresentacao : MonoBehaviour {
 					//CameraFade.StartAlphaFade( Color.clear, false, 1f, 0f, () => {												
 						
 					//});
+					GamePlay.Instance.Pause(false);
 					Application.LoadLevel(1);
 				});
 			}

@@ -30,7 +30,7 @@ public class Movimento : MonoBehaviour {
 			
 			// Pulo
 			if (Input.GetKeyDown(KeyCode.Space) &&  Physics.Raycast(transform.position, -Vector3.up, 1)) {
-				rigidbody.AddForce(Vector3.up * jumpHeight);
+				//rigidbody.AddForce(Vector3.up * jumpHeight);
 			}
 			
 			// Guarda-Chuva

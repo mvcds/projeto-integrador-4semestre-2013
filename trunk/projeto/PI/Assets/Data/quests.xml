@@ -2,10 +2,13 @@
 <QUEST_LIST>
 	<QUEST>
 		<ID>1</ID>
-		<NAME>QUEST #1</NAME>
-		<DESCRIPTION>Our first goal is to make it readable</DESCRIPTION>
+		<NAME>Remédio do Jãozinho</NAME>
+		<DESCRIPTION>Vá até a farmácia e encontre o remédio para o Jãozinho. Você tem 2m para completar esta missão</DESCRIPTION>
 		<TYPE>NONE</TYPE>
-		<IRRECUSABLE/>	
+		<TIMER>
+			<SECONDS>120</SECONDS>
+		</TIMER>
+		<IRRECUSABLE/>
 	</QUEST>
 	<QUEST>
 		<ID>2</ID>

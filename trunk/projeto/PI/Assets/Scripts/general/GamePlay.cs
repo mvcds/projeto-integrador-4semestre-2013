@@ -208,7 +208,7 @@ using System;
 			isPaused = p;
 		}
 	
-		private bool _canMove = false;
+	    private bool _canMove = false;
 	
 		public bool canMove
 		{
@@ -249,7 +249,7 @@ using System;
 		{
 			canShowHUD = true;
 		}
-		
+	
 		#endregion
 		
 		#region Game Inventory

@@ -33,6 +33,8 @@ public class Cerca : MonoBehaviour {
 		
 		if (c.name == "Player" ){
 			if (timerDelay.checkTime()){
+				c.rigidbody.AddForce(c.transform.forward * -500);
+				c.rigidbody.AddForce(c.transform.up * 200);
 				som.Play();
 				timerDelay = new QuestTimer(delay);
 				timerDelay.Run();

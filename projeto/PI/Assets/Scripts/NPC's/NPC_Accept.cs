@@ -21,7 +21,7 @@ using System;
 	void OnMouseOver()
 	{
 		//Distance
-		if (GamePlay.Instance.QuestById((uint)npcID).IsInProgress())
+		if (!GamePlay.Instance.QuestById((uint)npcID).IsDisabled())
 		{
 			canClick = (Vector3.Distance(transform.position, player.transform.position) < GamePlay.NPC_DISTANCE * area);
 			if (canClick && Input.GetMouseButton(0)) {
@@ -36,20 +36,32 @@ using System;
 	}
 		
 	void OnGUI(){
-		if (talk && GamePlay.Instance.QuestById((uint)npcID).IsInProgress()) {
-			GUI.Box (new Rect (Screen.width / 2 - 200, Screen.height / 3 - 150, 400, 300), GamePlay.Instance.QuestById((uint)npcID).Name + " Completada!");
-			
-			//GUI.Label (new Rect ( Screen.width / 2 - 100, Screen.height / 3, 100, 100), quest.Description);
-						
-			if (GUI.Button (new Rect ( Screen.width / 2 - 150, Screen.height / 2, 100, 20), "Ok")) {
-				GamePlay.Instance.QuestById((uint)npcID).Complete();
-				complete.Play();				
-				talk = false;
+		if (talk) {
+			if (GamePlay.Instance.QuestById((uint)npcID).IsInProgress()) {
+				GUI.Box (new Rect (Screen.width / 2 - 200, Screen.height / 3 - 150, 400, 300), GamePlay.Instance.QuestById((uint)npcID).Name + " Completada!");							
+				if (GUI.Button (new Rect ( Screen.width / 2 - 150, Screen.height / 2, 100, 20), "Ok")) {
+					GamePlay.Instance.QuestById((uint)npcID).Complete();
+					complete.Play();				
+					talk = false;
+				}
 			}
-			
+			else if (GamePlay.Instance.QuestById((uint)npcID).IsDone())
+			{
+				GUI.Box (new Rect (Screen.width / 2 - 200, Screen.height / 3 - 150, 400, 300), "Prototype's been completed!");	
+				if (GUI.Button (new Rect ( Screen.width / 2 - 150, Screen.height / 2, 100, 20), "Ok")) {
+					talk = false;
+				}
+			}
+			else
+			{
+				GUI.Box (new Rect (Screen.width / 2 - 200, Screen.height / 3 - 150, 400, 300), "Cof, cof... Estou doente!");							
+				if (GUI.Button (new Rect ( Screen.width / 2 - 150, Screen.height / 2, 100, 20), "Ok")) {
+					talk = false;
+				}
+			}
 		}
 		
-		if (canClick && GamePlay.Instance.QuestById((uint)npcID).IsInProgress()){
+		if (canClick && !GamePlay.Instance.QuestById((uint)npcID).IsDisabled()){
 			GUI.Label (new Rect (Input.mousePosition.x, Screen.height - Input.mousePosition.y, 100, 100), hoverMark);
 		}
 	}

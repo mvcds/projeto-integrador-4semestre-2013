@@ -185,6 +185,11 @@ using System;
 			return (Situation == QuestSituation.Done);
 		}
 	
+		public bool IsDisabled()
+		{
+			return (Situation == QuestSituation.Disabled);
+		}
+	
 		public bool Complete()
 		{
 			if (IsInProgress())

@@ -5,11 +5,11 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{91AC1F95-B110-CBC9-E811-6CC5E294FC3B}</ProjectGuid>
+	<ProjectGuid>{05355DCD-7512-3BDA-BE7A-7880A85C68D5}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
-	<AssemblyName>Assembly-CSharp</AssemblyName>
+	<AssemblyName>Assembly-CSharp-Editor</AssemblyName>
 	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
 	<FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -44,45 +44,23 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Data\QuestXML.cs" />
-     <Compile Include="Assets\Scripts\Handler\FileHandler.cs" />
-     <Compile Include="Assets\Scripts\Handler\XMLBase.cs" />
-     <Compile Include="Assets\Scripts\Menu\Button.cs" />
-     <Compile Include="Assets\Scripts\Menu\Login.cs" />
-     <Compile Include="Assets\Scripts\Menu\Menu.cs" />
-     <Compile Include="Assets\Scripts\Menu\btnComoJogar.cs" />
-     <Compile Include="Assets\Scripts\Menu\btnConfigurar.cs" />
-     <Compile Include="Assets\Scripts\Menu\btnIniciar.cs" />
-     <Compile Include="Assets\Scripts\Menu\btnSair.cs" />
-     <Compile Include="Assets\Scripts\NPC&apos;s\GameArea.cs" />
-     <Compile Include="Assets\Scripts\NPC&apos;s\NPC_Accept.cs" />
-     <Compile Include="Assets\Scripts\NPC&apos;s\NPC_Mouse.cs" />
-     <Compile Include="Assets\Scripts\NPC&apos;s\NPC_Quest.cs" />
-     <Compile Include="Assets\Scripts\Objects\CameraNave.cs" />
-     <Compile Include="Assets\Scripts\Objects\Cerca.cs" />
-     <Compile Include="Assets\Scripts\Objects\Correnteza.cs" />
-     <Compile Include="Assets\Scripts\Objects\Timer.cs" />
-     <Compile Include="Assets\Scripts\Player\GuardaChuva.cs" />
-     <Compile Include="Assets\Scripts\Player\Movimento.cs" />
-     <Compile Include="Assets\Scripts\Player\PlayerMove.cs" />
-     <Compile Include="Assets\Scripts\Player\Quest.cs" />
-     <Compile Include="Assets\Scripts\Tools\Grid.cs" />
-     <Compile Include="Assets\Scripts\Tools\QuestTool.cs" />
-     <Compile Include="Assets\Scripts\Tools\SceneDumper.cs" />
-     <Compile Include="Assets\Scripts\general\Apresentacao.cs" />
-     <Compile Include="Assets\Scripts\general\GameDesignTester.cs" />
-     <Compile Include="Assets\Scripts\general\GamePlay.cs" />
-     <Compile Include="Assets\Scripts\general\HUD.cs" />
-     <Compile Include="Assets\Scripts\general\MiniMap.cs" />
-     <Compile Include="Assets\Scripts\general\Test.cs" />
+     <Compile Include="Assets\Editor\ExampleEditorWindow.cs" />
+     <Compile Include="Assets\Scripts\Editor\GridEditor.cs" />
+     <Compile Include="Assets\Scripts\Editor\GridWindow.cs" />
+     <Compile Include="Assets\Scripts\Editor\InsertQuest.cs" />
      <None Include="Assets\ErrorLog.txt" />
      <None Include="Assets\Objects.txt" />
      <None Include="Assets\Standard Assets\Water (Basic)\Sources\Shaders\FX-Water Simple.shader" />
      <None Include="Assets\Data\quests.xml" />
+ <Reference Include="Assembly-UnityScript">
+ <HintPath>Library\ScriptAssemblies\Assembly-UnityScript.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
       <Project>{3738364B-8E3D-70EB-4A60-D9D980F00BB9}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
+    <ProjectReference Include="Assembly-CSharp-vs.csproj">
+      <Project>{91AC1F95-B110-CBC9-E811-6CC5E294FC3B}</Project>      <Name>Assembly-CSharp-vs</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

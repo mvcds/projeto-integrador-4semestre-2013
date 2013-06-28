@@ -1,0 +1,16 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Tests\GameplayTest.cs">
+    <Files>
+      <File FileName="Assets\Scripts\Controllers\GeneralTest.cs" Line="9" Column="12" />
+      <File FileName="Assets\Scripts\Tests\GameplayTest.cs" Line="19" Column="1" />
+      <File FileName="Assets\Scripts\Controllers\Gameplay.cs" Line="4" Column="11" />
+      <File FileName="Assets\Scripts\Controllers\QuestController.cs" Line="67" Column="4" />
+      <File FileName="Assets\Scripts\GameComponents\Quest.cs" Line="114" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

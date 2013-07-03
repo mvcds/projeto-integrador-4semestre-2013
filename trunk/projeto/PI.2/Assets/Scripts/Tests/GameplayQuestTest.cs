@@ -41,7 +41,7 @@ public class GameplayQuestTest : MonoBehaviour {
 		{
 			if (achieved && !finalMessage)
 			{
-				Debug.Log("\"" + alias + "\" has been achieved as " + Gameplay.Instance.Quests.QuestByID((uint) id).Situation);
+				Debug.Log("\"" + alias + "\" (" + Gameplay.Instance.Quests.QuestByID((uint) id).Name + ") has been achieved as " + Gameplay.Instance.Quests.QuestByID((uint) id).Situation);
 				finalMessage = true;
 			}
 			return;

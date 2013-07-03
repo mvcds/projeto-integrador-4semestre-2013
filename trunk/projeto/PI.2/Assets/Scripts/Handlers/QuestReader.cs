@@ -9,12 +9,12 @@ using UnityEngine;
 
 namespace PI.Backend
 {
-	abstract public class QuestReader : XMLReader {
+	public class QuestReader : XMLReader {
 	
 		#region Methods
 		public QuestReader()
 		{
-			Name = "quest";
+			Name = "quests";
 		}
 		
 		override public List<GameComponent> ListAll()
@@ -30,7 +30,7 @@ namespace PI.Backend
 				uint id = uint.Parse(node["ID"].InnerText);
 				string name = node["NAME"].InnerText;
 				string desc = node["DESCRIPTION"].InnerText;
-				//int? t = null;
+				//TODO: int? t = null;
 					
 				//*Optional XML items
 				try

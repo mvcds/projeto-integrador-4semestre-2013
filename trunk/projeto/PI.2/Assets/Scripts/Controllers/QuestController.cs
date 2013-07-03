@@ -70,14 +70,11 @@ namespace PI.Backend
 		#region Methods		
 		protected internal QuestController()	
 		{
-			//TODO: read XML
-			Quest quest1 = new Quest(1, "Test", "test", true);
-			Quest quest2 = new Quest(2, "Test2", "test2", true);
-			Quest quest3 = new Quest(3, "Test3", "test3", true);
-			
-			Quests.Add(quest1);
-			Quests.Add(quest2);			
-			Quests.Add(quest3);
+			QuestReader xml = new QuestReader();
+			foreach(Quest quest in xml.ListAll())
+			{
+				Quests.Add(quest);
+			}
 		}
 		
 		public void Start(uint id)

@@ -3,9 +3,16 @@ using System;
 
 namespace PI.Backend
 {
-	public class Gameplay {
+	public partial class Gameplay {
 		
 		#region Proprieties
+		public enum Movement
+		{
+			None = -1,
+			Walk,
+			Swim
+		}		
+		
 		private QuestController _quests = null;
 		public QuestController Quests
 		{
@@ -21,6 +28,8 @@ namespace PI.Backend
 		#endregion
 		
 		#region Singleton's Definition
+		
+		
 		private static Gameplay _instance;
 		
 		private Gameplay()

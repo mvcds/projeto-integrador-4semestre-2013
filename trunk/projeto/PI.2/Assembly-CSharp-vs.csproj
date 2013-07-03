@@ -44,6 +44,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Controllers\ContextProprieties.cs" />
      <Compile Include="Assets\Scripts\Controllers\Gameplay.cs" />
      <Compile Include="Assets\Scripts\Controllers\GeneralTest.cs" />
      <Compile Include="Assets\Scripts\Controllers\QuestController.cs" />

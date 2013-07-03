@@ -49,7 +49,11 @@
      <Compile Include="Assets\Scripts\Controllers\QuestController.cs" />
      <Compile Include="Assets\Scripts\GameComponents\GameComponent.cs" />
      <Compile Include="Assets\Scripts\GameComponents\Quest.cs" />
-     <Compile Include="Assets\Scripts\Tests\GameplayTest.cs" />
+     <Compile Include="Assets\Scripts\Handlers\QuestReader.cs" />
+     <Compile Include="Assets\Scripts\Handlers\XMLHandler.cs" />
+     <Compile Include="Assets\Scripts\Handlers\XMLReader.cs" />
+     <Compile Include="Assets\Scripts\Tests\GameplayQuestTest.cs" />
+     <None Include="Assets\Plugin\quests.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

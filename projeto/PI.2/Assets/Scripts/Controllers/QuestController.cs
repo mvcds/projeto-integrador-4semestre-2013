@@ -82,6 +82,7 @@ namespace PI.Backend
 		
 		public void Start(uint id)
 		{
+			//TODO: prevento from beggining if there's another quest running
 			QuestByID(id).Start();
 		}	
 		

@@ -15,17 +15,6 @@ namespace PI.Backend
 		#endregion
 		
 		#region Proprieties	
-		public uint ID
-		{
-			get;
-			private set;
-		}
-		
-		public string Name
-		{
-			get;
-			private set;
-		}
 		
 		public string Description
 		{
@@ -40,10 +29,10 @@ namespace PI.Backend
 		}
 		
 		//TODO: TIMER?
-		private Status Situation
+		public Status Situation
 		{
 			get;
-			set;
+			private set;
 		}
 		//TODO: list of requirements
 		#endregion

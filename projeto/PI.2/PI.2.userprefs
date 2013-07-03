@@ -1,13 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Tests\GameplayQuestTest.cs">
-    <Files>
-      <File FileName="Assets\Scripts\Handlers\QuestReader.cs" Line="28" Column="57" />
-      <File FileName="Assets\Scripts\GameComponents\Quest.cs" Line="62" Column="3" />
-      <File FileName="Assets\Scripts\Tests\GameplayQuestTest.cs" Line="35" Column="12" />
-      <File FileName="Assets\Scripts\Controllers\QuestController.cs" Line="92" Column="4" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

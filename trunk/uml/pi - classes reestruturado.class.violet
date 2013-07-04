@@ -356,6 +356,7 @@
       <void property="attributes">
        <void property="text">
         <string>Quests: questController
+Player: playerController
 instance: gameplay
 Context: (special)</string>
        </void>
@@ -437,7 +438,8 @@ MaxMoney</string>
       </void>
       <void property="methods">
        <void property="text">
-        <string>Move()
+        <string>Move(key)
+(Each vehicle can have a movement)
 ChangVehicle()</string>
        </void>
       </void>
@@ -752,9 +754,9 @@ Screen: string</string>
      <object class="com.horstmann.violet.ClassNode" id="ClassNode19">
       <void property="attributes">
        <void property="text">
-        <string>Dead: bool
+        <string>GameOver: bool
 CanMove: bool
-Vehicle: movement</string>
+movement: movement</string>
        </void>
       </void>
       <void property="name">
@@ -1040,12 +1042,12 @@ Error(error)</string>
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double27"/>
-      <double>840.0</double>
+      <double>850.0</double>
      </void>
     </void>
     <void method="setLocation">
      <double>690.0</double>
-     <double>840.0</double>
+     <double>850.0</double>
     </void>
    </object>
   </void>
@@ -1056,19 +1058,19 @@ Error(error)</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double28"/>
-      <double>703.0</double>
+      <double>704.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double28"/>
-      <double>1041.0</double>
+      <double>1056.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>703.0</double>
-     <double>1041.0</double>
+     <double>704.0</double>
+     <double>1056.0</double>
     </void>
    </object>
   </void>
@@ -1079,19 +1081,19 @@ Error(error)</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double29"/>
-      <double>1107.0</double>
+      <double>1108.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double29"/>
-      <double>1046.0</double>
+      <double>1061.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>1107.0</double>
-     <double>1046.0</double>
+     <double>1108.0</double>
+     <double>1061.0</double>
     </void>
    </object>
   </void>
@@ -1102,19 +1104,19 @@ Error(error)</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double30"/>
-      <double>749.0</double>
+      <double>750.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double30"/>
-      <double>866.0</double>
+      <double>881.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>749.0</double>
-     <double>866.0</double>
+     <double>750.0</double>
+     <double>881.0</double>
     </void>
    </object>
   </void>

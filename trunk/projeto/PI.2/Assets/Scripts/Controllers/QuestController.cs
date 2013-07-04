@@ -79,15 +79,17 @@ namespace PI.Backend
 		
 		public void Start(uint id)
 		{
-			//TODO: prevento from beggining if there's another quest running
+			//TODO: prevent from beggining if there's another quest running
 			QuestByID(id).Start();
 		}	
 		
+		//TODO: method below should work only with running quest
 		public void Complete(uint id)
 		{			
 			QuestByID(id).End(true);
 		}
 		
+		//TODO: method below should work only with running quest
 		public void Failure(uint id)
 		{			
 			QuestByID(id).End(false);

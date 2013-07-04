@@ -47,6 +47,7 @@
      <Compile Include="Assets\Scripts\Controllers\ContextProprieties.cs" />
      <Compile Include="Assets\Scripts\Controllers\Gameplay.cs" />
      <Compile Include="Assets\Scripts\Controllers\GeneralTest.cs" />
+     <Compile Include="Assets\Scripts\Controllers\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Controllers\QuestController.cs" />
      <Compile Include="Assets\Scripts\GameComponents\GameComponent.cs" />
      <Compile Include="Assets\Scripts\GameComponents\Quest.cs" />

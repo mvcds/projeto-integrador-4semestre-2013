@@ -6,11 +6,15 @@ namespace PI.Backend
 	public partial class Gameplay {
 		
 		#region Proprieties
+		//TODO: does moment indicates a Dependency Injection? (like Joypack Joyride)
 		public enum Movement
 		{
 			None = -1,
 			Walk,
-			Swim
+			Swim,
+			Dog,
+			Door,
+			Capybara
 		}		
 		
 		private QuestController _quests = null;

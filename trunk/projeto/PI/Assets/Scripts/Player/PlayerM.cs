@@ -6,12 +6,19 @@ public class PlayerM : MonoBehaviour {
 	public Transform LeftLane;
 	public Transform MiddleLane;
 	public Transform RightLane;
-	public float delayTime = 1.0f;
+	public Transform BottomLane;
+	public Transform TopLane;
+	private float delayTime;
 	
 	private Position position;
 	private Position moving;
 	private float delay;
 	private float previusDelay;
+	private bool diving;
+	private bool jumping;
+	
+	private float divingDelay = 20.0f;
+	private float jumpingDelay = 20.0f;
 	
 	public enum Position
 	{
@@ -24,6 +31,9 @@ public class PlayerM : MonoBehaviour {
 	void Start () {
 		position = Position.Middle;
 		moving = Position.Middle;
+		diving = false;
+		jumping = false;
+		delayTime = 1;
 		delay = delayTime;
 		previusDelay = Time.time;
 	}
@@ -31,18 +41,21 @@ public class PlayerM : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		// APAGAR
-		//if (position == Position.Left) print ("Left");
-		//if (position == Position.Middle) print ("Middle");
-		//if (position == Position.Right) print ("Right");
-		//
 		if (delay >= delayTime){
-			 
+			diving = false; 
+			jumping = false;
 			if (Input.GetKey (KeyCode.LeftArrow)) 
 				moveToLeft();
 		
 			if (Input.GetKey (KeyCode.RightArrow)) 
 				moveToRight();
+			
+			if (Input.GetKey (KeyCode.DownArrow)) 
+				dive();
+			
+			if (Input.GetKey (KeyCode.UpArrow)) 
+				jump();
+			
 		} else {
 			delay += Time.time - previusDelay;
 			playAnimation();
@@ -62,6 +75,7 @@ public class PlayerM : MonoBehaviour {
 		}
 		delay = 0;
 		previusDelay = Time.time;
+		delayTime = 1;
 	}
 	
 	private void moveToRight(){
@@ -77,17 +91,54 @@ public class PlayerM : MonoBehaviour {
 		}
 		delay = 0;
 		previusDelay = Time.time;
+		delayTime = 1;
+	}
+	
+	private void dive(){
+		delay = 0;
+		previusDelay = Time.time;
+		diving = true;
+		delayTime = divingDelay;
+	}
+	
+	private void jump(){
+		delay = 0;
+		previusDelay = Time.time;
+		jumping = true;
+		delayTime = jumpingDelay;
 	}
 	
 	private void playAnimation(){
-		if (moving == Position.Left)
-			transform.position = new Vector3(LeftLane.position.x * delay, 0, 0);
+		if (jumping == true){
+			if (delay < jumpingDelay * 0.3){
+				transform.position = new Vector3(transform.position.x, TopLane.position.y * (delay / (jumpingDelay * 0.3f)), 0);
 				
-		if (moving == Position.Middle)
-			transform.position = new Vector3(transform.position.x * (1.0f - delay), 0, 0); 
+			}else if (delay < jumpingDelay * 0.7) { 
+				// Tempo parado
+				
+			} else {
+				transform.position = new Vector3(transform.position.x, transform.position.y * (1-((delay - (jumpingDelay * 0.7f)) / (jumpingDelay * 0.3f))), 0);
+			}
+		} else if (diving == true){
+			if (delay < divingDelay * 0.3){
+				transform.position = new Vector3(transform.position.x, BottomLane.position.y * (delay / (divingDelay * 0.3f)), 0);
+				
+			}else if (delay < divingDelay * 0.7) { 
+				// Tempo parado
+				
+			} else {
+				transform.position = new Vector3(transform.position.x, transform.position.y * (1-((delay - (divingDelay * 0.7f)) / (divingDelay * 0.3f))), 0);
+			}
+		} else {
+			if (moving == Position.Left)
+				transform.position = new Vector3(LeftLane.position.x * delay, transform.position.y, 0);
+				
+			if (moving == Position.Middle)
+				transform.position = new Vector3(transform.position.x * (1.0f - delay), transform.position.y, 0); 
 		
-		if (moving == Position.Right)
-			transform.position = new Vector3(RightLane.position.x * delay, 0, 0); 
+			if (moving == Position.Right)
+				transform.position = new Vector3(RightLane.position.x * delay, transform.position.y, 0); 
+		}
 		
 		if (delay > delayTime / 2){
 			position = moving;

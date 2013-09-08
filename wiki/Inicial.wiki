@@ -13,3 +13,14 @@ Projeto Integrados da galera do 4º Semestre de TJD do SENAC (no primeiro semest
 == Escopo ==
 == Tecnologias ==
 == Concepts ==
+
+= Execução =
+== Workflow ==
+== Resultado ==
+
+= Equipe =
+== Game Art ==
+== Game Design ==
+== Game Sound ==
+== Programação ==
+== QA ==

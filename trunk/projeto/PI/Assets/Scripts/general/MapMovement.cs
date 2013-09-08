@@ -1,19 +1,21 @@
 using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(ObjectSpawnerByOdd))]
 public class MapMovement : MonoBehaviour {
-
-	public GameObject[] Blocks;
 	
 	private GameObject[] Objs;
 	private float delay;
 	private float randomDelayTime;
+	private ObjectSpawnerByOdd odd;
 	
 	// Use this for initialization
 	void Start () {
 		Objs = new GameObject[4];
 		delay = Time.time;
-		randomDelayTime = 1;
+		randomDelayTime = 1;			
+		
+		odd = (ObjectSpawnerByOdd)GetComponent(typeof(ObjectSpawnerByOdd));//TODO: is there a way to clean it?
 	}
 	
 	// Update is called once per frame
@@ -22,7 +24,11 @@ public class MapMovement : MonoBehaviour {
 		if (Time.time - delay > randomDelayTime){
 			for (int i = 0; i < 4; i++){
 				if (Objs[i] == null){
-					Objs[i] = (GameObject) Instantiate(Blocks[Random.Range (0, Blocks.Length)],
+					GameObject spawn = odd.getObject();
+					if (spawn == null)
+						continue;
+					
+					Objs[i] = (GameObject) Instantiate(spawn,
 					new Vector3(getRandomLane(), 0, 20), Quaternion.Euler(new Vector3(0,0,0)));
 					delay = Time.time;
 					randomDelayTime = Random.Range (0.5f, 2);	
@@ -38,11 +44,7 @@ public class MapMovement : MonoBehaviour {
 	}
 		
 	private int getRandomLane(){
-		int rand = (int)Random.Range(0, 3);
-		switch (rand){
-			case 0: return -5; break;
-			case 2: return 5; break;
-		}
-		return 0;
+		int rand = (int)Random.Range(-1,2);// equivale a [-1 à 1]
+		return 5 * rand;
 	}		
 }

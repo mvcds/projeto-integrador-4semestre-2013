@@ -37,6 +37,5 @@ public class WallMov : MonoBehaviour {
 			Destroy(rightLastBlock);
 			Destroy (leftLastBlock);
 		}
-	}
-				
+	}			
 }

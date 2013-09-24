@@ -4,6 +4,7 @@ using System.Collections;
 public class PowerUp : MonoBehaviour {
 	
 	public int powerUpID;
+	public AudioClip sound;//sound played after collision with powerup
 	
 	// Use this for initialization
 	void Start () {
@@ -24,7 +25,8 @@ public class PowerUp : MonoBehaviour {
 	}
 	
 	 void OnTriggerEnter(Collider other) {
-        Destroy(transform.gameObject);
+		AudioSource.PlayClipAtPoint(sound, transform.position);
+		Destroy(transform.gameObject);
 		PlayerStatus.gotPowerUp(powerUpID);
     }
 }

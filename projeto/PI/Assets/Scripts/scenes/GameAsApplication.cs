@@ -6,7 +6,7 @@ public class GameAsApplication : MonoBehaviour {
 	
 	#region Constants
 	
-	public enum GameStatus
+	public enum ApplicationStatus
 	{
 		NotInitialized = -1,
 		Initialized,
@@ -17,9 +17,9 @@ public class GameAsApplication : MonoBehaviour {
 	
 	#region Proprieties
 	
-	static private GameStatus _gameStatus = GameStatus.NotInitialized;
+	static private ApplicationStatus _gameStatus = ApplicationStatus.NotInitialized;
 	
-	static public GameStatus Status
+	static public ApplicationStatus AppStatus
 	{
 		get
 		{
@@ -34,8 +34,8 @@ public class GameAsApplication : MonoBehaviour {
 	public Texture[] splashImages;
 	public float[] splashDuration;
 	
-	private int now = 0;	
-	DateTime hora = DateTime.Now;
+	private int pseudoFrame = 0;	
+	DateTime now = DateTime.Now;
 	
 	#endregion
 	
@@ -48,31 +48,35 @@ public class GameAsApplication : MonoBehaviour {
 	
 	void Update()
 	{
-		if (Status == GameStatus.NotInitialized)
+		if (AppStatus == ApplicationStatus.NotInitialized)
 		{			
-			TimeSpan diferenca = DateTime.Now - hora;
-			if (diferenca.TotalMilliseconds > splashDuration[now])
+			TimeSpan diferenca = DateTime.Now - now;
+			if (diferenca.TotalMilliseconds > splashDuration[pseudoFrame])
 			{
-				if (now + 1 >= splashImages.Length)
+				if (pseudoFrame + 1 >= splashImages.Length)
 				{
-					Status = GameStatus.Initialized;
+					AppStatus = ApplicationStatus.Initialized;
 				}
-				now++;
-				hora = DateTime.Now;
+				pseudoFrame++;
+				now = DateTime.Now;
 			}
 			
 			if (Input.anyKey)
-				Status = GameStatus.Initialized;
+				AppStatus = ApplicationStatus.Initialized;
+		}
+		else if (AppStatus == ApplicationStatus.Quiting)			
+		{
+			Quiting();
 		}
 	}
 	
 	void OnGUI()
 	{	
-		if (Status == GameStatus.NotInitialized)
+		if (AppStatus == ApplicationStatus.NotInitialized)
 		{
 			try
 			{
-				GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), splashImages[now]);
+				GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), splashImages[pseudoFrame]);
 			}
 			catch{}
 		}
@@ -80,7 +84,13 @@ public class GameAsApplication : MonoBehaviour {
 	
 	static public void Quit()
 	{
-		Status = GameStatus.Quiting;
+		AppStatus = ApplicationStatus.Quiting;
+	}
+	
+	//TODO: implementing quiting
+	private void Quiting()
+	{
+		throw new NotImplementedException();
 		Application.Quit();
 	}
 	

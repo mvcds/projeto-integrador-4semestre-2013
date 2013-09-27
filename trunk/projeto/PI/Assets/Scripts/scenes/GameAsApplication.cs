@@ -6,11 +6,17 @@ public class GameAsApplication : MonoBehaviour {
 	
 	#region Constants
 	
-	public enum ApplicationStatus
+	private enum ApplicationStatus
 	{
 		NotInitialized = -1,
 		Initialized,
 		Quiting
+	}
+	
+	public enum GameStatus
+	{
+		StartMenu = -1,
+		Running
 	}
 	
 	#endregion
@@ -19,15 +25,47 @@ public class GameAsApplication : MonoBehaviour {
 	
 	static private ApplicationStatus _gameStatus = ApplicationStatus.NotInitialized;
 	
-	static public ApplicationStatus AppStatus
+	static private ApplicationStatus AppStatus
 	{
 		get
 		{
 			return _gameStatus;
 		}
-		private set
+		set
 		{
 			_gameStatus = value;
+		}
+	}
+		
+	static private GameStatus _status = GameStatus.StartMenu;
+	
+	static private GameStatus Status
+	{
+		get
+		{
+			return _status;
+		}
+		set
+		{
+			_status = value;
+		}
+	}
+	
+	static public bool hasBegun
+	{
+		get
+		{
+			return (AppStatus == ApplicationStatus.Initialized);
+		}
+	}
+	
+	static public bool isRunning
+	{
+		get
+		{
+			if (Debug.isDebugBuild)
+				return true;
+			return (Status == GameStatus.Running);
 		}
 	}
 	
@@ -49,25 +87,26 @@ public class GameAsApplication : MonoBehaviour {
 	void Update()
 	{
 		if (AppStatus == ApplicationStatus.NotInitialized)
-		{			
-			TimeSpan diferenca = DateTime.Now - now;
-			if (diferenca.TotalMilliseconds > splashDuration[pseudoFrame])
-			{
-				if (pseudoFrame + 1 >= splashImages.Length)
-				{
-					AppStatus = ApplicationStatus.Initialized;
-				}
-				pseudoFrame++;
-				now = DateTime.Now;
-			}
-			
-			if (Input.anyKey)
-				AppStatus = ApplicationStatus.Initialized;
-		}
-		else if (AppStatus == ApplicationStatus.Quiting)			
-		{
+			ShowSplash();
+		else if (AppStatus == ApplicationStatus.Quiting)
 			Quiting();
+	}
+	
+	void ShowSplash()
+	{
+		TimeSpan diferenca = DateTime.Now - now;
+		if (diferenca.TotalMilliseconds > splashDuration[pseudoFrame])
+		{
+			if (pseudoFrame + 1 >= splashImages.Length)
+			{
+				AppStatus = ApplicationStatus.Initialized;
+			}
+			pseudoFrame++;
+			now = DateTime.Now;
 		}
+		
+		if (Input.anyKey)
+			AppStatus = ApplicationStatus.Initialized;
 	}
 	
 	void OnGUI()
@@ -80,6 +119,18 @@ public class GameAsApplication : MonoBehaviour {
 			}
 			catch{}
 		}
+		else if (AppStatus == ApplicationStatus.Initialized)
+		{
+			switch (Status)
+			{
+				case GameStatus.StartMenu:
+					//Show initial menu		
+					break;
+				default:
+					Debug.Log("Not implemented");
+				break;
+			}
+		}
 	}
 	
 	static public void Quit()
@@ -87,10 +138,8 @@ public class GameAsApplication : MonoBehaviour {
 		AppStatus = ApplicationStatus.Quiting;
 	}
 	
-	//TODO: implementing quiting
-	private void Quiting()
+	static private void Quiting()
 	{
-		throw new NotImplementedException();
 		Application.Quit();
 	}
 	

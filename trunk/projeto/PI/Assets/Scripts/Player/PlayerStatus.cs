@@ -41,8 +41,11 @@ public class PlayerStatus : MonoBehaviour {
 	}
 	
 	void OnGUI(){
+		if (!GameAsApplication.isRunning)
+			return;
+			
 		if (duration > 0)
-		GUI.Box(new Rect(10, 10, 120, 25), "PowerUp: " + (int)(duration + 1) + " / " + maxDuration);
+			GUI.Box(new Rect(10, 10, 120, 25), "PowerUp: " + (int)(duration + 1) + " / " + maxDuration);
 		GUI.Box(new Rect(Screen.width - 100, 10, 100, 25), "Vida: " + (int)vida + " / " + maxVida);
 		GUI.Box(new Rect(Screen.width / 2 - 60, 10, 120, 25), "Velocidade: " + (int)MainScript.gameVelocity);
 	}
@@ -93,8 +96,6 @@ public class PlayerStatus : MonoBehaviour {
 		} else {
 			block = 0;
 		}
-		
-		
 		
 		duration = 30;
 	}

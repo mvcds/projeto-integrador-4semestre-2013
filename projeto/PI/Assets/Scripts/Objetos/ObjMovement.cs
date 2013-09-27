@@ -10,6 +10,10 @@ public class ObjMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		
+		if (!GameAsApplication.isRunning)
+			return;
+		
 		if (PlayerStatus.powerUp == PlayerStatus.PowerUp.Boia){
 			transform.Translate((-Vector3.forward * Time.deltaTime * MainScript.gameVelocity) / MainScript.floatSpeed);
 		} else {

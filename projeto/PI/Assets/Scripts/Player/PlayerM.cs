@@ -58,6 +58,9 @@ public class PlayerM : MonoBehaviour {
 		
 		boiar();
 		
+		if (!GameAsApplication.isRunning)
+			return;
+		
 		if (delay >= delayTime){
 			diving = false; 
 			jumping = false;

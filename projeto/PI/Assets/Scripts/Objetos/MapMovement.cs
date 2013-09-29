@@ -21,7 +21,7 @@ public class MapMovement : MonoBehaviour {
 	
 	void FixedUpdate () {
 		
-		if (!GameAsApplication.isRunning)
+		if (!GameController.isRunning)
 			return;
 		
 		if (PlayerStatus.powerUp == PlayerStatus.PowerUp.Boia){

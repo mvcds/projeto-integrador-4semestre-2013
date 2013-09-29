@@ -11,7 +11,7 @@ public class ObjMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		if (!GameAsApplication.isRunning)
+		if (!GameController.isRunning)
 			return;
 		
 		if (PlayerStatus.powerUp == PlayerStatus.PowerUp.Boia){

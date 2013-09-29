@@ -22,7 +22,7 @@ public class GameController {
 	
 	#region Proprieties
 			
-	static private GameStatus _status = GameStatus.StartMenu;
+	static private GameStatus _status = GameStatus.Running;
 	
 	static public GameStatus Status
 	{
@@ -40,6 +40,8 @@ public class GameController {
 	{
 		get
 		{
+			if (Debug.isDebugBuild)
+				return true;
 			return (Status == GameStatus.Running);
 		}
 	}

@@ -41,7 +41,7 @@ public class PlayerStatus : MonoBehaviour {
 	}
 	
 	void OnGUI(){
-		if (!GameAsApplication.isRunning)
+		if (!GameController.isRunning)
 			return;
 			
 		if (duration > 0)

@@ -27,13 +27,13 @@ public class WallMov : MonoBehaviour {
 			leftMiddleBlock = leftCurrentBlock;
 			
 			rightCurrentBlock = (GameObject) Instantiate(Walls[Random.Range (0, Walls.Length)],
-			new Vector3(7, 2.5f, 40), Quaternion.Euler(new Vector3(0,0,0)));
+			new Vector3(7.45f + (Random.Range(0.0f, 0.75f)), 2, 50.0f), Quaternion.Euler(new Vector3(0,0,0)));
 			
 			leftCurrentBlock = (GameObject) Instantiate(Walls[Random.Range (0, Walls.Length)],
-			new Vector3(-7, 2.5f, 40), Quaternion.Euler(new Vector3(0,0,0)));
+			new Vector3(-7.8f + (Random.Range(0.0f, 0.75f)), 2, 50.0f), Quaternion.Euler(new Vector3(0,0,0)));
 		}
 		
-		if (rightCurrentBlock.transform.position.z < -0 || rightMiddleBlock.transform.position.z < -0){
+		if (rightCurrentBlock.transform.position.z < 0 || rightMiddleBlock.transform.position.z < 0){
 			Destroy(rightLastBlock);
 			Destroy (leftLastBlock);
 		}

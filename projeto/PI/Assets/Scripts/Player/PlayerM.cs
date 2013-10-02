@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class PlayerM : MonoBehaviour {
 	
@@ -17,7 +18,7 @@ public class PlayerM : MonoBehaviour {
 	
 	public float divingDelay = 1.25f;
 	public float jumpingDelay = 1.5f;
-	public float movingDelay = 0.75f;
+	public float movingDelay = 0.25f;//0.75f;
 	
 	public float empuxo;
 	public float jumpHeight;
@@ -37,6 +38,8 @@ public class PlayerM : MonoBehaviour {
 	
 	private bool diving;
 	private bool jumping;
+	private float distance;
+	private DateTime dt = DateTime.Now;
 	
 	// Use this for initialization
 	void Start () {
@@ -55,7 +58,16 @@ public class PlayerM : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		TimeSpan span = DateTime.Now - dt;
+		if (span.TotalSeconds > 1){
+			if (PlayerStatus.powerUp == PlayerStatus.PowerUp.Boia){
+				distance += ((MainScript.gameVelocity / 1.666f) / 10) / MainScript.floatSpeed;
+			} else {
+				distance += ((MainScript.gameVelocity / 1.666f) / 10);
+			}
+			dt = DateTime.Now;
+		}
+		print ((int)distance);
 		boiar();
 		
 		if (!GameController.isRunning)

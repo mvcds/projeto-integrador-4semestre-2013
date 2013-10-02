@@ -3,7 +3,10 @@ using System.Collections;
 
 public class WallMov : MonoBehaviour {
 
-	public GameObject[] Walls;
+	//public GameObject[] Walls;
+	public GameObject rightWall;
+	public GameObject leftWall;
+	
 	public GameObject rightCurrentBlock;
 	public GameObject rightMiddleBlock;
 	public GameObject rightLastBlock;
@@ -26,10 +29,10 @@ public class WallMov : MonoBehaviour {
 			leftLastBlock = leftMiddleBlock;
 			leftMiddleBlock = leftCurrentBlock;
 			
-			rightCurrentBlock = (GameObject) Instantiate(Walls[Random.Range (0, Walls.Length)],
+			rightCurrentBlock = (GameObject) Instantiate(rightWall,
 			new Vector3(7.45f + (Random.Range(0.0f, 0.75f)), 2, 50.0f), Quaternion.Euler(new Vector3(0,0,0)));
 			
-			leftCurrentBlock = (GameObject) Instantiate(Walls[Random.Range (0, Walls.Length)],
+			leftCurrentBlock = (GameObject) Instantiate(leftWall,
 			new Vector3(-7.8f + (Random.Range(0.0f, 0.75f)), 2, 50.0f), Quaternion.Euler(new Vector3(0,0,0)));
 		}
 		

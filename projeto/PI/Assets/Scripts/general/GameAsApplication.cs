@@ -65,18 +65,26 @@ public class GameAsApplication : MonoBehaviour {
 	void ShowSplash()
 	{
 		TimeSpan diferenca = DateTime.Now - now;
-		if (diferenca.TotalMilliseconds > splashDuration[pseudoFrame])
+		
+		try
 		{
-			if (pseudoFrame + 1 >= splashImages.Length)
+			if (diferenca.TotalMilliseconds > splashDuration[pseudoFrame])
 			{
-				AppStatus = ApplicationStatus.Initialized;
+				if (pseudoFrame + 1 >= splashImages.Length)
+				{
+					AppStatus = ApplicationStatus.Initialized;
+				}
+				pseudoFrame++;
+				now = DateTime.Now;
 			}
-			pseudoFrame++;
-			now = DateTime.Now;
+			if (Input.anyKey)
+				throw new Exception();
+		}
+		catch
+		{
+				AppStatus = ApplicationStatus.Initialized;
 		}
 		
-		if (Input.anyKey)
-			AppStatus = ApplicationStatus.Initialized;
 	}
 	
 	#endregion

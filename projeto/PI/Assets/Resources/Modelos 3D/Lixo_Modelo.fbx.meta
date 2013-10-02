@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: eb221d0f8f2cf9b4dacb4e4a526ecc5b
+guid: de987b0013b4f374cb1836e6490819c9
 ModelImporter:
   fileIDToRecycleName:
-    4300000: cube
+    4300000: Lixo_Modelo:rubbish_02
   serializedVersion: 10
   materials:
     importMaterials: 1
@@ -20,7 +20,7 @@ ModelImporter:
     clipAnimations: []
   meshes:
     lODScreenPercentages: []
-    globalScale: .25
+    globalScale: .00999999978
     meshCompression: 0
     addColliders: 0
     swapUVChannels: 0

@@ -44,6 +44,10 @@ public class GameAsApplication : MonoBehaviour {
 	
 	private int pseudoFrame = 0;	
 	DateTime now = DateTime.Now;
+	
+	private static Menu ShownMenu = null;
+	
+	public Menu Initial;
 			
 	#endregion
 	
@@ -101,29 +105,29 @@ public class GameAsApplication : MonoBehaviour {
 			}
 			catch{}
 		}
+		//*
 		else if (AppStatus == ApplicationStatus.Initialized)
 		{
-			switch (GameController.Status)
-			{
-				case GameController.GameStatus.StartMenu:
-					InitialMenu();
+			if (ShownMenu == null)
+			{			
+				switch (GameController.Status)
+				{
+					case GameController.GameStatus.StartMenu:
+						ShowInitialMenu();
+						break;
+					default:
+						//Debug.Log("Not implemented");
 					break;
-				default:
-					//Debug.Log("Not implemented");
-				break;
+				}
 			}
-		}
+		}//*/
 		
-		Debug.Log(GameController.Status);
+		//Debug.Log(GameController.Status);
 	}
 	
-	void InitialMenu()
-	{
-		Rect test  = new Rect(0, 0, 100, 100);
-		if (GUI.Button(test, "Click me"))
-		{
-			GameController.LoadLevel("LanesTeste");
-		}
+	void ShowInitialMenu()
+	{		
+		ShownMenu = Initial;
 	}
 		
 	static public void Quit()
@@ -133,7 +137,9 @@ public class GameAsApplication : MonoBehaviour {
 	
 	static private void Quiting()
 	{
+		//TODO: stuff before quit
 		Application.Quit();
+		Debug.Log("bye, bye");
 	}
 	
 	#endregion;

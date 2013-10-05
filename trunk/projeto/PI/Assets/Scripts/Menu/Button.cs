@@ -11,8 +11,6 @@ abstract public class Button : MonoBehaviour {
 		Actived
 	}
 	
-	public float t = 1;
-	
 	private States _state;
 	
 	public AudioSource actived_sound,
@@ -33,7 +31,11 @@ abstract public class Button : MonoBehaviour {
 					hover;
 	protected DateTime time;
 	protected bool show;
-	
+		
+	void Awake () 
+	{
+		DontDestroyOnLoad(this);
+	}
 	
 	void Start()
 	{

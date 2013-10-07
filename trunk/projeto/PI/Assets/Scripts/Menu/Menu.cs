@@ -3,27 +3,21 @@ using System.Collections;
 
 public class Menu : MonoBehaviour {
 	
-	public GameController.GameStatus On = GameController.GameStatus.None;
-	
 	public Button[] buttons;
-				
-	void Awake () 
-	{
-		DontDestroyOnLoad(this);
-	}
 	
 	void Update()
 	{
-		if (GameAsApplication.hasBegun)
-			Show();
+		Show();
 	}
 
 	protected void Show()
-	{		
+	{
 		foreach(Button btn in buttons)
 		{
-			if (btn != null)			
-				btn.Show(On == GameController.Status);
+			if (btn == null)
+				continue;
+			//btn.Show(Diretor.Instancia.TelaAtual == MenuTela());
+			btn.Show(true);
 		}
 	}
 }

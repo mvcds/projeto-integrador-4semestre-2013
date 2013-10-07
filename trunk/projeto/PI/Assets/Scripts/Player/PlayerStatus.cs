@@ -16,8 +16,8 @@ public class PlayerStatus : MonoBehaviour {
 	public static int maxVida = 3;
 	public static int block = 0;
 	
-	private static float duration = 0;
-	private static float maxDuration = 30;
+	public static float duration = 0;
+	public static float maxDuration = 30;
 	
 	// Use this for initialization
 	void Start () {
@@ -38,16 +38,6 @@ public class PlayerStatus : MonoBehaviour {
 			block = 0;
 			powerUp = PowerUp.Nada;
 		}
-	}
-	
-	void OnGUI(){
-		//if (!GameController.isRunning)
-			//return;
-			
-		//if (duration > 0)
-			GUI.Box(new Rect(10, 10, 120, 25), "PowerUp: " + (int)(duration + 1) + " / " + maxDuration);
-		GUI.Box(new Rect(Screen.width - 100, 10, 100, 25), "Vida: " + (int)vida + " / " + maxVida);
-		GUI.Box(new Rect(Screen.width / 2 - 60, 10, 120, 25), "Velocidade: " + (int)MainScript.gameVelocity);
 	}
 	
 	// Acertado por um obstáculo

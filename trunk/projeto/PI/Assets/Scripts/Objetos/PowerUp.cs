@@ -13,7 +13,15 @@ public class PowerUp : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		if (PlayerStatus.powerUp == PlayerStatus.PowerUp.Boia){
+			transform.Translate((-Vector3.forward * Time.deltaTime * MainScript.gameVelocity) / MainScript.floatSpeed);
+		} else {
+			transform.Translate(-Vector3.forward * Time.deltaTime * MainScript.gameVelocity);
+		}
+		
+		if (transform.position.z < -10){
+			Destroy(gameObject);
+		}
 	}
 	
 	 void OnTriggerEnter(Collider other) {

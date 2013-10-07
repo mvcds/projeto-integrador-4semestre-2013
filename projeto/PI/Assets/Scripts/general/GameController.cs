@@ -13,8 +13,7 @@ public class GameController {
 		
 	public enum GameStatus
 	{
-		None = -1,
-		StartMenu,
+		StartMenu = -1,
 		OnStartingPhase,
 		Running
 	}
@@ -23,7 +22,7 @@ public class GameController {
 	
 	#region Proprieties
 			
-	static private GameStatus _status = GameStatus.StartMenu;
+	static private GameStatus _status = GameStatus.Running;
 	
 	static public GameStatus Status
 	{
@@ -33,8 +32,6 @@ public class GameController {
 		}
 		set
 		{
-			if (value == GameStatus.None)
-				throw new Exception("GameStatus can't be \"none\"!");
 			_status = value;
 		}
 	}
@@ -43,8 +40,8 @@ public class GameController {
 	{
 		get
 		{
-			//if (Debug.isDebugBuild)
-				//return true;
+			if (Debug.isDebugBuild)
+				return true;
 			return (Status == GameStatus.Running);
 		}
 	}
@@ -65,12 +62,6 @@ public class GameController {
 	{
 		Status = GameStatus.OnStartingPhase;
 		Application.LoadLevel(phase);
-	}
-	
-	public static void LoadStartScreen()
-	{
-		Status = GameStatus.StartMenu;
-		Application.LoadLevel(0);
 	}
 	
 	public static void RunLevel()

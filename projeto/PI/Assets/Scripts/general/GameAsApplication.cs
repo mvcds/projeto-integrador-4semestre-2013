@@ -44,10 +44,6 @@ public class GameAsApplication : MonoBehaviour {
 	
 	private int pseudoFrame = 0;	
 	DateTime now = DateTime.Now;
-	
-	private static Menu ShownMenu = null;
-	
-	public Menu Initial;
 			
 	#endregion
 	
@@ -69,26 +65,18 @@ public class GameAsApplication : MonoBehaviour {
 	void ShowSplash()
 	{
 		TimeSpan diferenca = DateTime.Now - now;
-		
-		try
+		if (diferenca.TotalMilliseconds > splashDuration[pseudoFrame])
 		{
-			if (diferenca.TotalMilliseconds > splashDuration[pseudoFrame])
+			if (pseudoFrame + 1 >= splashImages.Length)
 			{
-				if (pseudoFrame + 1 >= splashImages.Length)
-				{
-					AppStatus = ApplicationStatus.Initialized;
-				}
-				pseudoFrame++;
-				now = DateTime.Now;
-			}
-			if (Input.anyKey)
-				throw new Exception();
-		}
-		catch
-		{
 				AppStatus = ApplicationStatus.Initialized;
+			}
+			pseudoFrame++;
+			now = DateTime.Now;
 		}
 		
+		if (Input.anyKey)
+			AppStatus = ApplicationStatus.Initialized;
 	}
 	
 	#endregion
@@ -105,29 +93,29 @@ public class GameAsApplication : MonoBehaviour {
 			}
 			catch{}
 		}
-		//*
 		else if (AppStatus == ApplicationStatus.Initialized)
 		{
-			if (ShownMenu == null)
-			{			
-				switch (GameController.Status)
-				{
-					case GameController.GameStatus.StartMenu:
-						ShowInitialMenu();
-						break;
-					default:
-						//Debug.Log("Not implemented");
+			switch (GameController.Status)
+			{
+				case GameController.GameStatus.StartMenu:
+					InitialMenu();
 					break;
-				}
+				default:
+					//Debug.Log("Not implemented");
+				break;
 			}
-		}//*/
+		}
 		
-		//Debug.Log(GameController.Status);
+		Debug.Log(GameController.Status);
 	}
 	
-	void ShowInitialMenu()
-	{		
-		ShownMenu = Initial;
+	void InitialMenu()
+	{
+		Rect test  = new Rect(0, 0, 100, 100);
+		if (GUI.Button(test, "Click me"))
+		{
+			GameController.LoadLevel("LanesTeste");
+		}
 	}
 		
 	static public void Quit()
@@ -137,9 +125,7 @@ public class GameAsApplication : MonoBehaviour {
 	
 	static private void Quiting()
 	{
-		//TODO: stuff before quit
 		Application.Quit();
-		Debug.Log("bye, bye");
 	}
 	
 	#endregion;

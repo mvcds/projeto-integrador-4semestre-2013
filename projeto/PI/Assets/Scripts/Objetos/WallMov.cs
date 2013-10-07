@@ -30,10 +30,10 @@ public class WallMov : MonoBehaviour {
 			leftMiddleBlock = leftCurrentBlock;
 			
 			rightCurrentBlock = (GameObject) Instantiate(rightWall,
-			new Vector3(7.45f + (Random.Range(0.0f, 0.75f)), 2, 50.0f), Quaternion.Euler(new Vector3(0,0,0)));
+			new Vector3(9 + (Random.Range(0.0f, 0.75f)), 2, 50.0f), Quaternion.Euler(new Vector3(0,0,0)));
 			
 			leftCurrentBlock = (GameObject) Instantiate(leftWall,
-			new Vector3(-7.8f + (Random.Range(0.0f, 0.75f)), 2, 50.0f), Quaternion.Euler(new Vector3(0,0,0)));
+			new Vector3(-9.35f + (Random.Range(0.0f, 0.75f)), 2, 50.0f), Quaternion.Euler(new Vector3(0,0,0)));
 		}
 		
 		if (rightCurrentBlock.transform.position.z < 0 || rightMiddleBlock.transform.position.z < 0){

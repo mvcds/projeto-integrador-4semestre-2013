@@ -1,7 +1,7 @@
 //---------------------------------------------------------------
 //--------------- SCRIPT DE AUDIOPLAYER DE MÚSICA ---------------
 //------------- ESCRITO POR RONY KETCHUM ------------------------
-//------------- VERSÃO 1.1 - 08/10/2013 -------------------------
+//------------- VERSÃO 1.2 - 08/10/2013 -------------------------
 //---------------------------------------------------------------
 
 using UnityEngine;
@@ -82,22 +82,23 @@ public class AudioLooper : MonoBehaviour {
 		}
 		
 		//Ativação da Transição Alternativa
+		//Alterado aqui para volume de corte na metade e dobro do tempo
 		if(trans_alternativa){
 			if(fade_out){
-				if(player.volume>0.0f){
-				player.volume -=0.01f;
+				if(player.volume>0.5f){
+				player.volume -=0.005f;
 				}
 				else{
 					fade_out = false;
 					player.clip = loops[indice_troca];
 					mus_atual = indice_troca;
-					player.volume = 0.0f;
+					player.volume = 0.5f;
 					player.Play ();
 				}
 			}
 			else{
 				if(player.volume<1.0f){
-					player.volume+=0.01f;
+					player.volume+=0.005f;
 				}
 				else{
 					trans_alternativa = false;

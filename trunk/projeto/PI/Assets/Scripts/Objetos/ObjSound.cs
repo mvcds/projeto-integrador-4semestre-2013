@@ -7,6 +7,6 @@ public class ObjSound : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other) {
 		AudioSource.PlayClipAtPoint(sound, transform.position);
-        Destroy(transform.gameObject);
+        //Destroy(transform.gameObject);
     }
 }

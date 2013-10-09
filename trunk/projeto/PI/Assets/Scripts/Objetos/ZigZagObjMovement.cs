@@ -1,24 +1,21 @@
 using UnityEngine;
-using System.Collections;
 
+[RequireComponent(typeof(ObjMovement))]
+[RequireComponent(typeof(Obstacle))]
 public class ZigZagObjMovement : MonoBehaviour {
 	
 	public float speed;
 	bool direction;
 	
 	// Use this for initialization
-	void Start () {
-		direction = false;
+	void Start ()
+	{
+		direction = (Random.Range(0,1) == 0);
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		if (PlayerStatus.powerUp == PlayerStatus.PowerUp.Boia){
-			transform.Translate((-Vector3.forward * Time.deltaTime * MainScript.gameVelocity) / MainScript.floatSpeed);
-		} else {
-			transform.Translate(-Vector3.forward * Time.deltaTime * MainScript.gameVelocity);
-		}
-		
+	void Update ()
+	{		
 		if (transform.position.x > 4)
 			direction = true;
 		if (transform.position.x < -4) 
@@ -27,15 +24,6 @@ public class ZigZagObjMovement : MonoBehaviour {
 		if (direction)
 			transform.Translate(new Vector3(-speed, 0, 0));
 		else 
-			transform.Translate(new Vector3(speed, 0, 0));
-				
-		if (transform.position.z < -10){
-			Destroy(gameObject);
-		}
+			transform.Translate(new Vector3(speed, 0, 0));			
 	}
-	
-	void OnTriggerEnter(Collider other) {
-        Destroy(transform.gameObject);
-		PlayerStatus.gotHit();
-    }
 }

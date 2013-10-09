@@ -24,6 +24,7 @@ public class MapMovement : MonoBehaviour {
 		odd = (ObjectSpawnerByOdd)GetComponent(typeof(ObjectSpawnerByOdd));//TODO: is there a way to clean it?
 	}
 	
+	//TODO: tem como jogar esse movimento como os outros?
 	void FixedUpdate () {
 		
 		if (!GameController.isRunning)

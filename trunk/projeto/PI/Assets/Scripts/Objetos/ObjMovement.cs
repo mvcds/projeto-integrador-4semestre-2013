@@ -1,16 +1,14 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class ObjMovement : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
 	
-	}
+	private float destroyAt = 5;
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void Update () 
+	{		
 		if (!GameController.isRunning)
 			return;
 		
@@ -20,13 +18,8 @@ public class ObjMovement : MonoBehaviour {
 			transform.Translate(-Vector3.forward * Time.deltaTime * MainScript.gameVelocity);
 		}
 		
-		if (transform.position.z < -10){
+		if (transform.position.z < -destroyAt){
 			Destroy(gameObject);
 		}
 	}
-	
-	 void OnTriggerEnter(Collider other) {
-        Destroy(transform.gameObject);
-		PlayerStatus.gotHit();
-    }
 }

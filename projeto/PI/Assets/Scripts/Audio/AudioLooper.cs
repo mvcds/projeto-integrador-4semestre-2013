@@ -14,7 +14,7 @@ public class AudioLooper : MonoBehaviour {
 	public AudioClip[] transicoes;
 	public AudioClip[] loops;
 	//Indicador para música atual
-	public int mus_atual;
+	private int mus_atual;
 	//Variável para controle de troca externa
 	private bool trocar;
 	//Variáveis de Controle

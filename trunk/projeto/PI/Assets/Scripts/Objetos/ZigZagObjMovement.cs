@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[RequireComponent(typeof(ObjMovement))]
-[RequireComponent(typeof(Obstacle))]
+//[RequireComponent(typeof(ObjMovement))]
+//[RequireComponent(typeof(Obstacle))]
 public class ZigZagObjMovement : MonoBehaviour {
 	
 	public float speed;

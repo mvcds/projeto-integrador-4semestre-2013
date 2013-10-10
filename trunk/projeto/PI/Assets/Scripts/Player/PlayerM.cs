@@ -114,7 +114,7 @@ public class PlayerM : MonoBehaviour {
 				
 		if (position == Position.Middle){
 			moving = Position.Left;
-			goingMiddleFromRight = -5;
+			goingMiddleFromRight = -4;
 		}
 		
 		if (position == Position.Right){
@@ -131,7 +131,7 @@ public class PlayerM : MonoBehaviour {
 				
 		if (position == Position.Middle){
 			moving = Position.Right;
-			goingMiddleFromRight = 5;
+			goingMiddleFromRight = 4;
 		}
 		
 		if (position == Position.Left){

@@ -87,12 +87,13 @@ public class MapMovement : MonoBehaviour {
 	
 	private float getRandomDelay(){
 		//print("Random Max Delay: " + (2 - ((MainScript.gameVelocity / 30) * 1.7f)));
-		return Random.Range (0.5f - ((MainScript.gameVelocity / 30) * 0.3f), 2 - ((MainScript.gameVelocity / 30) * 1.7f));
+		return 5;//Random.Range (0.5f - ((MainScript.gameVelocity / 30) * 0.3f), 2 - ((MainScript.gameVelocity / 30) * 1.7f));
 		
 	}
 	
 	private int getRandomLane(){
 		int rand = (int)Random.Range(0, 3);
+		return 0;
 		switch (rand){
 			case 0:
 				if (leftBlock < 0)

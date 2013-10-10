@@ -4,7 +4,7 @@ using System;
 
 public class ObjMovement : MonoBehaviour {
 	
-	private float destroyAt = 5;
+	private float destroyAt = 20;
 	
 	// Update is called once per frame
 	void Update () 

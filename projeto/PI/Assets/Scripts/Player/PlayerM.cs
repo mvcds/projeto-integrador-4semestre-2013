@@ -16,9 +16,9 @@ public class PlayerM : MonoBehaviour {
 	public Transform BottomLane;
 	public Transform TopLane;
 	
-	public float divingDelay = 1.25f;
-	public float jumpingDelay = 1.5f;
-	public float movingDelay = 0.25f;//0.75f;
+	public float divingDelay;
+	public float jumpingDelay;
+	public float movingDelay;
 	
 	public float empuxo;
 	public float jumpHeight;
@@ -66,8 +66,9 @@ public class PlayerM : MonoBehaviour {
 				distance += ((MainScript.gameVelocity / 1.666f) / 10);
 			}
 			dt = DateTime.Now;
+			MainScript.distance = distance;
 		}
-		print ((int)distance);
+		
 		boiar();
 		
 		if (!GameController.isRunning)

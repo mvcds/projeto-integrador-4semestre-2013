@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 153dedc598abc84418783b045c68745c
+guid: 21e0cd1f61144e14fb0fbda8648f336e
 ModelImporter:
   fileIDToRecycleName:
     4300000: cube
@@ -20,7 +20,7 @@ ModelImporter:
     clipAnimations: []
   meshes:
     lODScreenPercentages: []
-    globalScale: .00999999978
+    globalScale: 1.25
     meshCompression: 0
     addColliders: 0
     swapUVChannels: 0

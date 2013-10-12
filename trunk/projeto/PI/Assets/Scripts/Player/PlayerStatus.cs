@@ -99,7 +99,7 @@ public class PlayerStatus : MonoBehaviour {
 	// GameOver
 	private static void gameOver(){
 		reset();
-		Application.LoadLevel(Application.loadedLevel);
+	    Application.LoadLevel(Application.loadedLevel);
 	}
 	
 	private static void reset(){
@@ -111,6 +111,8 @@ public class PlayerStatus : MonoBehaviour {
 		duration = 0;
 		maxDuration = 30;
 		MainScript.gameVelocity = 5;
+		MainScript.distance = 0;
+		MainScript.ducks = 0;
 	}
 	
 	// HitAnimation

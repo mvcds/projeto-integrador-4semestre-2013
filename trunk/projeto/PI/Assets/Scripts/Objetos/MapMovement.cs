@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
-
+//
+// NÃO ESTÁ MAIS SENDO UTILIZADO
+//
 [RequireComponent(typeof(ObjectSpawnerByOdd))]
 public class MapMovement : MonoBehaviour {
 

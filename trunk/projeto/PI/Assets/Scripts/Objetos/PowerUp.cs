@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(ObjMovement))]
+//[RequireComponent(typeof(ObjMovement))]
 public class PowerUp : MonoBehaviour {
 	
 	public int powerUpID;		

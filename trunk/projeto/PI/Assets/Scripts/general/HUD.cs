@@ -26,17 +26,18 @@ public class HUD : MonoBehaviour {
 			
 		if (PlayerStatus.duration > 0)
 			GUI.Box(new Rect(10, 10, 120, 25), "PowerUp: " + (int)(PlayerStatus.duration + 1) + " / " + PlayerStatus.maxDuration);
-		//GUI.Box(new Rect(Screen.width - 100, 10, 100, 25), "Vida: " + (int)PlayerStatus.vida + " / " + PlayerStatus.maxVida);
 		GUI.Box(new Rect(Screen.width / 2 - 60, 10, 120, 25), "Velocidade: " + (int)MainScript.gameVelocity);
+		GUI.Box(new Rect(10, Screen.height - 35, 200, 25), "Distancia Percorrida: " + (int)MainScript.distance);
 		
 		// Ducks
 		GUIStyle myStyle = new GUIStyle();
 		myStyle.font = font;
 		myStyle.fontSize = 40;
+		myStyle.alignment = TextAnchor.MiddleRight;
 		myStyle.normal.textColor = Color.white;	
 					
 		drawImage(0, Screen.height * 0.05f, duckBar);
-		GUI.Label(new Rect (200, Screen.height * 0.055f, 50, 50), "" + MainScript.ducks, myStyle);
+		GUI.Label(new Rect (-280, Screen.height * 0.07f, 500, 50), "" + MainScript.ducks, myStyle);
 				
 		// Life Bar
 		drawImage(Screen.width - (lifeBar.width), Screen.height * 0.05f, lifeBar);

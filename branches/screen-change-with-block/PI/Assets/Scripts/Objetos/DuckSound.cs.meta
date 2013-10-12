@@ -1,8 +1,0 @@
-fileFormatVersion: 2
-guid: 692a4596464ae634a87c4aea9ebceaf1
-MonoImporter:
-  serializedVersion: 2
-  defaultReferences:
-  - quack: {fileID: 8300000, guid: 2fd2eb8c8a44ead489541c0b37592a18, type: 1}
-  executionOrder: 0
-  icon: {instanceID: 0}

@@ -1,0 +1,31 @@
+1
+Ele: Oi, tem alguém em casa?
+()
+
+2
+Ele: ...
+()
+
+3
+(Ele)
+Ela: chamou?
+
+4
+Ele: Eu não sei quem você é, mas eu quero muito saber.
+Ela: Hmm....  Quer entrar?
+
+6
+Ele: Só se for agora!
+Ela: Com tudo...
+
+7
+(Ele)
+Ela: Só que não
+
+8
+(Ele)
+Ela: Haha
+
+9
+Ele: Pow... =(
+()

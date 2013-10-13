@@ -16,7 +16,6 @@ public class Menu : MonoBehaviour {
 		{
 			if (btn == null)
 				continue;
-			//btn.Show(Diretor.Instancia.TelaAtual == MenuTela());
 			btn.Show(true);
 		}
 	}

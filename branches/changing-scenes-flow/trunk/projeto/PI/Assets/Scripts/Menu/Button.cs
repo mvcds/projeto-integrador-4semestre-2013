@@ -10,9 +10,7 @@ abstract public class Button : MonoBehaviour {
 		Hover,
 		Actived
 	}
-	
-	public float t = 1;
-	
+		
 	private States _state;
 	
 	public AudioSource actived_sound,
@@ -34,7 +32,6 @@ abstract public class Button : MonoBehaviour {
 	protected DateTime time;
 	protected bool show;
 	
-	
 	void Start()
 	{
 		time = DateTime.Now;
@@ -42,7 +39,12 @@ abstract public class Button : MonoBehaviour {
 	}
 	
 	void Update()
-	{
+    {
+        place_size.x = place_size.x.FixForHundred();
+        place_size.y = place_size.y.FixForHundred();
+        place_size.width = place_size.width.FixForHundred();
+        place_size.height = place_size.height.FixForHundred();
+
 		ChangeTexture();
 	}
 	
@@ -85,20 +87,14 @@ abstract public class Button : MonoBehaviour {
 	}
 	
 	protected abstract void Action();
-	
-	private	int x,y,width,height;
-	
+		
 	void OnGUI()
 	{
 		if (show)
 		{
-			x = (int) (Screen.width * place_size.x/100);
-			y = (int) (Screen.height * place_size.y/100);
-			width = (int) (Screen.width * place_size.width/100);
-			height = (int)(Screen.height * place_size.height/100);
-								
-			Rect r = new Rect(x, y, width, height);
-			
+            Rect r = new Rect(place_size.x.FitOnWidth(), place_size.y.FitOnHeight(),
+                place_size.width.FitOnWidth(), place_size.height.FitOnHeight());
+            
 			GUIStyle s = new GUIStyle();
 			s.border = new RectOffset(0, 0,0,0);
 			s.padding = new RectOffset(0,0,0,0);

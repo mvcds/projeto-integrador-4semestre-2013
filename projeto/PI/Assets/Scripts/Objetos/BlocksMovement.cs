@@ -25,7 +25,7 @@ public class BlocksMovement : MonoBehaviour {
 	
 	void FixedUpdate () {
 		
-		if (!GameController.isRunning)
+		if (!Director.Instance.isRunning)
 			return;
 		
 		if (PlayerStatus.powerUp == PlayerStatus.PowerUp.Boia){

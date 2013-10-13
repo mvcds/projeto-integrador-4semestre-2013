@@ -10,7 +10,7 @@ public class ParedeScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!GameController.isRunning)
+		if (!Director.Instance.isRunning)
 			return;
 		
 		if (PlayerStatus.powerUp == PlayerStatus.PowerUp.Boia){

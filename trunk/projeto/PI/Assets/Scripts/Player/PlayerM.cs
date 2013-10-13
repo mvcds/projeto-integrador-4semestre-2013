@@ -71,7 +71,7 @@ public class PlayerM : MonoBehaviour {
 		
 		boiar();
 		
-		if (!GameController.isRunning)
+		if (!Director.Instance.isRunning)
 			return;
 		
 		if (delay >= delayTime){

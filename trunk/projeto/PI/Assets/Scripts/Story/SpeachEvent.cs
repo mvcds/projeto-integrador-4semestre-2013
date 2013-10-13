@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public abstract class SpeachEvent : MonoBehaviour {
+public class SpeachEvent : MonoBehaviour {
 		
 	public enum Trigger
 	{
@@ -20,15 +20,15 @@ public abstract class SpeachEvent : MonoBehaviour {
 	{
 		get
 		{
-			if (!GameAsApplication.hasBegun)
-				return false;
-			
+            if (!Director.Instance.canShowDialog)
+                return false;
+
 			switch(On)
 			{
 				case Trigger.PhaseBeginning:
-					return GameController.isStarting;
-				case Trigger.PhaseEnding:
-					break;
+                    return Director.Instance.isStarting;
+                case Trigger.PhaseEnding:
+                    return Director.Instance.isVictory;
 			}
 			
 			return false;
@@ -46,15 +46,15 @@ public abstract class SpeachEvent : MonoBehaviour {
 		if (!Run)
 			return;
 				
-		RightArrow.x = ScreenUtil.FixForHundred(RightArrow.x);
-		RightArrow.y = ScreenUtil.FixForHundred(RightArrow.y);			
-		RightArrow.width = ScreenUtil.FixForHundred(RightArrow.width);
-		RightArrow.height = ScreenUtil.FixForHundred(RightArrow.height);
+		RightArrow.x = RightArrow.x.FixForHundred();
+		RightArrow.y = RightArrow.y.FixForHundred();			
+		RightArrow.width = RightArrow.width.FixForHundred();
+		RightArrow.height = RightArrow.height.FixForHundred();
 		
-		LeftArrow.x = ScreenUtil.FixForHundred(LeftArrow.x);
-		LeftArrow.y = ScreenUtil.FixForHundred(LeftArrow.y);			
-		LeftArrow.width = ScreenUtil.FixForHundred(LeftArrow.width);
-		LeftArrow.height = ScreenUtil.FixForHundred(LeftArrow.height);
+		LeftArrow.x = LeftArrow.x.FixForHundred();
+		LeftArrow.y = LeftArrow.y.FixForHundred();			
+		LeftArrow.width = LeftArrow.width.FixForHundred();
+        LeftArrow.height = LeftArrow.height.FixForHundred();
 		
 		if (pages[_current] != null)
 			pages[_current].Show();
@@ -64,11 +64,11 @@ public abstract class SpeachEvent : MonoBehaviour {
 	{
 		if (!Run)
 			return;
-		
-		Rect left = new Rect(ScreenUtil.FitOnWidth(LeftArrow.x), ScreenUtil.FitOnHeight(LeftArrow.y),
-			ScreenUtil.FitOnWidth(LeftArrow.width), ScreenUtil.FitOnHeight(LeftArrow.height));		
-		Rect right = new Rect(ScreenUtil.FitOnWidth(RightArrow.x), ScreenUtil.FitOnHeight(RightArrow.y),
-			ScreenUtil.FitOnWidth(RightArrow.width), ScreenUtil.FitOnHeight(RightArrow.height));
+		        
+		Rect left = new Rect(LeftArrow.x.FitOnWidth(), LeftArrow.y.FitOnHeight(),
+			LeftArrow.width.FitOnWidth(), LeftArrow.height.FitOnHeight());		
+		Rect right = new Rect(RightArrow.x.FitOnWidth(), RightArrow.y.FitOnHeight(),
+			RightArrow.width.FitOnWidth(), RightArrow.height.FitOnHeight());
 		
 		if (_current > 0)
 		{
@@ -97,6 +97,9 @@ public abstract class SpeachEvent : MonoBehaviour {
 	{
 		_current--;
 	}
-	
-	public abstract void Action();	
+
+    public virtual void Action()
+    {
+        Director.Instance.Run();
+    }
 }

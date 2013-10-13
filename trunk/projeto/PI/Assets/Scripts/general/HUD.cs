@@ -21,7 +21,7 @@ public class HUD : MonoBehaviour {
 	}
 	
 	void OnGUI(){
-		if (!GameController.isRunning)
+		if (!Director.Instance.isRunning)
 			return;
 			
 		if (PlayerStatus.duration > 0)

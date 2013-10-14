@@ -13,21 +13,21 @@ public class SpeachFace : MonoBehaviour {
 		if (!_show)
 			return;
 		
-		Position.x = Position.x.FixForHundred();
-        Position.y = Position.y.FixForHundred();			
-		Position.width = Position.width.FixForHundred(true);
-        Position.height = Position.height.FixForHundred(true);
+		Position.x = ScreenUtil.FixForHundred(Position.x);
+		Position.y = ScreenUtil.FixForHundred(Position.y);			
+		Position.width = ScreenUtil.FixForHundred(Position.width, true);
+		Position.height = ScreenUtil.FixForHundred(Position.height, true);	
 	}
 		
 	void OnGUI()
 	{	
 		if (!_show)
 			return;
-
-        Rect imagePosition = new Rect(Position.x.FitOnWidth(), Position.y.FitOnHeight(),
-            Position.width.FitOnWidth(), Position.height.FitOnHeight());		
 		
-		GUI.DrawTexture (imagePosition, Image);
+		Rect imagePosition = new Rect(ScreenUtil.FitOnWidth(Position.x), ScreenUtil.FitOnHeight(Position.y),
+			ScreenUtil.FitOnWidth(Position.width), ScreenUtil.FitOnHeight(Position.height));		
+		
+		GUI.DrawTexture (imagePosition, Image);		
 	}
 	
 	void FixedUpdate()

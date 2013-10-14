@@ -13,16 +13,16 @@ public class SpeachItem : MonoBehaviour {
 	{
 		if (!_show)
 			return;
-
-        SpeachPosition1.x = SpeachPosition1.x.FixForHundred();
-        SpeachPosition1.y = SpeachPosition1.y.FixForHundred();
-        SpeachPosition1.width = SpeachPosition1.width.FixForHundred();
-        SpeachPosition1.height = SpeachPosition1.height.FixForHundred();
-
-        SpeachPosition2.x = SpeachPosition2.x.FixForHundred();
-        SpeachPosition2.y = SpeachPosition2.y.FixForHundred();
-        SpeachPosition2.width = SpeachPosition2.width.FixForHundred();
-        SpeachPosition2.height = SpeachPosition2.height.FixForHundred();
+				
+		SpeachPosition1.x = ScreenUtil.FixForHundred(SpeachPosition1.x);
+		SpeachPosition1.y = ScreenUtil.FixForHundred(SpeachPosition1.y);			
+		SpeachPosition1.width = ScreenUtil.FixForHundred(SpeachPosition1.width);
+		SpeachPosition1.height = ScreenUtil.FixForHundred(SpeachPosition1.height);
+		
+		SpeachPosition2.x = ScreenUtil.FixForHundred(SpeachPosition2.x);
+		SpeachPosition2.y = ScreenUtil.FixForHundred(SpeachPosition2.y);	
+		SpeachPosition2.width = ScreenUtil.FixForHundred(SpeachPosition2.width);
+		SpeachPosition2.height = ScreenUtil.FixForHundred(SpeachPosition2.height);
 	}
 	
 	void FixedUpdate()
@@ -66,8 +66,8 @@ public class SpeachItem : MonoBehaviour {
 		{
 			speach = speach.Trim();
 			
-			Rect speachPosition = new Rect(position.x.FitOnWidth(), position.y.FitOnHeight(),
-				position.width.FitOnWidth(), position.height.FitOnHeight());
+			Rect speachPosition = new Rect(ScreenUtil.FitOnWidth(position.x), ScreenUtil.FitOnHeight(position.y),
+				ScreenUtil.FitOnWidth(position.width), ScreenUtil.FitOnHeight(position.height));
 			
 			GUI.Label(speachPosition, speach);
 		}

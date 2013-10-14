@@ -7,8 +7,8 @@ public class ObjMovement : MonoBehaviour {
 	private float destroyAt = 20;
 	
 	// Update is called once per frame
-	void Update () 
-	{		
+	void Update ()
+    {
 		if (!Director.Instance.isRunning)
 			return;
 		

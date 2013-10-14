@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Director
 {
@@ -90,6 +91,12 @@ public class Director
 
     #region Game
 
+    public Rank GameRank
+    {
+        get;
+        private set;
+    }
+
     private enum GameStatus
     {
         None,
@@ -120,6 +127,7 @@ public class Director
 
         _status = GameStatus.Starting;
 
+        GameRank = new Rank();
         Application.LoadLevel(level);
     }
 
@@ -201,6 +209,19 @@ public class Director
         _status = GameStatus.Pause;
     }
 
+    [Obsolete("Missing full implementation")]
+    public void GameOver(bool victory = false)
+    {
+        if (victory)
+        {
+            //TODO
+            //_status = GameStatus.RankWrite;
+            _status = GameStatus.Victory;
+        }
+        else
+            _status = GameStatus.GameOver;
+    }
+
     public string StatusOfThisLevel()
     {
         string level = Application.loadedLevelName;
@@ -218,6 +239,86 @@ public class Director
 
     #region Rank 
 
+    private const int RANK_LIMIT = 10;
+
+    public enum RankType
+    {
+        Duck,
+        Distance
+        ,Average
+    }
+
+    private Dictionary<RankType, List<RankPosition>> _rankByType = new Dictionary<RankType, List<RankPosition>>();
+    
+    public Dictionary<RankType, List<RankPosition>> RankByType
+    {
+        get
+        {
+            FixRankByType(ref _rankByType);
+            return _rankByType;
+        }
+        private set
+        {
+            FixRankByType(ref value);
+            _rankByType = value;
+        }
+    }
+
+    private List<RankPosition> DefaultList(RankType type)
+    {
+        List<Rank> list = new List<Rank>();
+        List<RankPosition> result = new List<RankPosition>();
+
+        for (int i = 0; i < RANK_LIMIT; i++)
+        {
+            if (type == RankType.Duck)
+            {
+                list.Add(
+                    new Rank((i + 1) * RANK_LIMIT)
+                 );
+            }
+            else if (type == RankType.Distance)
+            {
+                list.Add(
+                    new Rank(0, (i + 1) * RANK_LIMIT)
+                 );
+            }
+        }
+
+        foreach (Rank r in list)
+            result.Add(new RankPosition(DEFAULT_PROFILE_NAME, r));
+       
+
+        return result;
+    }
+
+    private void FixRankByType(ref Dictionary<RankType, List<RankPosition>> list)
+    {
+        //*Initializing rank
+        if (!list.ContainsKey(RankType.Duck))
+            list.Add(RankType.Duck, DefaultList(RankType.Duck));
+        if (!list.ContainsKey(RankType.Distance))
+            list.Add(RankType.Distance, DefaultList(RankType.Distance));
+        //*/
+
+        foreach (RankType type in list.Keys)
+        {
+            switch (type)
+            {
+                case RankType.Duck:
+                    list[type] = list[type].OrderBy(p => p.Ranking.Ducks).ToList();
+                    break;
+                case RankType.Distance:
+                    list[type] = list[type].OrderBy(p => p.Ranking.Distance).ToList();
+                    break;
+                case RankType.Average:
+                    list[type] = list[type].OrderBy(p => (p.Ranking.Ducks + p.Ranking.Distance * 3) / 4).ToList();
+                    break;
+            }
+            list[type] = list[type].Take(RANK_LIMIT).ToList();
+        }
+    }//*/
+    
     #endregion
 
     #region Achiv

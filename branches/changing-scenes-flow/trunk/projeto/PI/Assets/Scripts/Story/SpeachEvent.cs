@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public abstract class SpeachEvent : MonoBehaviour {
+public class SpeachEvent : MonoBehaviour {
 		
 	public enum Trigger
 	{
@@ -12,7 +12,7 @@ public abstract class SpeachEvent : MonoBehaviour {
 	[SerializeField] private int _current = 0;
 	public SpeachItem[] pages;
 	public  Texture Right, Left, End;
-	[SerializeField] private Rect RightArrow, LeftArrow;	
+	[SerializeField] private Rect RightArrow, LeftArrow, EndArrow;	
 	//[SerializeField] private bool _show = true;
 	public Trigger On;	
 	
@@ -20,9 +20,9 @@ public abstract class SpeachEvent : MonoBehaviour {
 	{
 		get
 		{
-			/*if (!GameAsApplication.hasBegun)
-				return false;*/
-			
+            if (!Director.Instance.canShowDialog)
+                return false;
+
 			switch(On)
 			{
 				case Trigger.PhaseBeginning:
@@ -39,37 +39,48 @@ public abstract class SpeachEvent : MonoBehaviour {
 	{
 		 LeftArrow = new Rect(0,90,50,10);
 		 RightArrow = new Rect(50,90,50,10);
+         EndArrow = RightArrow;
+         EndArrow.y = 0;
 	}
 	
 	void Update()
 	{
+        
 		if (!Run)
 			return;
-				
-		RightArrow.x = RightArrow.x.FixForHundred();
-		RightArrow.y = RightArrow.y.FixForHundred();			
-		RightArrow.width = RightArrow.width.FixForHundred();
-		RightArrow.height = RightArrow.height.FixForHundred();
-		
-		LeftArrow.x = LeftArrow.x.FixForHundred();
-		LeftArrow.y = LeftArrow.y.FixForHundred();			
-		LeftArrow.width = LeftArrow.width.FixForHundred();
-        LeftArrow.height = LeftArrow.height.FixForHundred();
+
+        FixForHundred(RightArrow);
+        FixForHundred(LeftArrow);
+        FixForHundred(EndArrow);
 		
 		if (pages[_current] != null)
 			pages[_current].Show();
 	}
-	
+
+    void FixForHundred(Rect r)
+    {
+        r.x = r.x.FixForHundred();
+        r.y = r.y.FixForHundred();
+        r.width = r.width.FixForHundred();
+        r.height = r.height.FixForHundred();
+    }
+
+    Rect CreateFixed(Rect r)
+    {
+        return new Rect(r.x.FitOnWidth(), r.y.FitOnHeight(),
+               r.width.FitOnWidth(), r.height.FitOnHeight());		
+    }
+
 	void OnGUI()
 	{
 		if (!Run)
 			return;
-		        
-		Rect left = new Rect(LeftArrow.x.FitOnWidth(), LeftArrow.y.FitOnHeight(),
-			LeftArrow.width.FitOnWidth(), LeftArrow.height.FitOnHeight());		
-		Rect right = new Rect(RightArrow.x.FitOnWidth(), RightArrow.y.FitOnHeight(),
-			RightArrow.width.FitOnWidth(), RightArrow.height.FitOnHeight());
-		
+
+        Rect left = CreateFixed(LeftArrow);
+        Rect right = CreateFixed(RightArrow);
+        Rect skip = CreateFixed(EndArrow);
+        bool canSkip = Director.Instance.canSkipDialog(On);
+
 		if (_current > 0)
 		{
 			if (GUI.Button(left, Left))
@@ -83,9 +94,17 @@ public abstract class SpeachEvent : MonoBehaviour {
 		}
 		else if (pages.Length > 0)
 		{
+            canSkip = false;
 			if (GUI.Button(right, End))
 				Action();
 		}
+        
+        
+        if (canSkip)
+        {
+            if (GUI.Button(skip, End))
+                Action();
+        }
 	}
 	
 	public void Forward()
@@ -97,6 +116,10 @@ public abstract class SpeachEvent : MonoBehaviour {
 	{
 		_current--;
 	}
-	
-	public abstract void Action();	
+
+    public virtual void Action()
+    {
+        Director.Instance.Run();
+        Destroy(this);
+    }
 }

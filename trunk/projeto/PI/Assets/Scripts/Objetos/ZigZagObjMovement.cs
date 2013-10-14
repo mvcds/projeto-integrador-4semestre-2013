@@ -15,7 +15,10 @@ public class ZigZagObjMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update ()
-	{		
+	{
+        if (!Director.Instance.isRunning)
+            return;
+
 		if (transform.position.x > 4)
 			direction = true;
 		if (transform.position.x < -4) 

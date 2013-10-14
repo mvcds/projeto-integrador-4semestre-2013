@@ -24,7 +24,7 @@ public class Director
 
     #endregion
     
-    #region Splash Screen
+    #region Splash
 
     public bool wasSplashShown
     {
@@ -39,7 +39,7 @@ public class Director
 
     #endregion
 
-    #region Profile Screen
+    #region Profile
     
     public bool UseProfile
     {
@@ -48,25 +48,47 @@ public class Director
             return false;
         }
     }
-
-    List<string> unblockedLevels = new List<string>();
+    
+    Dictionary<string, LevelStatus> unblockedLevels = new Dictionary<string, LevelStatus>();
 
     private const string DEFAULT_PROFILE_NAME = "CAP";
 
     public void LoadProfile(string name = DEFAULT_PROFILE_NAME)
     {
-        //unblockedLevels = RecoverLevels(name);
-        if (!unblockedLevels.Contains(DEFAULT_LEVEL_NAME))
-            unblockedLevels.Add(DEFAULT_LEVEL_NAME);
+        //TODO: unblockedLevels = RecoverLevels(name); 
+        //Fix if the first level is missing
+        if (!unblockedLevels.ContainsKey(DEFAULT_LEVEL_NAME))
+            unblockedLevels.Add(DEFAULT_LEVEL_NAME, LevelStatus.First);
+    }
+
+    [Obsolete("Not fully tested yet")]
+    public bool canSkipDialog(SpeachEvent.Trigger on)
+    {
+        string level = Application.loadedLevelName;
+
+        if (unblockedLevels.ContainsKey(level))
+        {
+            if (unblockedLevels[level] == LevelStatus.First)
+                return false;
+            else if (unblockedLevels[level] == LevelStatus.Played && on == SpeachEvent.Trigger.PhaseBeginning)
+                return true;
+            //Not tested below
+            else if (unblockedLevels[level] == LevelStatus.FirstWin && on == SpeachEvent.Trigger.PhaseEnding)
+                return false;
+
+            return true;
+        }
+
+        return false;
     }
 
     #endregion
 
-    #region Menu Screen
+    #region Menu 
     
     #endregion
 
-    #region Game Screen
+    #region Game
 
     private enum GameStatus
     {
@@ -80,13 +102,30 @@ public class Director
         Exiting
     }
 
+    private enum LevelStatus
+    {
+        First,
+        Played,
+        FirstWin,
+        Win
+    }
+
     GameStatus _status = GameStatus.None;
     public const string DEFAULT_LEVEL_NAME = "LanesTesteBlocos";
 
     public void LoadLevel(string level)
     {
+        if (!unblockedLevels.ContainsKey(level))
+            unblockedLevels.Add(level, LevelStatus.First);
+
         _status = GameStatus.Starting;
+
         Application.LoadLevel(level);
+    }
+
+    public void ResetLevel()
+    {
+        LoadLevel(Application.loadedLevelName);
     }
 
     public bool isStarting
@@ -147,20 +186,41 @@ public class Director
 
     public void Run()
     {
+        string level = Application.loadedLevelName;
+
+        if (!unblockedLevels.ContainsKey(level))
+            unblockedLevels.Add(level, LevelStatus.Played);
+        else if (unblockedLevels[level] == LevelStatus.First)
+            unblockedLevels[level] = LevelStatus.Played;
+
         _status = GameStatus.Run;
+    }
+
+    public void Pause()
+    {
+        _status = GameStatus.Pause;
+    }
+
+    public string StatusOfThisLevel()
+    {
+        string level = Application.loadedLevelName;
+        if (!unblockedLevels.ContainsKey(level))
+            return "None";
+        else
+            return unblockedLevels[level].ToString();
     }
 
     #endregion
 
-    #region Shop Screen
+    #region Shop
 
     #endregion
 
-    #region Rank Screen
+    #region Rank 
 
     #endregion
 
-    #region Achiv Screen
+    #region Achiv
 
     #endregion
 }

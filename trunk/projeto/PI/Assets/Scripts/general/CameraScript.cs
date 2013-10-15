@@ -7,7 +7,7 @@ public class CameraScript : MonoBehaviour {
 		
 	// Use this for initialization
 	void Start () {
-	
+		Director.Instance.Run();
 	}
 	
 	// Update is called once per frame

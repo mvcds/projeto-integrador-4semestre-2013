@@ -90,11 +90,19 @@ public class Director
     #endregion
 
     #region Game
-
+	
+	private Rank _rank = new Rank();
+	
     public Rank GameRank
     {
-        get;
-        private set;
+        get
+		{
+			return _rank;
+		}
+        private set
+		{
+			_rank = value;
+		}
     }
 
     private enum GameStatus

@@ -59,7 +59,7 @@ public class Director
         //TODO: unblockedLevels = RecoverLevels(name); 
         //Fix if the first level is missing
         if (!unblockedLevels.ContainsKey(DEFAULT_LEVEL_NAME))
-            unblockedLevels.Add(DEFAULT_LEVEL_NAME, LevelStatus.First);
+            unblockedLevels.Add(DEFAULT_LEVEL_NAME, LevelStatus.First);            		
     }
 
     [Obsolete("Not fully tested yet")]
@@ -91,17 +91,20 @@ public class Director
 
     #region Game
 	
-	private Rank _rank = new Rank();
+	private Rank _rank;
 	
     public Rank GameRank
     {
         get
 		{
+			if (_rank == null)
+				_rank = new Rank();
+			
 			return _rank;
 		}
         private set
 		{
-			_rank = value;
+			_rank = value; 
 		}
     }
 
@@ -257,20 +260,27 @@ public class Director
     }
 
     private Dictionary<RankType, List<RankPosition>> _rankByType = new Dictionary<RankType, List<RankPosition>>();
-    
-    public Dictionary<RankType, List<RankPosition>> RankByType
-    {
-        get
-        {
-            FixRankByType(ref _rankByType);
-            return _rankByType;
-        }
-        private set
-        {
-            FixRankByType(ref value);
-            _rankByType = value;
-        }
-    }
+    	
+	public List<RankPosition> RankInLevel(RankType type)
+	{
+		string level = Application.loadedLevelName;
+		List<RankPosition> result = new List<RankPosition>();
+		
+		FixRank(ref _rankByType);
+				
+		foreach(RankPosition p in _rankByType[type])
+		{
+			if (p.Level == level || p.Level == null)
+			{
+				result.Add(p);
+				
+				if (result.Count >= RANK_LIMIT)
+					break;
+			}
+		}
+		
+		return result;
+	}
 
     private List<RankPosition> DefaultList(RankType type)
     {
@@ -294,23 +304,29 @@ public class Director
         }
 
         foreach (Rank r in list)
-            result.Add(new RankPosition(DEFAULT_PROFILE_NAME, r));
+            result.Add(new RankPosition(DEFAULT_PROFILE_NAME, r, null));
        
 
         return result;
     }
-
-    private void FixRankByType(ref Dictionary<RankType, List<RankPosition>> list)
-    {
+		
+	private void FixRank(ref Dictionary<RankType, List<RankPosition>> list)
+	{
         //*Initializing rank
         if (!list.ContainsKey(RankType.Duck))
             list.Add(RankType.Duck, DefaultList(RankType.Duck));
         if (!list.ContainsKey(RankType.Distance))
             list.Add(RankType.Distance, DefaultList(RankType.Distance));
         //*/
-
-        foreach (RankType type in list.Keys)
-        {
+		
+		//*Size
+		foreach (RankType type in list.Keys)
+			list[type] = list[type].Take(RANK_LIMIT).ToList();
+		//*/
+			
+		//*Type
+		foreach (RankType type in list.Keys)
+        {			
             switch (type)
             {
                 case RankType.Duck:
@@ -323,9 +339,10 @@ public class Director
                     list[type] = list[type].OrderBy(p => (p.Ranking.Ducks + p.Ranking.Distance * 3) / 4).ToList();
                     break;
             }
-            list[type] = list[type].Take(RANK_LIMIT).ToList();
         }
-    }//*/
+		//*/
+	}
+	//*/
     
     #endregion
 

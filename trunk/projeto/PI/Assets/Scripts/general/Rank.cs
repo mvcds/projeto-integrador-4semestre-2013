@@ -25,19 +25,27 @@ public class Rank {
         get;
         set;
     }
+	
 
     //TODO: Near Missings?
 }
 
 public class RankPosition
 {
-    public RankPosition(string profile, Rank ranking)
+    public RankPosition(string profile, Rank ranking, string level = null)
     {
         Profile = profile;
+		Level = level;
         Ranking = ranking;
     }
 
     public string Profile
+    {
+        get;
+        private set;
+    }
+	
+    public string Level
     {
         get;
         private set;

@@ -1,7 +1,7 @@
 //---------------------------------------------------------------
 //--------------- SCRIPT DE AUDIOPLAYER DE MÚSICA ---------------
 //------------- ESCRITO POR RONY KETCHUM ------------------------
-//------------- VERSÃO 1.2 - 08/10/2013 -------------------------
+//------------- VERSÃO 1.3 - 17/10/2013 -------------------------
 //---------------------------------------------------------------
 
 using UnityEngine;
@@ -17,10 +17,13 @@ public class AudioLooper : MonoBehaviour {
 	private int mus_atual;
 	//Variável para controle de troca externa
 	private bool trocar;
+	
+	private int conta_troca;
+	private int conta_troca_2;
 	//Variáveis de Controle
 	private bool fazendo_transicao;
 	private bool ja_trocou;
-	
+	private float velocidade_jogo;
 	//variáveis para controle do pitch (Power-Ups)
 	private bool pitch_up;
 	private bool pitch_down;
@@ -44,6 +47,25 @@ public class AudioLooper : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		
+		if(MainScript.gameVelocity<10){
+			velocidade_jogo = 0.90f + ((MainScript.gameVelocity-5)/50);
+			trocar = false;
+			conta_troca = 0;
+			conta_troca_2 = (int) MainScript.gameVelocity;
+		}
+		else{
+			velocidade_jogo = 1.0f;
+			if(conta_troca<3){
+				conta_troca = (int) MainScript.gameVelocity - conta_troca_2;
+			}
+			else{
+				if(MainScript.gameVelocity<=33.0f){
+					conta_troca = 0;
+					conta_troca_2 = (int) MainScript.gameVelocity;
+					Troca ();
+				}
+			}
+		}
 		
 		//Ativação da Transição normal
 		if(trocar && !fazendo_transicao && !trans_alternativa){
@@ -80,7 +102,6 @@ public class AudioLooper : MonoBehaviour {
 				}
 			}
 		}
-		
 		//Ativação da Transição Alternativa
 		//Alterado aqui para volume de corte na metade e dobro do tempo
 		if(trans_alternativa){
@@ -118,22 +139,22 @@ public class AudioLooper : MonoBehaviour {
 		//--------------- Funções de Pitch ---------------------------
 		//------------------------------------------------------------
 		if(pitch_up){
-			player.pitch = 1.15f;
+			velocidade_jogo = velocidade_jogo+0.15f;
 			if(step_pitch>time_pitch){
-				player.pitch = 1.0f;
 				pitch_up = false;
 			}
 			step_pitch+=Time.deltaTime;
 		}
 		
 		if(pitch_down){
-			player.pitch = 0.85f;
+			velocidade_jogo = velocidade_jogo - 0.15f;
 			if(step_pitch>time_pitch){
-				player.pitch = 1.0f;
 				pitch_down = false;
 			}
 			step_pitch+=Time.deltaTime;
 		}
+		
+		player.pitch = velocidade_jogo;
 		
 		//TESTES
 		//Por motivos óbvios apagar esse bloco inteiro quando for pro game mesmo

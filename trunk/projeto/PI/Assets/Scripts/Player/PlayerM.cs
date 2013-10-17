@@ -84,10 +84,11 @@ public class PlayerM : MonoBehaviour {
 				moveToRight();
 			
 			if (verticalDelay >= verticalDelayTime){
+				
 				if (Input.GetKey (KeyCode.DownArrow)) 
 					dive();
 			
-				if (/*PlayerStatus.powerUp == PlayerStatus.PowerUp.Capivara && */Input.GetKey (KeyCode.UpArrow)) 
+				if (PlayerStatus.powerUp == PlayerStatus.PowerUp.Capivara && Input.GetKey (KeyCode.UpArrow)) 
 					jump();
 			} else {
 				verticalDelay += Time.deltaTime;

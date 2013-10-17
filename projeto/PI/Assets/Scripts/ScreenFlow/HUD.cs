@@ -38,7 +38,8 @@ public class HUD : MonoBehaviour {
 		myStyle.normal.textColor = Color.white;	
 					
 		drawImage(0, Screen.height * 0.05f, duckBar);
-        GUI.Label(new Rect(-280, Screen.height * 0.07f, 500, 50), "" + Director.Instance.GameRank.Ducks, myStyle);
+        //GUI.Label(new Rect(-280, Screen.height * 0.07f, 500, 50), "" + Director.Instance.GameRank.Ducks, myStyle);
+		GUI.Label(new Rect(-280, Screen.height * 0.06f, 500, 50), "" + MainScript.ducks, myStyle);
 				
 		// Life Bar
 		drawImage(Screen.width - (lifeBar.width), Screen.height * 0.05f, lifeBar);

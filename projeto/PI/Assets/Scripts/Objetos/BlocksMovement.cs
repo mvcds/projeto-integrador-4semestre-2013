@@ -11,6 +11,7 @@ public class BlocksMovement : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		
 		odd = (ObjectSpawnerByOdd)GetComponent(typeof(ObjectSpawnerByOdd));//TODO: is there a way to clean it?
 		
 		GameObject spawn3 = odd.getObject();

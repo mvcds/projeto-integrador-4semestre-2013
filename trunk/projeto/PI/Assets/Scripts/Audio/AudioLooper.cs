@@ -1,7 +1,7 @@
 //---------------------------------------------------------------
 //--------------- SCRIPT DE AUDIOPLAYER DE MÚSICA ---------------
 //------------- ESCRITO POR RONY KETCHUM ------------------------
-//------------- VERSÃO 1.3 - 17/10/2013 -------------------------
+//------------- VERSÃO 1.4 - 17/10/2013 -------------------------
 //---------------------------------------------------------------
 
 using UnityEngine;
@@ -29,6 +29,10 @@ public class AudioLooper : MonoBehaviour {
 	private bool pitch_down;
 	private int time_pitch;
 	private double step_pitch;
+	
+	//variáveis para controle de volume do pause
+	private bool mudou;
+	private float vol_mudado;
 	
 	//variáveis para controle de transição alternativa
 	private int indice_troca;
@@ -79,6 +83,15 @@ public class AudioLooper : MonoBehaviour {
 			ja_trocou = false;
 			trocar = false;
 		}
+		
+		//Pause
+		if(Director.Instance.isPaused){
+			player.volume = 0.1f;
+		}
+		else{
+			player.volume = 1.0f;
+		}
+		
 		
 		
 		if(fazendo_transicao){

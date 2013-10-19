@@ -144,6 +144,7 @@ public class Director
 
     public void ResetLevel()
     {
+        GameRank = new Rank();
         LoadLevel(Application.loadedLevelName);
     }
 

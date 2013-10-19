@@ -66,7 +66,7 @@ public class PlayerM : MonoBehaviour {
 				distance += ((MainScript.gameVelocity / 1.666f) / 10);
 			}
 			dt = DateTime.Now;
-			MainScript.distance = distance;
+            Director.Instance.GameRank.Distance = distance;
 		}
 		
 		boiar();

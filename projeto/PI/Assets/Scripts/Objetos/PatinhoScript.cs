@@ -14,7 +14,8 @@ public class PatinhoScript : MonoBehaviour {
 	 void OnTriggerEnter(Collider other) {
 		if (!hit){
 			Destroy(transform.gameObject);
-			MainScript.ducks++;
+			//MainScript.ducks++;
+            Director.Instance.GameRank.AddDuck();
 			hit = true;
 		}
     }

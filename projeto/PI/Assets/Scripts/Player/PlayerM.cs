@@ -40,6 +40,7 @@ public class PlayerM : MonoBehaviour {
 	private bool jumping;
 	private float distance;
 	private DateTime dt = DateTime.Now;
+    private bool startedTime = false;
 	
 	// Use this for initialization
 	void Start () {
@@ -57,7 +58,18 @@ public class PlayerM : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+    void Update()
+    {
+        boiar();
+        
+        if (!Director.Instance.isRunning)
+            return;
+        else if (!startedTime)
+        {
+            dt = DateTime.Now;
+            startedTime = true;
+        }
+
 		TimeSpan span = DateTime.Now - dt;
 		if (span.TotalSeconds > 1){
 			if (PlayerStatus.powerUp == PlayerStatus.PowerUp.Boia){
@@ -68,12 +80,7 @@ public class PlayerM : MonoBehaviour {
 			dt = DateTime.Now;
             Director.Instance.GameRank.Distance = distance;
 		}
-		
-		boiar();
-		
-		if (!Director.Instance.isRunning)
-			return;
-		
+				
 		if (delay >= delayTime){
 			diving = false; 
 			jumping = false;

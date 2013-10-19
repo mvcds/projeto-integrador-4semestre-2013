@@ -26,7 +26,6 @@ public class Rank {
         set;
     }
 	
-
     //TODO: Near Missings?
 }
 

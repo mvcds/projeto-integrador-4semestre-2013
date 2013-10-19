@@ -4,10 +4,12 @@ using System.Collections;
 public class CameraScript : MonoBehaviour {
 	
 	public Transform player;
-		
+    public bool AutomaticStart = true;
+
 	// Use this for initialization
 	void Start () {
-		Director.Instance.Run();
+        if (AutomaticStart && Debug.isDebugBuild)
+		    Director.Instance.Run();
 	}
 	
 	// Update is called once per frame

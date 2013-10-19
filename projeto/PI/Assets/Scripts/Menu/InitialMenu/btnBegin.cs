@@ -3,11 +3,15 @@ using System.Collections;
 
 public class btnBegin : Button {
 		
+    public string TestScene = Director.DEFAULT_LEVEL_NAME;
+
 	protected override void Action ()
     {
         //TODO: select level
-        //Director.Instance.LoadLevel(Director.DEFAULT_LEVEL_NAME);
-		Director.Instance.LoadLevel("lane_chao");
+        if (!Debug.isDebugBuild)
+            Director.Instance.LoadLevel(Director.DEFAULT_LEVEL_NAME);
+        else
+            Director.Instance.LoadLevel(TestScene);
 	}
 	
 }

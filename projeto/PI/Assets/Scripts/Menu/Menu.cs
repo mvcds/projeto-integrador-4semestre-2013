@@ -17,9 +17,20 @@ public class Menu : MonoBehaviour {
 		
 		Show();
 	}
+	
+	protected virtual bool canShow
+	{
+		get
+		{
+			return true;
+		}
+	}
 
 	protected void Show()
 	{
+		if (!canShow)
+			return;
+		
 		GUI.depth = -1;
 		foreach(Button btn in buttons)
 		{
@@ -31,6 +42,9 @@ public class Menu : MonoBehaviour {
 	
 	void OnGUI()
 	{
+		if (!canShow)
+			return;
+		
 		if (_bgMenu != null)
 		{
 			

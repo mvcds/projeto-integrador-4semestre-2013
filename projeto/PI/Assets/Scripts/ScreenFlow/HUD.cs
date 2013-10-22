@@ -14,6 +14,7 @@ public class HUD : MonoBehaviour {
 	private Texture powerUpBarraBoia;
 	private Texture powerUpBarraCapivara;
 	private Texture powerUpFill;
+	private Texture powerUpFillRed;
 	
 	// Use this for initialization
 	void Start ()
@@ -28,6 +29,7 @@ public class HUD : MonoBehaviour {
 		powerUpBarraCapivara = (Texture)Resources.Load("Images/HUD/LifeBar/BarraCapivara");
 		powerUpBarraPorta = (Texture)Resources.Load("Images/HUD/LifeBar/BarraPorta");
 		powerUpFill = (Texture)Resources.Load("Images/HUD/LifeBar/greenBar");
+		powerUpFillRed = (Texture)Resources.Load("Images/HUD/LifeBar/redBar");
 	}
 	
 	void OnGUI(){
@@ -38,6 +40,14 @@ public class HUD : MonoBehaviour {
 			//GUI.Box(new Rect(10, 10, 120, 25), "PowerUp: " + (int)(PlayerStatus.duration + 1) + " / " + PlayerStatus.maxDuration);
 		GUI.Box(new Rect(Screen.width / 2 - 60, 10, 120, 25), "Velocidade: " + (int)MainScript.gameVelocity);
 		GUI.Box(new Rect(Screen.width - 250, Screen.height - 60, 200, 25), "Distancia Percorrida: " + (int) Director.Instance.GameRank.Distance);
+		//GUI.Box(new Rect(Screen.width - 250, Screen.height - 200, 200, 25), "Folego: " + (int) MainScript.folego);
+		
+		// Folego
+		if (MainScript.folego >= 2)
+			GUI.DrawTexture (new Rect (50 + 40, Screen.height * 0.912f, (MainScript.folego / MainScript.Maxfolego) * powerUpFill.width, powerUpFill.height), powerUpFill);
+		else 
+			GUI.DrawTexture (new Rect (50 + 40, Screen.height * 0.912f, (MainScript.folego / MainScript.Maxfolego) * powerUpFill.width, powerUpFill.height), powerUpFillRed);
+		drawImage(50, Screen.height * 0.9f, powerUpBarraBoia);
 		
 		// Ducks
 		GUIStyle myStyle = new GUIStyle();
@@ -53,17 +63,17 @@ public class HUD : MonoBehaviour {
 		// PowerUp
 		if (PlayerStatus.powerUp != PlayerStatus.PowerUp.Nada){
 			
-			GUI.DrawTexture (new Rect (50 + 40, Screen.height * 0.912f, (PlayerStatus.duration / PlayerStatus.maxDuration) * powerUpFill.width, powerUpFill.height), powerUpFill);
+			GUI.DrawTexture (new Rect (50 + 40, Screen.height * 0.812f, (PlayerStatus.duration / PlayerStatus.maxDuration) * powerUpFill.width, powerUpFill.height), powerUpFill);
 			
 			//drawImage(50, Screen.height * 0.90f, powerUpFill);
-			if (PlayerStatus.powerUp != PlayerStatus.PowerUp.Capivara)
-				drawImage(50, Screen.height * 0.90f, powerUpBarraCapivara);
+			if (PlayerStatus.powerUp == PlayerStatus.PowerUp.Capivara)
+				drawImage(50, Screen.height * 0.80f, powerUpBarraCapivara);
 			
-			if (PlayerStatus.powerUp != PlayerStatus.PowerUp.Porta)
-				drawImage(50, Screen.height * 0.90f, powerUpBarraPorta);
+			if (PlayerStatus.powerUp == PlayerStatus.PowerUp.Porta)
+				drawImage(50, Screen.height * 0.80f, powerUpBarraPorta);
 			
-			if (PlayerStatus.powerUp != PlayerStatus.PowerUp.Boia)	
-				drawImage(50, Screen.height * 0.90f, powerUpBarraBoia);
+			if (PlayerStatus.powerUp == PlayerStatus.PowerUp.Boia)	
+				drawImage(50, Screen.height * 0.80f, powerUpBarraBoia);
 			
 			
 		}

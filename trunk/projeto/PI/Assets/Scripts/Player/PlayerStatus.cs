@@ -98,8 +98,9 @@ public class PlayerStatus : MonoBehaviour {
 	
 	// GameOver
 	private static void gameOver(){
-		reset();
-        Director.Instance.ResetLevel();
+		//reset();
+        //Director.Instance.ResetLevel();
+		Director.Instance.GameOver();
 	}
 	
 	private static void reset(){

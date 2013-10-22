@@ -2,6 +2,23 @@ fileFormatVersion: 2
 guid: 16717795b6b16a24cb16ba4a442feadd
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - player_efeitos: {instanceID: 0}
+  - ArvoreCaida: {fileID: 8300000, guid: 2ac03d2d73b0edd48a9cf5d968bc8db9, type: 1}
+  - Carro1: {instanceID: 0}
+  - Caminhao: {instanceID: 0}
+  - Carro: {instanceID: 0}
+  - Carro2: {instanceID: 0}
+  - Cacamba: {instanceID: 0}
+  - Entulho: {instanceID: 0}
+  - Fio: {instanceID: 0}
+  - Lixo: {instanceID: 0}
+  - Portao: {instanceID: 0}
+  - Poste: {instanceID: 0}
+  - Boia: {instanceID: 0}
+  - Capivara: {instanceID: 0}
+  - Geladeira: {instanceID: 0}
+  - Porta: {instanceID: 0}
+  - Patinho: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}

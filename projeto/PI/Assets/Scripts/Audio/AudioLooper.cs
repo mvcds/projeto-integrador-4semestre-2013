@@ -89,7 +89,7 @@ public class AudioLooper : MonoBehaviour {
 			player.volume = 0.1f;
 		}
 		else{
-			player.volume = 1.0f;
+			player.volume = 0.6f;
 		}
 		
 		

@@ -23,6 +23,8 @@ public class AudioSelecter: MonoBehaviour {
 	public AudioClip Capivara;
 	public AudioClip Geladeira;
 	public AudioClip Porta;
+	
+	public AudioClip Patinho;
 		
 	void OnTriggerEnter(Collider other) {
 		
@@ -48,6 +50,10 @@ public class AudioSelecter: MonoBehaviour {
 			
 			case "Caçamba":
 				player_efeitos.clip = Cacamba;
+			break;
+			
+			case "Caminhao":
+				player_efeitos.clip = Caminhao;
 			break;
 			
 			case "Entulho":
@@ -86,7 +92,12 @@ public class AudioSelecter: MonoBehaviour {
 				player_efeitos.clip = Porta;
 			break;				
 			
+			case "Patinho":
+				player_efeitos.clip = Patinho;
+			break;
+			
 			default:
+				Debug.Log(other.name);
 				return;
 		}
 		player_efeitos.Play();

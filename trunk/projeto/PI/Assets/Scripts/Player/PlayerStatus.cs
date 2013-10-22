@@ -112,6 +112,7 @@ public class PlayerStatus : MonoBehaviour {
 		duration = 0;
 		maxDuration = 30;
 		MainScript.gameVelocity = 5;
+		MainScript.folego = MainScript.Maxfolego;
 	}
 	
 	// HitAnimation

@@ -31,6 +31,7 @@ public class PlayerM : MonoBehaviour {
 	private float delay;
 	private float verticalDelay;
 	private float verticalDelayTime;
+	//private float divingDelay;
 	
 	private Position position;
 	private Position moving;
@@ -55,13 +56,15 @@ public class PlayerM : MonoBehaviour {
 		
 		verticalDelay = verticalDelayTime;
 		verticalDelayTime = movingDelay;
+		divingDelay = 0;
 	}
 	
 	// Update is called once per frame
     void Update()
     {
         boiar();
-        
+        folego();
+		
         if (!Director.Instance.isRunning)
             return;
         else if (!startedTime)
@@ -80,9 +83,19 @@ public class PlayerM : MonoBehaviour {
 			dt = DateTime.Now;
             Director.Instance.GameRank.Distance = distance;
 		}
+		
+		divingDelay += Time.deltaTime;
 				
+				if (Input.GetKeyUp (KeyCode.DownArrow)){ 
+					diving = false;
+					empuxo = 60;
+					if (divingDelay > 1.0f)
+					divingDelay = 0;
+				
+				}
+		
 		if (delay >= delayTime){
-			diving = false; 
+			//diving = false; 
 			jumping = false;
 			if (Input.GetKey (KeyCode.LeftArrow)) 
 				moveToLeft();
@@ -90,11 +103,13 @@ public class PlayerM : MonoBehaviour {
 			if (Input.GetKey (KeyCode.RightArrow)) 
 				moveToRight();
 			
+			
+			
 			if (verticalDelay >= verticalDelayTime){
 				
 				if (Input.GetKey (KeyCode.DownArrow)) 
 					dive();
-			
+				
 				if (PlayerStatus.powerUp == PlayerStatus.PowerUp.Capivara && Input.GetKey (KeyCode.UpArrow)) 
 					jump();
 			} else {
@@ -152,14 +167,20 @@ public class PlayerM : MonoBehaviour {
 	}
 	
 	private void dive(){
-		rigidbody.AddForce(Vector3.down * diveForce);
-		diving = true;
+		if (!diving && divingDelay > 1.0f && MainScript.folego >= 2 && PlayerStatus.powerUp != PlayerStatus.PowerUp.Boia){
+			
 		
-		delay = 0;
-		delayTime = movingDelay;
+			print("Diving");
+			rigidbody.AddForce(Vector3.down * diveForce);
+			diving = true;
+			
+			empuxo = 20;
+			delay = 0;
+			delayTime = 0;//movingDelay;
 		
-		verticalDelay = 0;
-		verticalDelayTime = divingDelay;
+			verticalDelay = 0;
+			verticalDelayTime = 0;//divingDelay;
+		}	
 	}
 	
 	private void jump(){
@@ -173,8 +194,24 @@ public class PlayerM : MonoBehaviour {
 		verticalDelayTime = jumpingDelay;
 	}
 	
+	private void folego(){
+		if (diving){
+			if (MainScript.folego > 0){
+				MainScript.folego -= Time.deltaTime;
+			} else {
+				diving = false;
+				divingDelay = 0;
+				empuxo = 60;
+			}
+		} else {
+			MainScript.folego += Time.deltaTime / 2;
+			if (MainScript.folego > MainScript.Maxfolego)
+				MainScript.folego = MainScript.Maxfolego;
+		}
+	}
+	
 	private void playAnimation(){
-		if (jumping != true && diving != true){
+		if (jumping != true /*&& diving != true*/){
 		
 			if (moving == Position.Left)
 				transform.position = new Vector3(LeftLane.position.x * (delay / movingDelay), transform.position.y, 0);

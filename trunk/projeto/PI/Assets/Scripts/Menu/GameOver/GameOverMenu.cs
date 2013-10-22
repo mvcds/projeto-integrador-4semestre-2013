@@ -8,7 +8,12 @@ public class GameOverMenu : Menu
 	{
 		get
 		{
-			return Director.Instance.isGameOver;
+			bool gameover = Director.Instance.isGameOver;
+			/*if (Debug.isDebugBuild)
+				Director.Instance.ResetLevel();*/
+			if (gameover && Debug.isDebugBuild)
+					Director.Instance.ResetLevel();
+			return gameover;
 		}
 	}
 }

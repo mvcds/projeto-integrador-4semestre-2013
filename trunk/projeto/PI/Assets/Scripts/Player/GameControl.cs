@@ -33,8 +33,6 @@ public class GameControl : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.Escape))
                 Director.Instance.Pause();
-            if (Input.GetKeyDown(KeyCode.R))
-                Director.Instance.ResetLevel();
         }
         else if (Director.Instance.isPaused)
         {

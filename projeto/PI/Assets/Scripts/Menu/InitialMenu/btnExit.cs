@@ -5,7 +5,7 @@ public class btnExit : Button {
 	
 	protected override void Action ()
     {
-        Debug.Log("?");
+        Director.Instance.LoadLevel("2-Menu");
 	}
 	
 }

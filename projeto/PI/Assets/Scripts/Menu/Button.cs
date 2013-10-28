@@ -98,6 +98,7 @@ abstract public class Button : MonoBehaviour {
 			GUIStyle s = new GUIStyle();
 			s.border = new RectOffset(0, 0,0,0);
 			s.padding = new RectOffset(0,0,0,0);
+			s.margin = new RectOffset(0,0,0,0);
 			
 			if (GUI.RepeatButton(r, _shown_image, s))
 				State = States.Actived;

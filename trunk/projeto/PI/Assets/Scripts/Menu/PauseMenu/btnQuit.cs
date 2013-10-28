@@ -5,7 +5,8 @@ public class btnQuit : Button {
 		
 	protected override void Action ()
     {
-        Director.Instance.Run();
+        //Director.Instance.Run();
+		Application.LoadLevel("2-Menu");
 	}
 	
 }

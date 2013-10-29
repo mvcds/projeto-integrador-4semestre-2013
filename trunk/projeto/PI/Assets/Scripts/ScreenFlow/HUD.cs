@@ -16,6 +16,8 @@ public class HUD : MonoBehaviour {
 	private Texture powerUpFill;
 	private Texture powerUpFillRed;
 	
+	private float missionMessageTime = 5;
+	
 	// Use this for initialization
 	void Start ()
     {
@@ -40,8 +42,7 @@ public class HUD : MonoBehaviour {
 			//GUI.Box(new Rect(10, 10, 120, 25), "PowerUp: " + (int)(PlayerStatus.duration + 1) + " / " + PlayerStatus.maxDuration);
 		GUI.Box(new Rect(Screen.width / 2 - 60, 10, 120, 25), "Velocidade: " + (int)MainScript.gameVelocity);
 		GUI.Box(new Rect(Screen.width - 250, Screen.height - 60, 200, 25), "Distancia Percorrida: " + (int) Director.Instance.GameRank.Distance);
-		//GUI.Box(new Rect(Screen.width - 250, Screen.height - 200, 200, 25), "Folego: " + (int) MainScript.folego);
-		
+			
 		// Folego
 		if (MainScript.folego >= 2)
 			GUI.DrawTexture (new Rect (50 + 40, Screen.height * 0.912f, (MainScript.folego / MainScript.Maxfolego) * powerUpFill.width, powerUpFill.height), powerUpFill);
@@ -52,10 +53,36 @@ public class HUD : MonoBehaviour {
 		// Ducks
 		GUIStyle myStyle = new GUIStyle();
 		myStyle.font = font;
-		myStyle.fontSize = 40;
-		myStyle.alignment = TextAnchor.MiddleRight;
+		myStyle.fontSize = 27;
+		myStyle.alignment = TextAnchor.MiddleCenter;
 		myStyle.normal.textColor = Color.white;	
 					
+		// Label Inicial
+		if (missionMessageTime > 0){
+			GUI.Label(new Rect(Screen.width / 2 - 100, 100, 200, 25), "FASE: " + Application.loadedLevel, myStyle); 
+			
+			switch(Application.loadedLevel){
+				case 1:
+					GUI.Label(new Rect(Screen.width / 2 - 250, 180, 500, 25), "Percorra 30 Metros de Distancia!", myStyle); 
+					break;
+				
+				case 2:
+					GUI.Label(new Rect(Screen.width / 2 - 250, 180, 500, 25), "Colete 50 Patinhos!", myStyle); 
+					break;
+				
+				case 3:
+					GUI.Label(new Rect(Screen.width / 2 - 250, 180, 500, 25), "Percorra 30 Metros de Distância!", myStyle); 
+					break;
+				
+				case 4:
+					GUI.Label(new Rect(Screen.width / 2 - 250, 180, 500, 25), "Percorra 30 Metros de Distância!", myStyle); 
+					break;
+			}
+		}
+		
+		myStyle.alignment = TextAnchor.MiddleRight;
+		myStyle.fontSize = 40;
+		
 		drawImage(0, Screen.height * 0.05f, duckBar);
         //GUI.Label(new Rect(-280, Screen.height * 0.07f, 500, 50), "" + Director.Instance.GameRank.Ducks, myStyle);
 		GUI.Label(new Rect(-280, Screen.height * 0.065f, 500, 50), "" + Director.Instance.GameRank.Ducks, myStyle);
@@ -99,6 +126,6 @@ public class HUD : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		missionMessageTime -= Time.deltaTime;
 	}
 }

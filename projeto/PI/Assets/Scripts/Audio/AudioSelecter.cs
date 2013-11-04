@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+//AudioSelecter V.1.1 by Rony Ket - 04/11/2013
 
 [RequireComponent(typeof(AudioSource))]
 public class AudioSelecter: MonoBehaviour {
@@ -29,6 +30,7 @@ public class AudioSelecter: MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		
 		player_efeitos.volume = 1;
+		player_efeitos.pitch = 1.0f;
 		
 		switch(other.name)
 		{
@@ -93,6 +95,7 @@ public class AudioSelecter: MonoBehaviour {
 			break;				
 			
 			case "Patinho":
+				player_efeitos.pitch = Random.Range (0.8f,1.3f);
 				player_efeitos.clip = Patinho;
 			break;
 			

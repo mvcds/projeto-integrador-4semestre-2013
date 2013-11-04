@@ -1,7 +1,7 @@
 //---------------------------------------------------------------
 //--------------- SCRIPT DE AUDIOPLAYER DE MÚSICA ---------------
 //------------- ESCRITO POR RONY KETCHUM ------------------------
-//------------- VERSÃO 1.4 - 17/10/2013 -------------------------
+//------------- VERSÃO 1.5 - 04/11/2013 -------------------------
 //---------------------------------------------------------------
 
 using UnityEngine;
@@ -18,8 +18,6 @@ public class AudioLooper : MonoBehaviour {
 	//Variável para controle de troca externa
 	private bool trocar;
 	
-	private int conta_troca;
-	private int conta_troca_2;
 	//Variáveis de Controle
 	private bool fazendo_transicao;
 	private bool ja_trocou;
@@ -39,6 +37,8 @@ public class AudioLooper : MonoBehaviour {
 	private bool fade_out;
 	private bool trans_alternativa;
 	
+	int distancia;
+	
 	// Use this for initialization
 	void Start () {
 		mus_atual = 0;
@@ -54,22 +54,13 @@ public class AudioLooper : MonoBehaviour {
 		if(MainScript.gameVelocity<10){
 			velocidade_jogo = 0.90f + ((MainScript.gameVelocity-5)/50);
 			trocar = false;
-			conta_troca = 0;
-			conta_troca_2 = (int) MainScript.gameVelocity;
 		}
-		else{
-			velocidade_jogo = 1.0f;
-			if(conta_troca<3){
-				conta_troca = (int) MainScript.gameVelocity - conta_troca_2;
-			}
-			else{
-				if(MainScript.gameVelocity<=33.0f){
-					conta_troca = 0;
-					conta_troca_2 = (int) MainScript.gameVelocity;
-					Troca ();
-				}
-			}
+		
+		distancia = (int) Director.Instance.GameRank.Distance+1;
+		if((distancia%10)==0){
+			Troca();
 		}
+		
 		
 		//Ativação da Transição normal
 		if(trocar && !fazendo_transicao && !trans_alternativa){

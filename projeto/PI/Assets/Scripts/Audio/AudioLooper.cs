@@ -46,6 +46,8 @@ public class AudioLooper : MonoBehaviour {
 		ja_trocou = true;
 		trocar = false;
 		time_pitch = 10;
+		player.volume = 0.6f;
+		
 	}
 	
 	// Update is called once per frame

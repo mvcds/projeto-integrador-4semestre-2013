@@ -3,42 +3,42 @@ using System.Collections;
 
 public class WallMov : MonoBehaviour {
 
-	//public GameObject[] Walls;
 	public GameObject rightWall;
 	public GameObject leftWall;
 	
 	public GameObject rightCurrentBlock;
 	public GameObject rightMiddleBlock;
 	public GameObject rightLastBlock;
+	
 	public GameObject leftCurrentBlock;
 	public GameObject leftMiddleBlock;
 	public GameObject leftLastBlock;
 	
 	// Use this for initialization
 	void Start () {
-		
+	
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		
-		if (rightLastBlock == null){
-			rightLastBlock = rightMiddleBlock;
-			rightMiddleBlock = rightCurrentBlock;
+				
+		if (rightCurrentBlock.transform.position.z < -10){
 			
-			leftLastBlock = leftMiddleBlock;
-			leftMiddleBlock = leftCurrentBlock;
+			Destroy(rightCurrentBlock);
+			Destroy (leftCurrentBlock);
 			
-			rightCurrentBlock = (GameObject) Instantiate(rightWall,
-			new Vector3(9 + (Random.Range(0.0f, 0.75f)), 2, 50.0f), Quaternion.Euler(new Vector3(0,0,0)));
+			rightCurrentBlock = rightMiddleBlock;
+			rightMiddleBlock = rightLastBlock;
 			
-			leftCurrentBlock = (GameObject) Instantiate(leftWall,
-			new Vector3(-9.35f + (Random.Range(0.0f, 0.75f)), 2, 50.0f), Quaternion.Euler(new Vector3(0,0,0)));
+			leftCurrentBlock = leftMiddleBlock;
+			leftMiddleBlock = leftLastBlock;
+			
+			rightLastBlock = (GameObject) Instantiate(rightWall,
+			new Vector3(9 + (Random.Range(0.0f, 0.75f)), 2, 65.0f), Quaternion.Euler(new Vector3(0,0,0)));
+			
+			leftLastBlock = (GameObject) Instantiate(leftWall,
+			new Vector3(-9.35f + (Random.Range(0.0f, 0.75f)), 2, 65.0f), Quaternion.Euler(new Vector3(0,0,0)));
 		}
-		
-		if (rightCurrentBlock.transform.position.z < 0 || rightMiddleBlock.transform.position.z < 0){
-			Destroy(rightLastBlock);
-			Destroy (leftLastBlock);
-		}
+
 	}			
 }

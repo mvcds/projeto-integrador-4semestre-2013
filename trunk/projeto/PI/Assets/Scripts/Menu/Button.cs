@@ -83,6 +83,7 @@ abstract public class Button : MonoBehaviour {
 	
 	public void Show(bool show)
 	{
+		GUI.depth = 1;
 		this.show = show;
 	}
 	

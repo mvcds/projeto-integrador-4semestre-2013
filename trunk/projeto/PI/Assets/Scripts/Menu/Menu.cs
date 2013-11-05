@@ -30,8 +30,8 @@ public class Menu : MonoBehaviour {
 	{
 		//if (!canShow)
 		//	return;
-		
-		GUI.depth = -1;
+	
+		//GUI.depth = -1;
 		foreach(Button btn in buttons)
 		{
 			if (btn == null)
@@ -42,6 +42,7 @@ public class Menu : MonoBehaviour {
 	
 	void OnGUI()
 	{
+		GUI.depth = 1;
 		if (!canShow)
 			return;
 		

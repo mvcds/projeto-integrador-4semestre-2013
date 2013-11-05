@@ -16,10 +16,7 @@ public class AudioAmbient : MonoBehaviour {
 			public AudioClip correnteza2;
 			public AudioClip trovao1;
 			public AudioClip trovao2;
-	
-			//LOL!!!!
-			public AudioClip LOL;
-	
+		
 			//variável para sortear som ambiente random
 			private int seletor;
 			//flags utilizadas para controle do som do trovão não se repetir
@@ -129,30 +126,6 @@ public class AudioAmbient : MonoBehaviour {
 				break;			
 			}
 		}
-		/* 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * */
-		if (PlayerStatus.vida == 2){
-			player.clip = LOL;
-			player.volume = 1.0f;
-			player.Play();
-		}
-		/* 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * */
 
 	}
 }

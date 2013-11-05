@@ -64,10 +64,14 @@ public class AudioAmbient : MonoBehaviour {
 				}
 				if(correnteza){
 					escolheu = true;
+					trovao = false;
+					chuva = false;
 					correnteza = false;
 				}
 				if(chuva){
 					escolheu = true;
+					trovao = false;
+					chuva = false;
 					correnteza = false;
 				}
 

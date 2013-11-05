@@ -221,8 +221,7 @@ public class Director
         _status = GameStatus.Pause;
     }
 
-    [Obsolete("Missing full implementation")]
-    public void GameOver(bool victory = false)
+    public void GameOver(bool victory)
     {
         if (victory)
         {

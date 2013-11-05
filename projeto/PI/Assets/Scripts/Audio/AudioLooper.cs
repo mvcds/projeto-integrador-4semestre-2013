@@ -51,11 +51,13 @@ public class AudioLooper : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		
+		//Aqui eu coloco a velocidade da música conforme a velocidade do game.
 		if(MainScript.gameVelocity<10){
 			velocidade_jogo = 0.90f + ((MainScript.gameVelocity-5)/50);
 			trocar = false;
 		}
 		
+		//Aqui eu verifico a distancia percorrida pra trocar a música (quando andar cada 10)
 		distancia = (int) Director.Instance.GameRank.Distance+1;
 		if((distancia%10)==0){
 			Troca();

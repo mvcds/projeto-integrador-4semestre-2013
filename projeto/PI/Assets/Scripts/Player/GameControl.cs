@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class GameControl : MonoBehaviour {
-
+		
     private Rigidbody MyBody
     {
         get
@@ -26,18 +26,23 @@ public class GameControl : MonoBehaviour {
     }
 
 	void Update () {
-
-
-
         if (Director.Instance.isRunning)
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Return))
                 Director.Instance.Pause();
         }
         else if (Director.Instance.isPaused)
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Return))
                 Director.Instance.Run();
         }
+		
+		if (Debug.isDebugBuild)
+		{
+			if (Input.GetKeyDown(KeyCode.R))
+			{
+				Director.Instance.ResetLevel();
+			}
+		}
 	}
 }

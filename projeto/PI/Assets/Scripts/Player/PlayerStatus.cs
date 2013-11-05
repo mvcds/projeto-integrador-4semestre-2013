@@ -100,7 +100,7 @@ public class PlayerStatus : MonoBehaviour {
 	private static void gameOver(){
 		//reset();
         //Director.Instance.ResetLevel();
-		Director.Instance.GameOver();
+		Director.Instance.GameOver(false);
 	}
 	
 	private static void reset(){

@@ -87,6 +87,12 @@ public class PlayerStatus : MonoBehaviour {
 			block = 0;
 		}
 		
+		/*if (powerUp == PowerUp.Boia)
+			gotFloat();
+		
+		if (powerUp == PowerUp.Porta)
+			gotDoor();*/
+		
 		duration = 30;
 	}
 	

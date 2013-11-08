@@ -31,7 +31,7 @@ public class LevelFim : MonoBehaviour {
 			if (Director.Instance.GameRank.Ducks >= ducksLevel2){
 				print ("Fim do Level: " + level);
 				// Chamar tela de Vitória
-				Application.LoadLevel(3);
+				//Application.LoadLevel(3);
 			}
 			break;
 			

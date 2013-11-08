@@ -204,7 +204,7 @@ public class PlayerM : MonoBehaviour {
 				empuxo = 60;
 			}
 		} else {
-			MainScript.folego += Time.deltaTime / 2;
+			MainScript.folego += Time.deltaTime / 10;
 			if (MainScript.folego > MainScript.Maxfolego)
 				MainScript.folego = MainScript.Maxfolego;
 		}

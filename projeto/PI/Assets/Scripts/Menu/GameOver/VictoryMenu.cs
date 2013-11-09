@@ -7,7 +7,10 @@ public class VictoryMenu : Menu
 	{
 		get
 		{
-			return Director.Instance.isVictory;
+			bool gameover = Director.Instance.isVictory;
+			/*if (gameover && Debug.isDebugBuild)
+					Director.Instance.ResetLevel();*/
+			return gameover;
 		}
 	}
 }

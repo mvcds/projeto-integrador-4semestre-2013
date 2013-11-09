@@ -6,7 +6,7 @@ public class btnMenu : Button
 		
 	protected override void Action ()
     {
-        Application.LoadLevel("2-Menu");
+		Director.Instance.LoadLevel("2-Menu");
 	}
 	
 }

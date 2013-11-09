@@ -2,7 +2,8 @@ using UnityEngine;
 using System.Collections;
 
 public class GameControl : MonoBehaviour {
-		
+	
+	
     private Rigidbody MyBody
     {
         get
@@ -40,9 +41,11 @@ public class GameControl : MonoBehaviour {
 		if (Debug.isDebugBuild)
 		{
 			if (Input.GetKeyDown(KeyCode.R))
-			{
 				Director.Instance.ResetLevel();
-			}
+			else if (Input.GetKeyDown(KeyCode.E))
+				Director.Instance.GameOver(false);
+			else if (Input.GetKeyDown(KeyCode.W))
+				Director.Instance.GameOver(true);
 		}
 	}
 }

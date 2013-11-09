@@ -100,7 +100,7 @@ public class SpeachEvent : MonoBehaviour {
 		}
         
         
-        if (canSkip)
+        if (canSkip || Debug.isDebugBuild)
         {
             if (GUI.Button(skip, End))
                 Action();

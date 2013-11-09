@@ -15,7 +15,6 @@ public class Menu : MonoBehaviour {
         place_size.width = place_size.width.FixForHundred();
         place_size.height = place_size.height.FixForHundred();
 		
-		Show();
 	}
 	
 	protected virtual bool canShow
@@ -28,30 +27,28 @@ public class Menu : MonoBehaviour {
 
 	protected void Show()
 	{
-		//if (!canShow)
-		//	return;
-	
-		//GUI.depth = -1;
 		foreach(Button btn in buttons)
 		{
+			if (!canShow)
+				return;
 			if (btn == null)
 				continue;
+			
 			btn.Show(canShow);
 		}
 	}
 	
 	void OnGUI()
 	{
-		GUI.depth = 1;
+		GUI.depth = 0;
 		if (!canShow)
 			return;
 		
+		Show();
 		if (_bgMenu != null)
 		{
-			
             Rect r = new Rect(place_size.x.FitOnWidth(), place_size.y.FitOnHeight(),
                 place_size.width.FitOnWidth(), place_size.height.FitOnHeight());
-			//GUI.depth = 2;
 			GUI.DrawTexture(r, _bgMenu);
 		}
 	}

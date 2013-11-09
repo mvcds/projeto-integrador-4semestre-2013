@@ -5,7 +5,7 @@ public class btnContinuar : Button {
 	
 	protected override void Action ()
 	{
-		Debug.Log("?");	
+		
 	}
 	
 }

@@ -40,7 +40,6 @@ abstract public class Button : MonoBehaviour {
 		
 		if (s != null)
 		{
-			//TODO: ajustar pitch de acordo com configuração
 			s.Play();
 		}
 		_sound = s;
@@ -48,8 +47,8 @@ abstract public class Button : MonoBehaviour {
 	
 	public void Show(bool show)
 	{
-		GUI.depth = 1;
 		this.show = show;
+		GUI.depth = 11;
 	}
 	
 	protected abstract void Action();
@@ -64,12 +63,5 @@ abstract public class Button : MonoBehaviour {
 			if (GUI.Button(r, _shown_image, _style))
 				Action();
 		}
-	}
-	
-	private bool isMouseOver(Rect r)
-	{		
-		Vector3 mousePosition = Input.mousePosition;
-		mousePosition.y = Screen.height - mousePosition.y;
-		return (r.Contains(mousePosition));
 	}
 }

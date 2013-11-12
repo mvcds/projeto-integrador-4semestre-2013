@@ -129,7 +129,7 @@ public class Director
     }
 
     GameStatus _status = GameStatus.None;
-    public const string DEFAULT_LEVEL_NAME = "LanesTesteBlocos";
+    public const string DEFAULT_LEVEL_NAME = "FaseTeste1";
 
     public void LoadLevel(string level)
     {

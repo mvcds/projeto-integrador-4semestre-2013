@@ -13,6 +13,8 @@ public class AudioLooper : MonoBehaviour {
 	//Esses arrays são para colocar as músicas do game
 	public AudioClip[] transicoes;
 	public AudioClip[] loops;
+	public AudioClip musica_isVictory;
+	public AudioClip musica_isGameOver;
 	//Indicador para música atual
 	private int mus_atual;
 	//Variável para controle de troca externa
@@ -87,6 +89,10 @@ public class AudioLooper : MonoBehaviour {
 			player.volume = 0.6f;
 		}
 		
+		if(Director.Instance.isVictory == true)
+			player.clip = musica_isVictory;
+		else if(Director.Instance.isGameOver == true)
+			player.clip = musica_isGameOver;
 		
 		
 		if(fazendo_transicao){

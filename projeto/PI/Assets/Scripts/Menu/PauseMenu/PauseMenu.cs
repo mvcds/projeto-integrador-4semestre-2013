@@ -10,4 +10,5 @@ public class PauseMenu : Menu
 			return Director.Instance.isPaused;
 		}
 	}
+
 }

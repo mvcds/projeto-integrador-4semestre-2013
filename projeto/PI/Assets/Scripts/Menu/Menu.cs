@@ -37,7 +37,7 @@ public class Menu : MonoBehaviour {
 			btn.Show(canShow);
 		}
 	}
-	
+    	
 	void OnGUI()
 	{
 		GUI.depth = 0;

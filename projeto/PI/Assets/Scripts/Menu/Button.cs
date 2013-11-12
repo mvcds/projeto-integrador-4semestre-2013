@@ -4,7 +4,8 @@ using System;
 
 abstract public class Button : MonoBehaviour {	
 	public GUIStyle _style;
-	
+
+    public Menu _myMenu;
 	public AudioSource actived_sound,
 		hover_sound;
 	private AudioSource _sound;
@@ -50,8 +51,25 @@ abstract public class Button : MonoBehaviour {
 		this.show = show;
 		GUI.depth = 11;
 	}
-	
-	protected abstract void Action();
+
+    protected virtual void Action()
+    {
+        HideBottomUp();
+    }
+
+
+    private void HideBottomUp()
+    {
+        if (_myMenu == null)
+            return;
+        foreach (Button btn in _myMenu.buttons)
+        {
+            if (btn == null)
+                continue;
+
+            btn.Show(false);
+        }
+    }
 		
 	void OnGUI()
 	{

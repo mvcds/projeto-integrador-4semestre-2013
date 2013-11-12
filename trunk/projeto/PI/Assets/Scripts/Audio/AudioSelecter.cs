@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-//AudioSelecter V.1.2 by Rony Ket - 05/11/2013
+//AudioSelecter V.1.3 by Rony Ket - 12/11/2013
 
 [RequireComponent(typeof(AudioSource))]
 public class AudioSelecter: MonoBehaviour {
@@ -23,6 +23,7 @@ public class AudioSelecter: MonoBehaviour {
 	public AudioClip Lixo;
 	public AudioClip Portao;
 	public AudioClip Poste;
+	public AudioClip Cachorro;
 	//PowerUps
 	public AudioClip Boia;
 	public AudioClip Capivara;
@@ -145,6 +146,11 @@ public class AudioSelecter: MonoBehaviour {
 			case "Patinho":
 				player_efeitos.pitch = Random.Range (0.8f,1.3f);
 				player_efeitos.clip = Patinho;
+			break;
+			
+		case "Cachorro":
+				player_efeitos.clip = Cachorro;
+				PlayDor ();
 			break;
 			
 			//Se colidir com algo estranho saberemos e não será tocado som

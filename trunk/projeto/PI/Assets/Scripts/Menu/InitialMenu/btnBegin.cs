@@ -3,7 +3,7 @@ using System.Collections;
 
 public class btnBegin : Button {
 		
-    public string TestScene = Director.DEFAULT_LEVEL_NAME;
+    private string TestScene = Director.DEFAULT_LEVEL_NAME;
 
 	protected override void Action ()
     {

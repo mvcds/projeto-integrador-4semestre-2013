@@ -60,7 +60,7 @@ public class PlayerM : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         boiar();
         folego();
@@ -170,7 +170,6 @@ public class PlayerM : MonoBehaviour {
 		if (!diving && divingDelay > 1.0f && MainScript.folego >= 2 && PlayerStatus.powerUp != PlayerStatus.PowerUp.Boia){
 			
 		
-			print("Diving");
 			rigidbody.AddForce(Vector3.down * diveForce);
 			diving = true;
 			
@@ -184,6 +183,7 @@ public class PlayerM : MonoBehaviour {
 	}
 	
 	private void jump(){
+		
 		rigidbody.AddForce(Vector3.up * jumpHeight);
 		jumping = true;
 		
@@ -227,4 +227,5 @@ public class PlayerM : MonoBehaviour {
 			position = moving;
 		}
 	}
+	
 }

@@ -14,7 +14,7 @@ public class ZigZagObjMovement : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update ()
+	void FixedUpdate ()
 	{
         if (!Director.Instance.isRunning)
             return;

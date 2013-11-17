@@ -3,7 +3,8 @@ using System.Collections;
 
 public class GameControl : MonoBehaviour {
 	
-	
+	public btnResume resume;
+
     private Rigidbody MyBody
     {
         get
@@ -35,7 +36,7 @@ public class GameControl : MonoBehaviour {
         else if (Director.Instance.isPaused)
         {
             if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Return))
-                Director.Instance.Run();
+                resume.Resume();
         }
 
         DeveloperCheat();

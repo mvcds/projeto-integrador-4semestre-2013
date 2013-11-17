@@ -5,8 +5,13 @@ public class btnResume : Button {
 		
 	protected override void Action ()
     {
-        base.Action();
-		Director.Instance.Run();
+        Resume();
 	}
+
+    public void Resume()
+    {
+        base.Action();
+        Director.Instance.Run();
+    }
 	
 }

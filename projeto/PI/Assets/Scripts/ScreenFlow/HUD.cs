@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class HUD : MonoBehaviour {
-	
+    
 	public Font font;
 	
 	private Texture lifeBar;
@@ -16,7 +16,6 @@ public class HUD : MonoBehaviour {
 	private Texture powerUpFill;
 	private Texture powerUpFillRed;
 	
-	private float missionMessageTime = 5;
 	
 	// Use this for initialization
 	void Start ()
@@ -51,35 +50,9 @@ public class HUD : MonoBehaviour {
 		drawImage(50, Screen.height * 0.9f, powerUpBarraBoia);
 		
 		// Ducks
-		GUIStyle myStyle = new GUIStyle();
+        GUIStyle myStyle = new GUIStyle();
 		myStyle.font = font;
-		myStyle.fontSize = 27;
-		myStyle.alignment = TextAnchor.MiddleCenter;
-		myStyle.normal.textColor = Color.white;	
-					
-		// Label Inicial
-		if (missionMessageTime > 0){
-			GUI.Label(new Rect(Screen.width / 2 - 100, 100, 200, 25), "FASE: " + Application.loadedLevel, myStyle); 
-			
-			switch(Application.loadedLevel){
-				case 1:
-					GUI.Label(new Rect(Screen.width / 2 - 250, 180, 500, 25), "Percorra 30 Metros de Distancia!", myStyle); 
-					break;
-				
-				case 2:
-					GUI.Label(new Rect(Screen.width / 2 - 250, 180, 500, 25), "Colete 50 Patinhos!", myStyle); 
-					break;
-				
-				case 3:
-					GUI.Label(new Rect(Screen.width / 2 - 250, 180, 500, 25), "Percorra 30 Metros de Distância!", myStyle); 
-					break;
-				
-				case 4:
-					GUI.Label(new Rect(Screen.width / 2 - 250, 180, 500, 25), "Percorra 30 Metros de Distância!", myStyle); 
-					break;
-			}
-		}
-		
+		myStyle.normal.textColor = Color.white;
 		myStyle.alignment = TextAnchor.MiddleRight;
 		myStyle.fontSize = 40;
 		
@@ -124,8 +97,4 @@ public class HUD : MonoBehaviour {
 		GUI.DrawTexture (new Rect (x, y, texture.width, texture.height), texture);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		missionMessageTime -= Time.deltaTime;
-	}
 }

@@ -37,15 +37,38 @@ public class GameControl : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Return))
                 Director.Instance.Run();
         }
-		
-		if (Debug.isDebugBuild)
-		{
-			if (Input.GetKeyDown(KeyCode.R))
-				Director.Instance.ResetLevel();
-			else if (Input.GetKeyDown(KeyCode.E))
-				Director.Instance.GameOver(false);
-			else if (Input.GetKeyDown(KeyCode.W))
-				Director.Instance.GameOver(true);
-		}
+
+        DeveloperCheat();
 	}
+
+    void DeveloperCheat()
+    {
+        if (Debug.isDebugBuild)
+        {            
+            if (Input.GetKeyDown(KeyCode.R))
+                Director.Instance.ResetLevel();
+            else if (Input.GetKeyDown(KeyCode.E))
+                Director.Instance.GameOver(false);
+            else if (Input.GetKeyDown(KeyCode.W))
+                Director.Instance.GameOver(true);
+
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                if (PlayerStatus.powerUp != PlayerStatus.PowerUp.Nada)
+                    PlayerStatus.gotHit();
+            }
+            else  if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                PlayerStatus.gotPowerUp(0);
+            }
+            else  if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                PlayerStatus.gotPowerUp(1);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                PlayerStatus.gotPowerUp(3);
+            }
+        }
+    }
 }

@@ -9,7 +9,9 @@ public class CameraScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         if (AutomaticStart && Debug.isDebugBuild)
-		    Director.Instance.Run();
+            Director.Instance.Run();
+        else
+            Director.Instance.Start();
 	}
 	
 	// Update is called once per frame

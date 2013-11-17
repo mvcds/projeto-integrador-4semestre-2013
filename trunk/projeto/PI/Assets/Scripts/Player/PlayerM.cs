@@ -58,11 +58,15 @@ public class PlayerM : MonoBehaviour {
 		verticalDelayTime = movingDelay;
 		divingDelay = 0;
 	}
-	
-	// Update is called once per frame
+
     void FixedUpdate()
     {
         boiar();
+    }
+
+	// Update is called once per frame
+    void Update()
+    {
         folego();
 		
         if (!Director.Instance.isRunning)
@@ -91,7 +95,6 @@ public class PlayerM : MonoBehaviour {
 					empuxo = 60;
 					if (divingDelay > 1.0f)
 					divingDelay = 0;
-				
 				}
 		
 		if (delay >= delayTime){

@@ -135,12 +135,18 @@ public class Director
     {
         if (!unblockedLevels.ContainsKey(level))
             unblockedLevels.Add(level, LevelStatus.First);
-
-        _status = GameStatus.Starting;
-
+        
         GameRank = new Rank();
-        Application.LoadLevel(level);
+        try
+        {
+            Application.LoadLevel(level);
+        }
+        catch (System.Exception e)
+        {
+            throw e;
+        }
     }
+
 
     public void ResetLevel()
     {
@@ -233,6 +239,12 @@ public class Director
             _status = GameStatus.GameOver;
     }
 
+    public void Start()
+    {
+        _status = GameStatus.Starting;
+    }
+
+
     public string StatusOfThisLevel()
     {
         string level = Application.loadedLevelName;
@@ -241,6 +253,7 @@ public class Director
         else
             return unblockedLevels[level].ToString();
     }
+
 
     #endregion
 

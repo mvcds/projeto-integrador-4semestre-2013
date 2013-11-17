@@ -63,12 +63,12 @@ public class PlayerStatus : MonoBehaviour {
 		}
 	}
 	
-	public static void gotPowerUp(int pwerUp){
+	public static void gotPowerUp(int gotten){
 		
 		// ----- BOIA -----
-		if ((PowerUp)pwerUp == PowerUp.Boia && powerUp == PowerUp.Boia){
+		if ((PowerUp)gotten == PowerUp.Boia && powerUp == PowerUp.Boia){
 			// Se o powerUp que foi pego é a boia, e o atual tbm, faz nada
-		} else if ((PowerUp)pwerUp == PowerUp.Boia && powerUp != PowerUp.Boia){
+		} else if ((PowerUp)gotten == PowerUp.Boia && powerUp != PowerUp.Boia){
 			// Se o PowerUp que foi pego é a boia, e o atual não for a boia, diminue a velocidade
 			MainScript.gameVelocity /= MainScript.floatSpeed;
 		} else if (powerUp == PowerUp.Boia){
@@ -76,7 +76,7 @@ public class PlayerStatus : MonoBehaviour {
 			MainScript.gameVelocity *= MainScript.floatSpeed;
 		}
 		
-		powerUp = (PowerUp)pwerUp;
+		powerUp = (PowerUp)gotten;
 		
 		// Blocks
 		if (powerUp == PowerUp.Boia || powerUp == PowerUp.Porta || powerUp == PowerUp.Capivara){

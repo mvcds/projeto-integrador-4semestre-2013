@@ -98,10 +98,10 @@ public class PlayerM : MonoBehaviour {
 			//diving = false; 
 			jumping = false;
 			if (Input.GetKey (KeyCode.LeftArrow)) 
-				moveToLeft();
-		
-			if (Input.GetKey (KeyCode.RightArrow)) 
-				moveToRight();
+				MoveTo(Position.Left);
+
+            if (Input.GetKey(KeyCode.RightArrow))
+                MoveTo(Position.Right);
 			
 			
 			
@@ -131,41 +131,29 @@ public class PlayerM : MonoBehaviour {
 		rigidbody.AddForce(Vector3.up * empuxoDinamico);
 		rigidbody.drag = atritoDinamico;
 	}
-	
-	private void moveToLeft(){
-		if (position == Position.Left)
-			return;
-				
-		if (position == Position.Middle){
-			moving = Position.Left;
-			goingMiddleFromRight = -4;
-		}
-		
-		if (position == Position.Right){
-			moving = Position.Middle;
-		}
-		
-		delay = 0;
-		delayTime = movingDelay;
-	}
-	
-	private void moveToRight(){
-		if (position == Position.Right)
-			return;
-				
-		if (position == Position.Middle){
-			moving = Position.Right;
-			goingMiddleFromRight = 4;
-		}
-		
-		if (position == Position.Left){
-			moving = Position.Middle;
-		}
-		
-		delay = 0;
-		delayTime = movingDelay;
-	}
-	
+
+    private void MoveTo(Position p)
+    {
+        if (position == p)
+            return;
+
+        //*Verificar a diferença com Rafael
+	    if (position == Position.Middle)
+        {
+            moving = p;
+            goingMiddleFromRight = 4;
+
+            if (p == Position.Left)
+                goingMiddleFromRight *= -1;
+        }
+        else
+	     //*/
+            moving = Position.Middle;
+
+        delay = 0;
+        delayTime = movingDelay;
+    }
+    	
 	private void dive(){
 		if (!diving && divingDelay > 1.0f && MainScript.folego >= 2 && PlayerStatus.powerUp != PlayerStatus.PowerUp.Boia){
 			

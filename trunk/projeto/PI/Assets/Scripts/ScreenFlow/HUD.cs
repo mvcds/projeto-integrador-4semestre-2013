@@ -16,7 +16,6 @@ public class HUD : MonoBehaviour {
 	private Texture powerUpFill;
 	private Texture powerUpFillRed;
 	
-	
 	// Use this for initialization
 	void Start ()
     {

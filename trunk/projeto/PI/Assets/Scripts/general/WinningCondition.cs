@@ -7,8 +7,8 @@ public class WinningCondition : MonoBehaviour {
     public enum Unit
     {
         Duck
-        , Distance/*
-        , Time
+        , Distance
+        , Seconds/*
         , Hit
         , GotPowerUp
         , GotCapivara
@@ -57,6 +57,9 @@ public class WinningCondition : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (!Director.Instance.isRunning)
+            return;
+
         if (!hasWon)
             hasWon = Test;
         else if (failable)
@@ -99,8 +102,8 @@ public class WinningCondition : MonoBehaviour {
                     return Director.Instance.GameRank.Distance;
                 case Unit.Duck:
                     return Director.Instance.GameRank.Ducks;
-                /*case Unit.Time:
-                    return 0;*/
+                case Unit.Seconds:
+                    return (int) Director.Instance.GameDuration;
             }
             throw new Exception("Get Value of?");
         }

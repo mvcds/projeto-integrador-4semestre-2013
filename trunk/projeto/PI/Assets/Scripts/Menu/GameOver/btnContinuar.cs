@@ -10,20 +10,22 @@ public class btnContinuar : Button {
 	{
         if (Debug.isDebugBuild && reset)
             Director.Instance.ResetLevel();
-
-        //*
-        try
+        else
         {
-            if (string.IsNullOrEmpty(next))
-                throw new System.Exception();
+            //*
+            try
+            {
+                if (string.IsNullOrEmpty(next))
+                    throw new System.Exception();
 
-            Director.Instance.LoadLevel(next);
+                Director.Instance.LoadLevel(next);
+            }
+            catch
+            {
+                Director.Instance.LoadLevel("2-Menu");
+            }
+            //*/
         }
-        catch
-        {
-            Director.Instance.LoadLevel("2-Menu");
-        }
-        //*/
     }
 	
 }

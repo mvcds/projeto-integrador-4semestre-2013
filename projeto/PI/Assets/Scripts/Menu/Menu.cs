@@ -10,13 +10,28 @@ public class Menu : MonoBehaviour {
 		
 	void Update()
 	{
-        place_size.x = place_size.x.FixForHundred();
-        place_size.y = place_size.y.FixForHundred();
-        place_size.width = place_size.width.FixForHundred();
-        place_size.height = place_size.height.FixForHundred();
-		
+        FixPosition();
 	}
+
+    protected virtual void FixPosition()
+    {
+        FixRect(ref place_size);
+    }
 	
+    protected void FixRect(ref Rect r)
+    {
+        r.x = r.x.FixForHundred();
+        r.y = r.y.FixForHundred();
+        r.width = r.width.FixForHundred();
+        r.height = r.height.FixForHundred();
+    }
+
+    protected Rect Fit(Rect r)
+    {
+        return new Rect(r.x.FitOnWidth(), r.y.FitOnHeight(),
+                r.width.FitOnWidth(), r.height.FitOnHeight());
+    }
+
 	protected virtual bool canShow
 	{
 		get
@@ -25,7 +40,7 @@ public class Menu : MonoBehaviour {
 		}
 	}
 
-	protected void Show()
+	protected virtual void Show()
 	{
 		foreach(Button btn in buttons)
 		{
@@ -35,21 +50,21 @@ public class Menu : MonoBehaviour {
 				continue;
 			
 			btn.Show(canShow);
-		}
+        }
 	}
     	
 	void OnGUI()
-	{
+    {
 		GUI.depth = 0;
 		if (!canShow)
 			return;
-		
-		Show();
-		if (_bgMenu != null)
-		{
-            Rect r = new Rect(place_size.x.FitOnWidth(), place_size.y.FitOnHeight(),
-                place_size.width.FitOnWidth(), place_size.height.FitOnHeight());
-			GUI.DrawTexture(r, _bgMenu);
-		}
+
+        if (_bgMenu != null)
+        {
+            Rect r = Fit(place_size);
+            GUI.DrawTexture(r, _bgMenu);
+        }
+
+        Show();
 	}
 }

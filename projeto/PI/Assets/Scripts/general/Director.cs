@@ -128,6 +128,7 @@ public class Director
         Win
     }
 
+    private DateTime gameStart;
     GameStatus _status = GameStatus.None;
     public const string DEFAULT_LEVEL_NAME = "FaseTeste1";
 
@@ -136,7 +137,6 @@ public class Director
         if (!unblockedLevels.ContainsKey(level))
             unblockedLevels.Add(level, LevelStatus.First);
         
-        GameRank = new Rank();
         try
         {
             Application.LoadLevel(level);
@@ -150,7 +150,6 @@ public class Director
 
     public void ResetLevel()
     {
-        GameRank = new Rank();
         LoadLevel(Application.loadedLevelName);
     }
 
@@ -220,6 +219,7 @@ public class Director
             unblockedLevels[level] = LevelStatus.Played;
 
         _status = GameStatus.Run;
+        gameStart = DateTime.Now;
     }
 
     public void Pause()
@@ -242,6 +242,7 @@ public class Director
     public void Start()
     {
         _status = GameStatus.Starting;
+        GameRank = new Rank();
     }
 
 
@@ -254,6 +255,13 @@ public class Director
             return unblockedLevels[level].ToString();
     }
 
+    public double GameDuration
+    {
+        get
+        {
+            return (DateTime.Now - gameStart).TotalSeconds;
+        }
+    }
 
     #endregion
 

@@ -2,20 +2,27 @@ using UnityEngine;
 using System.Collections;
 
 public class SpeachEvent : MonoBehaviour {
+    private GUIStyle _styleRight = new GUIStyle(),
+        _styleLeft = new GUIStyle(),
+        _styleEnd = new GUIStyle();
+    private Texture2D _voidImage;
 		
 	public enum Trigger
 	{
 		PhaseBeginning,
 		PhaseEnding
 	}
-	
+    
+    public Texture _background;
+
 	[SerializeField] private int _current = 0;
 	public SpeachItem[] pages;
-	public  Texture Right, Left, End;
-	[SerializeField] private Rect RightArrow, LeftArrow, EndArrow;	
+    public Texture2D Right, Left, End;
+    public Texture2D RightHover, LeftHover, EndHover;
+	public Rect RightArrow, LeftArrow, EndArrow;	
 	//[SerializeField] private bool _show = true;
-	public Trigger On;	
-	
+    public Trigger On;
+    
 	private bool Run
 	{
 		get
@@ -34,20 +41,22 @@ public class SpeachEvent : MonoBehaviour {
 			return false;
 		}
 	}
-	
-	void Start()
-	{
-		 LeftArrow = new Rect(0,90,50,10);
-		 RightArrow = new Rect(50,90,50,10);
-         EndArrow = RightArrow;
-         EndArrow.y = 0;
-	}
+
+    void SetStyle(ref GUIStyle s, Texture2D n, Texture2D h)
+    {
+        s.normal.background = n;
+        s.hover.background = h;
+        s.active.background = h;
+    }
 	
 	void Update()
-	{
-        
+	{   
 		if (!Run)
 			return;
+
+        SetStyle(ref _styleRight, Right, RightHover);
+        SetStyle(ref _styleLeft, Left, LeftHover);
+        SetStyle(ref _styleEnd, End, EndHover);
 
         FixForHundred(RightArrow);
         FixForHundred(LeftArrow);
@@ -79,30 +88,34 @@ public class SpeachEvent : MonoBehaviour {
         Rect left = CreateFixed(LeftArrow);
         Rect right = CreateFixed(RightArrow);
         Rect skip = CreateFixed(EndArrow);
+        Rect bg = CreateFixed(new Rect(0,0,100,100));
         bool canSkip = Director.Instance.canSkipDialog(On);
+                
+        if (_background != null)
+            GUI.DrawTexture(bg, _background);
 
 		if (_current > 0)
 		{
-			if (GUI.Button(left, Left))
+            if (GUI.Button(left, _voidImage, _styleLeft))
 				Backward();
 		}
 		
 		if (_current < pages.Length - 1)
 		{
-			if (GUI.Button(right, Right))
+            if (GUI.Button(right, _voidImage, _styleRight))
 				Forward();
 		}
 		else if (pages.Length > 0)
 		{
             canSkip = false;
-			if (GUI.Button(right, End))
+            if (GUI.Button(right, _voidImage, _styleEnd))
 				Action();
 		}
         
         
         if (canSkip || Debug.isDebugBuild)
         {
-            if (GUI.Button(skip, End))
+            if (GUI.Button(skip, _voidImage, _styleEnd))
                 Action();
         }
 	}

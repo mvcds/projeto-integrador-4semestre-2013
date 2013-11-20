@@ -19,6 +19,20 @@ public class HUD : MonoBehaviour {
 	// Arrow
 	private Texture arrowUp;
 	private static float arrowUpTime;
+    
+    GUIStyle MyFont
+    {
+        get
+        {
+            GUIStyle myStyle = new GUIStyle();
+            myStyle.font = font;
+            myStyle.normal.textColor = Color.white;
+            myStyle.alignment = TextAnchor.MiddleRight;
+            myStyle.fontSize = 40;
+
+            return myStyle;
+        }
+    }
 	
 	// Use this for initialization
 	void Start ()
@@ -56,16 +70,9 @@ public class HUD : MonoBehaviour {
 			GUI.DrawTexture (new Rect (50 + 40, Screen.height * 0.912f, (MainScript.folego / MainScript.Maxfolego) * powerUpFill.width, powerUpFill.height), powerUpFillRed);
 		drawImage(50, Screen.height * 0.9f, powerUpBarraBoia);
 		
-		// Ducks
-        GUIStyle myStyle = new GUIStyle();
-		myStyle.font = font;
-		myStyle.normal.textColor = Color.white;
-		myStyle.alignment = TextAnchor.MiddleRight;
-		myStyle.fontSize = 40;
-		
 		drawImage(0, Screen.height * 0.05f, duckBar);
         //GUI.Label(new Rect(-280, Screen.height * 0.07f, 500, 50), "" + Director.Instance.GameRank.Ducks, myStyle);
-		GUI.Label(new Rect(-280, Screen.height * 0.065f, 500, 50), "" + Director.Instance.GameRank.Ducks, myStyle);
+		GUI.Label(new Rect(-280, Screen.height * 0.065f, 500, 50), "" + Director.Instance.GameRank.Ducks, MyFont);
 		
 		// PowerUp
 		if (PlayerStatus.powerUp != PlayerStatus.PowerUp.Nada){
@@ -81,8 +88,6 @@ public class HUD : MonoBehaviour {
 			
 			if (PlayerStatus.powerUp == PlayerStatus.PowerUp.Boia)	
 				drawImage(50, Screen.height * 0.80f, powerUpBarraBoia);
-			
-			
 		}
 		
 		// Life Bar
@@ -94,7 +99,6 @@ public class HUD : MonoBehaviour {
 		// ArrowUp
 		if (arrowUpTime > 0)
 			drawImage(Screen.width * 0.7f, Screen.height * 0.2f, arrowUp);
-		
 	}
 	
 	void FixedUpdate()
@@ -117,5 +121,4 @@ public class HUD : MonoBehaviour {
 	{
 		arrowUpTime = 5;
 	}
-	
 }

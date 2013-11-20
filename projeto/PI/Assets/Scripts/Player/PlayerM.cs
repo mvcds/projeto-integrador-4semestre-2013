@@ -61,17 +61,12 @@ public class PlayerM : MonoBehaviour {
 
     void FixedUpdate()
     {
-        /*
-           Existe um erro com o fato do método boiar() ser chamado por aqui, é possível ficar apertando e 
-		soltando rapidamente a seta para baixo fazendo com que o personagem mergulhe novamente antes de 
-		chegar na superfície.
-		*/
+        boiar();
     }
 
 	// Update is called once per frame
     void Update()
     {
-		boiar();
         folego();
 		
         if (!Director.Instance.isRunning)

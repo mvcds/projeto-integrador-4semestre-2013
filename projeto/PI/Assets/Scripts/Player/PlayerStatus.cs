@@ -119,7 +119,7 @@ public class PlayerStatus : MonoBehaviour {
 		maxDuration = 30;
 		MainScript.gameVelocity = 10;
 		MainScript.folego = MainScript.Maxfolego;
-		Director.Instance.GameRank.resetDucks();
+		//Director.Instance.GameRank.resetDucks();
 	}
 	
 	// HitAnimation

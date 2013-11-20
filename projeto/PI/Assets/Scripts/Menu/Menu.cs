@@ -6,8 +6,14 @@ public class Menu : MonoBehaviour {
 	public Button[] buttons;	
 	public Texture2D _bgMenu = null;
 	[SerializeField]
-	private Rect place_size = new Rect(0,0, 0, 100);
-		
+    private Rect place_size = new Rect(0, 0, 100, 100);
+
+    public bool Able
+    {
+        get;
+        private set;
+    }
+    		
 	void Update()
 	{
         FixPosition();
@@ -44,12 +50,16 @@ public class Menu : MonoBehaviour {
 	{
 		foreach(Button btn in buttons)
 		{
-			if (!canShow)
-				return;
+            if (!canShow)
+                return;
+
 			if (btn == null)
 				continue;
 			
-			btn.Show(canShow);
+            if (!btn._revertShown)
+			    btn.Show(Able);
+            else
+                btn.Show(!Able);
         }
 	}
     	
@@ -67,4 +77,14 @@ public class Menu : MonoBehaviour {
 
         Show();
 	}
+
+    public void SetAble(bool able = true)
+    {
+        Able = able;
+    }
+
+    void Start()
+    {
+        SetAble();
+    }
 }

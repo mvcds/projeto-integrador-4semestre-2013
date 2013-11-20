@@ -8,6 +8,7 @@ public class BlocksMovement : MonoBehaviour {
 	public GameObject middleBlock;
 	public GameObject currentBlock;
 	private ObjectSpawnerByOdd odd;
+    public float levelVelocity = 15;
 	
 	// Use this for initialization
 	void Start () {
@@ -31,13 +32,12 @@ public class BlocksMovement : MonoBehaviour {
 		
 		if (PlayerStatus.powerUp == PlayerStatus.PowerUp.Boia){
 			MainScript.gameVelocity += (Time.deltaTime / (20 * MainScript.floatSpeed));
-			if (MainScript.gameVelocity > 15)
-				MainScript.gameVelocity = 15;
+			
 		} else {
 			MainScript.gameVelocity += (Time.deltaTime / 20);
-			if (MainScript.gameVelocity > 15)
-				MainScript.gameVelocity = 15;
 		}
+        if (MainScript.gameVelocity > levelVelocity)
+            MainScript.gameVelocity = levelVelocity;
 
 		if (lastBlock == null){
 			

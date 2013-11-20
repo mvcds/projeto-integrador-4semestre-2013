@@ -31,12 +31,12 @@ public class BlocksMovement : MonoBehaviour {
 		
 		if (PlayerStatus.powerUp == PlayerStatus.PowerUp.Boia){
 			MainScript.gameVelocity += (Time.deltaTime / (20 * MainScript.floatSpeed));
-			if (MainScript.gameVelocity > 10)
-				MainScript.gameVelocity = 10;
+			if (MainScript.gameVelocity > 15)
+				MainScript.gameVelocity = 15;
 		} else {
 			MainScript.gameVelocity += (Time.deltaTime / 20);
-			if (MainScript.gameVelocity > 10)
-				MainScript.gameVelocity = 10;
+			if (MainScript.gameVelocity > 15)
+				MainScript.gameVelocity = 15;
 		}
 
 		if (lastBlock == null){

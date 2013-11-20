@@ -87,9 +87,9 @@ public class PlayerStatus : MonoBehaviour {
 			block = 0;
 		}
 		
-		/*if (powerUp == PowerUp.Boia)
-			gotFloat();
-		
+		if (powerUp == PowerUp.Capivara)
+			HUD.drawArrowUp();
+		/*
 		if (powerUp == PowerUp.Porta)
 			gotDoor();*/
 		
@@ -117,8 +117,9 @@ public class PlayerStatus : MonoBehaviour {
 		
 		duration = 0;
 		maxDuration = 30;
-		MainScript.gameVelocity = 5;
+		MainScript.gameVelocity = 10;
 		MainScript.folego = MainScript.Maxfolego;
+		Director.Instance.GameRank.resetDucks();
 	}
 	
 	// HitAnimation

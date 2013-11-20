@@ -61,12 +61,17 @@ public class PlayerM : MonoBehaviour {
 
     void FixedUpdate()
     {
-        boiar();
+        /*
+           Existe um erro com o fato do método boiar() ser chamado por aqui, é possível ficar apertando e 
+		soltando rapidamente a seta para baixo fazendo com que o personagem mergulhe novamente antes de 
+		chegar na superfície.
+		*/
     }
 
 	// Update is called once per frame
     void Update()
     {
+		boiar();
         folego();
 		
         if (!Director.Instance.isRunning)
@@ -125,14 +130,16 @@ public class PlayerM : MonoBehaviour {
 	}
 	
 	private void boiar(){
-		rigidbody.drag = 0;
-		float resistencia = nivelAgua - transform.position.y;
+		if (!Director.Instance.isPaused){
+			rigidbody.drag = 0;
+			float resistencia = nivelAgua - transform.position.y;
 		
-		float empuxoDinamico = Mathf.Clamp(resistencia * empuxo, 0, empuxo);
-		float atritoDinamico = Mathf.Clamp(resistencia * atritoAgua, 0, atritoAgua);
+			float empuxoDinamico = Mathf.Clamp(resistencia * empuxo, 0, empuxo);
+			float atritoDinamico = Mathf.Clamp(resistencia * atritoAgua, 0, atritoAgua);
 		
-		rigidbody.AddForce(Vector3.up * empuxoDinamico);
-		rigidbody.drag = atritoDinamico;
+			rigidbody.AddForce(Vector3.up * empuxoDinamico);
+			rigidbody.drag = atritoDinamico;
+		}
 	}
 
     private void MoveTo(Position p)
@@ -157,7 +164,7 @@ public class PlayerM : MonoBehaviour {
         delayTime = movingDelay;
     }
     	
-	private void dive(){
+	private void dive(){	
 		if (!diving && divingDelay > 1.0f && MainScript.folego >= 2 && PlayerStatus.powerUp != PlayerStatus.PowerUp.Boia){
 			
 		

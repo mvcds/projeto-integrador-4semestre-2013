@@ -16,6 +16,10 @@ public class HUD : MonoBehaviour {
 	private Texture powerUpFill;
 	private Texture powerUpFillRed;
 	
+	// Arrow
+	private Texture arrowUp;
+	private static float arrowUpTime;
+	
 	// Use this for initialization
 	void Start ()
     {
@@ -30,6 +34,10 @@ public class HUD : MonoBehaviour {
 		powerUpBarraPorta = (Texture)Resources.Load("Images/HUD/LifeBar/BarraPorta");
 		powerUpFill = (Texture)Resources.Load("Images/HUD/LifeBar/greenBar");
 		powerUpFillRed = (Texture)Resources.Load("Images/HUD/LifeBar/redBar");
+		
+		// Arrow 
+		arrowUp = (Texture)Resources.Load("Images/HUD/SetaCima");
+		arrowUpTime = 0;
 	}
 	
 	void OnGUI(){
@@ -38,7 +46,7 @@ public class HUD : MonoBehaviour {
 			
 		//if (PlayerStatus.duration > 0)
 			//GUI.Box(new Rect(10, 10, 120, 25), "PowerUp: " + (int)(PlayerStatus.duration + 1) + " / " + PlayerStatus.maxDuration);
-		GUI.Box(new Rect(Screen.width / 2 - 60, 10, 120, 25), "Velocidade: " + (int)MainScript.gameVelocity);
+		//GUI.Box(new Rect(Screen.width / 2 - 60, 10, 120, 25), "Velocidade: " + (int)MainScript.gameVelocity);
 		GUI.Box(new Rect(Screen.width - 250, Screen.height - 60, 200, 25), "Distancia Percorrida: " + (int) Director.Instance.GameRank.Distance);
 			
 		// Folego
@@ -82,7 +90,16 @@ public class HUD : MonoBehaviour {
 		drawHeart(1);
 		drawHeart(2);
 		drawHeart(3);
-			
+		
+		// ArrowUp
+		if (arrowUpTime > 0)
+			drawImage(Screen.width * 0.7f, Screen.height * 0.2f, arrowUp);
+		
+	}
+	
+	void FixedUpdate()
+	{
+		arrowUpTime -= Time.deltaTime;	
 	}
 	
 	void drawHeart(int position){
@@ -94,6 +111,11 @@ public class HUD : MonoBehaviour {
 	
 	void drawImage(float x, float y, Texture texture){
 		GUI.DrawTexture (new Rect (x, y, texture.width, texture.height), texture);
+	}
+	
+	public static void drawArrowUp()
+	{
+		arrowUpTime = 5;
 	}
 	
 }

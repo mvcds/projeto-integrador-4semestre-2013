@@ -18,6 +18,8 @@ abstract public class Button : MonoBehaviour {
 					hover;
 	protected DateTime time;
 	protected bool show;
+
+    public bool _revertShown = false;
 	
 	void Start()
 	{

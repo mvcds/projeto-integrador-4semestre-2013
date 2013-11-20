@@ -8,6 +8,22 @@ public class SpeachItem : MonoBehaviour {
 	public string Speach1 = "", Speach2 = "";
 	public Rect SpeachPosition1, SpeachPosition2;
 	private bool _show = false;
+
+    public Font font;
+
+    GUIStyle MyFont
+    {
+        get
+        {
+            GUIStyle myStyle = new GUIStyle();
+            myStyle.font = font;
+            myStyle.normal.textColor = Color.black;
+            myStyle.alignment = TextAnchor.MiddleLeft;
+            myStyle.fontSize = 18;
+
+            return myStyle;
+        }
+    }
 		
 	void Update()
 	{
@@ -56,7 +72,7 @@ public class SpeachItem : MonoBehaviour {
 	{
 		_show = true;
 	}
-	
+    
 	private void Show(SpeachFace face, Rect position, string speach)
 	{
 		if (face != null)
@@ -68,8 +84,8 @@ public class SpeachItem : MonoBehaviour {
 			
 			Rect speachPosition = new Rect(ScreenUtil.FitOnWidth(position.x), ScreenUtil.FitOnHeight(position.y),
 				ScreenUtil.FitOnWidth(position.width), ScreenUtil.FitOnHeight(position.height));
-			
-			GUI.Label(speachPosition, speach);
+
+			GUI.Label(speachPosition, speach, MyFont);
 		}
 	}
 }

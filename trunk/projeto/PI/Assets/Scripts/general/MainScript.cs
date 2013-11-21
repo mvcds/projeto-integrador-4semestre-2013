@@ -8,6 +8,8 @@ public class MainScript {
 	public static float Maxfolego = 5.0f;
 	public static float folego = Maxfolego;
 	public static string levelToLoad;
+	public static int maxspeed = 15 ;
+	public static int minspeed = 10;
 	
 	public static void loadLevel(string level){
 		levelToLoad = level;

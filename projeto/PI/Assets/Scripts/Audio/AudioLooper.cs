@@ -1,7 +1,7 @@
 //---------------------------------------------------------------
 //--------------- SCRIPT DE AUDIOPLAYER DE MÚSICA ---------------
 //------------- ESCRITO POR RONY KETCHUM ------------------------
-//------------- VERSÃO 1.5 - 04/11/2013 -------------------------
+//------------- VERSÃO 1.5.1 - 21/11/2013 -------------------------
 //---------------------------------------------------------------
 
 using UnityEngine;
@@ -38,6 +38,7 @@ public class AudioLooper : MonoBehaviour {
 	private int indice_troca;
 	private bool fade_out;
 	private bool trans_alternativa;
+
 	
 	int distancia;
 	
@@ -56,8 +57,8 @@ public class AudioLooper : MonoBehaviour {
 	void FixedUpdate () {
 		
 		//Aqui eu coloco a velocidade da música conforme a velocidade do game.
-		if(MainScript.gameVelocity<10){
-			velocidade_jogo = 0.90f + ((MainScript.gameVelocity-5)/50);
+		if(MainScript.gameVelocity<MainScript.maxspeed){
+			velocidade_jogo = 0.90f + ((MainScript.gameVelocity-MainScript.minspeed)/50);
 			trocar = false;
 		}
 		
@@ -172,41 +173,16 @@ public class AudioLooper : MonoBehaviour {
 		
 		//TESTES
 		//Por motivos óbvios apagar esse bloco inteiro quando for pro game mesmo
-		if(Input.GetKey(KeyCode.Z)){
-			acelera ();
-		}
-		if(Input.GetKey(KeyCode.X)){
-			diminui();
-		}
-		if(Input.GetKey(KeyCode.T)){
-			Troca ();
-		}
-		if(Input.GetKey(KeyCode.Alpha1)){
-			Troca (1);
-		}
-	    if(Input.GetKey(KeyCode.Alpha2)){
-			Troca (2);
-		}
-		if(Input.GetKey(KeyCode.Alpha3)){
-			Troca (3);
-		}
-	    if(Input.GetKey(KeyCode.Alpha4)){
-			Troca (4);
-		}
-		if(Input.GetKey(KeyCode.Alpha5)){
-			Troca (5);
-		}
-	    if(Input.GetKey(KeyCode.Alpha6)){
-			Troca (6);
-		}
-		if(Input.GetKey(KeyCode.Alpha7)){
-			Troca (7);
-		}
-	    if(Input.GetKey(KeyCode.Alpha8)){
-			Troca (8);
-		}	    
-		if(Input.GetKey(KeyCode.Alpha9)){
-			Troca (9);
+		if(Debug.isDebugBuild){
+			if(Input.GetKey(KeyCode.Z)){
+				acelera ();
+			}
+			if(Input.GetKey(KeyCode.X)){
+				diminui();
+			}
+			if(Input.GetKey(KeyCode.T)){
+				Troca ();
+			}
 		}
 		//TESTES
 	

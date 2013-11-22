@@ -8,7 +8,7 @@ public class BlocksMovement : MonoBehaviour {
 	public GameObject middleBlock;
 	public GameObject currentBlock;
 	private ObjectSpawnerByOdd odd;
-    public float levelVelocity = 15;
+    //public float levelVelocity = 15;
 	
 	// Use this for initialization
 	void Start () {
@@ -36,8 +36,8 @@ public class BlocksMovement : MonoBehaviour {
 		} else {
 			MainScript.gameVelocity += (Time.deltaTime / 20);
 		}
-        if (MainScript.gameVelocity > levelVelocity)
-            MainScript.gameVelocity = levelVelocity;
+        if (MainScript.gameVelocity > MainScript.maxspeed)
+            MainScript.gameVelocity = MainScript.maxspeed;
 
 		if (lastBlock == null){
 			

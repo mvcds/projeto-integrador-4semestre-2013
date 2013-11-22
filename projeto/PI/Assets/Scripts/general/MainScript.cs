@@ -5,7 +5,7 @@ public class MainScript {
 
 	public static float gameVelocity = 10;
 	public static float floatSpeed = 1.5f;
-	public static float Maxfolego = 5.0f;
+	public static float Maxfolego = 3.0f;
 	public static float folego = Maxfolego;
 	public static string levelToLoad;
 	public static int maxspeed = 15 ;

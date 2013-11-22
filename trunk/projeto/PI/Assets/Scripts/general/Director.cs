@@ -117,8 +117,10 @@ public class Director
         RankWrite,
         Victory,
         GameOver,
-        Exiting
+        Exiting,
+		Ending
     }
+	
 
     private enum LevelStatus
     {
@@ -200,6 +202,14 @@ public class Director
             return (_status == GameStatus.GameOver);
         }
     }
+    
+    public bool isEnding
+    {
+        get
+        {
+            return (_status == GameStatus.Ending);
+        }
+    }
 
     public bool canShowDialog
     {
@@ -230,14 +240,18 @@ public class Director
     public void GameOver(bool victory)
     {
         if (victory)
-        {
-            //TODO
-            //_status = GameStatus.RankWrite;
-            _status = GameStatus.Victory;
-        }
+            _status = GameStatus.Ending;
         else
             _status = GameStatus.GameOver;
     }
+	
+	public void Victory()
+	{
+		if (_status == GameStatus.Ending)
+			_status = GameStatus.Victory;
+		else
+			throw new System.Exception("To set a victory, first call gameover as victory");
+	}
 
     public void Start()
     {

@@ -35,7 +35,7 @@ public class SpeachEvent : MonoBehaviour {
 				case Trigger.PhaseBeginning:
                     return Director.Instance.isStarting;
                 case Trigger.PhaseEnding:
-                    return Director.Instance.isVictory;
+                    return Director.Instance.isEnding;
 			}
 			
 			return false;
@@ -132,7 +132,12 @@ public class SpeachEvent : MonoBehaviour {
 
     public virtual void Action()
     {
-        Director.Instance.Run();
-        Destroy(this);
+		if (On == Trigger.PhaseBeginning)		
+		{
+        	Director.Instance.Run();
+        	Destroy(this);
+		}
+		else
+			Director.Instance.Victory();
     }
 }

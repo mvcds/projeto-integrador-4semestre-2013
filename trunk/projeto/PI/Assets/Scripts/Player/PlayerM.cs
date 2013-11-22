@@ -62,12 +62,14 @@ public class PlayerM : MonoBehaviour {
     void FixedUpdate()
     {
         boiar();
+        
     }
 
 	// Update is called once per frame
     void Update()
     {
-        folego();
+		
+		folego();
 		
         if (!Director.Instance.isRunning)
             return;
@@ -92,7 +94,7 @@ public class PlayerM : MonoBehaviour {
 				
 				if (Input.GetKeyUp (KeyCode.DownArrow)){ 
 					diving = false;
-					empuxo = 60;
+					empuxo = 80;
 					if (divingDelay > 1.0f)
 					divingDelay = 0;
 				}
@@ -160,7 +162,7 @@ public class PlayerM : MonoBehaviour {
     }
     	
 	private void dive(){	
-		if (!diving && divingDelay > 1.0f && MainScript.folego >= 2 && PlayerStatus.powerUp != PlayerStatus.PowerUp.Boia){
+		if (!diving && divingDelay > 1.0f && MainScript.folego >= 1 && PlayerStatus.powerUp != PlayerStatus.PowerUp.Boia){
 			
 		
 			rigidbody.AddForce(Vector3.down * diveForce);
@@ -194,7 +196,7 @@ public class PlayerM : MonoBehaviour {
 			} else {
 				diving = false;
 				divingDelay = 0;
-				empuxo = 60;
+				empuxo = 80;
 			}
 		} else {
 			MainScript.folego += Time.deltaTime / 10;

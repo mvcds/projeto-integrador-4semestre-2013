@@ -9,7 +9,7 @@ public class SpeachEvent : MonoBehaviour {
 		
 	public enum Trigger
 	{
-		PhaseBeginning,
+		PhaseStarting,
 		PhaseEnding
 	}
     
@@ -32,7 +32,7 @@ public class SpeachEvent : MonoBehaviour {
 
 			switch(On)
 			{
-				case Trigger.PhaseBeginning:
+				case Trigger.PhaseStarting:
                     return Director.Instance.isStarting;
                 case Trigger.PhaseEnding:
                     return Director.Instance.isEnding;
@@ -111,14 +111,22 @@ public class SpeachEvent : MonoBehaviour {
             if (GUI.Button(right, _voidImage, _styleEnd))
 				Action();
 		}
-        
-        
-        if (canSkip || Debug.isDebugBuild)
+
+
+        if (canSkip || hasWon)
         {
             if (GUI.Button(skip, _voidImage, _styleEnd))
                 Action();
         }
 	}
+
+    private bool hasWon
+    {
+        get
+        {
+            return (Debug.isDebugBuild || Director.Instance.StatusOfThisLevel() == "Win");
+        }
+    }
 	
 	public void Forward()
 	{
@@ -132,12 +140,11 @@ public class SpeachEvent : MonoBehaviour {
 
     public virtual void Action()
     {
-		if (On == Trigger.PhaseBeginning)		
-		{
-        	Director.Instance.Run();
-        	Destroy(this);
-		}
-		else
-			Director.Instance.Victory();
+        if (On == Trigger.PhaseStarting)
+            Director.Instance.Run();
+        else
+            Director.Instance.Victory();
+
+        Destroy(gameObject);
     }
 }

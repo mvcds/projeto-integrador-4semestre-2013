@@ -35,7 +35,7 @@ public class Victory : MonoBehaviour {
     void Validate()
     {
         if (conditions.Length <= 0)
-            throw new Exception("No winnign condition");
+            throw new Exception("No winning condition");
     }
 
     void FixPosition()

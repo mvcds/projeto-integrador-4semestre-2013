@@ -20,7 +20,7 @@ public class VictoryMenu : Menu
 	{
 		get
 		{
-			return Director.Instance.isVictory;
+            return Director.Instance.isVictory;
 		}
 	}
     
@@ -42,7 +42,7 @@ public class VictoryMenu : Menu
 
         GUIStyle myStyle = new GUIStyle();
         myStyle.font = font;
-        myStyle.normal.textColor = Color.white;
+        myStyle.normal.textColor = Color.black;
         myStyle.alignment = TextAnchor.MiddleLeft;
         myStyle.fontSize = 40;
 

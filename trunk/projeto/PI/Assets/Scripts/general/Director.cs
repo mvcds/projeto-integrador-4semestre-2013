@@ -19,6 +19,7 @@ public class Director
         {
             if (_instance == null)
                 _instance = new Director();
+
             return _instance;
         }
     }
@@ -71,9 +72,8 @@ public class Director
         {
             if (unblockedLevels[level] == LevelStatus.First)
                 return false;
-            else if (unblockedLevels[level] == LevelStatus.Played && on == SpeachEvent.Trigger.PhaseBeginning)
+            else if (unblockedLevels[level] == LevelStatus.Played && on == SpeachEvent.Trigger.PhaseStarting)
                 return true;
-            //Not tested below
             else if (unblockedLevels[level] == LevelStatus.FirstWin && on == SpeachEvent.Trigger.PhaseEnding)
                 return false;
 
@@ -120,7 +120,6 @@ public class Director
         Exiting,
 		Ending
     }
-	
 
     private enum LevelStatus
     {
@@ -148,7 +147,6 @@ public class Director
             throw e;
         }
     }
-
 
     public void ResetLevel()
     {
@@ -240,25 +238,39 @@ public class Director
     public void GameOver(bool victory)
     {
         if (victory)
+        {
+            SetWin();
             _status = GameStatus.Ending;
+        }
         else
             _status = GameStatus.GameOver;
+    }
+
+    public void SetWin()
+    {
+        string level = Application.loadedLevelName;
+        if (!unblockedLevels.ContainsKey(level))
+            unblockedLevels.Add(level, LevelStatus.FirstWin);
+        else if (unblockedLevels[level] == LevelStatus.Played)
+            unblockedLevels[level] = LevelStatus.FirstWin;
     }
 	
 	public void Victory()
 	{
-		if (_status == GameStatus.Ending)
-			_status = GameStatus.Victory;
-		else
-			throw new System.Exception("To set a victory, first call gameover as victory");
-	}
+        if (_status == GameStatus.Ending)
+        {
+            _status = GameStatus.Victory;
+            unblockedLevels[Application.loadedLevelName] = LevelStatus.Win;
+        }
+        else
+            throw new System.Exception("To set a victory, first call gameover as victory");
+    }
 
     public void Start()
     {
         _status = GameStatus.Starting;
         GameRank = new Rank();
     }
-
 
     public string StatusOfThisLevel()
     {

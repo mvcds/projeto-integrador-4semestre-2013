@@ -98,7 +98,9 @@ public class HUD : MonoBehaviour {
 		
 		// ArrowUp
 		if (arrowUpTime > 0)
-			drawImage(Screen.width * 0.7f, Screen.height * 0.2f, arrowUp);
+			drawImage(Screen.width * 0.7f, Screen.height * 0.2f + ((arrowUp.height * (arrowUpTime % 25.0f)/ 5) * 5.0f), arrowUp);
+		
+		//print("" + (arrowUpTime % 25.0f)/ 5);
 	}
 	
 	void FixedUpdate()

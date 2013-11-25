@@ -41,6 +41,7 @@ public class AudioSelecter: MonoBehaviour {
 	public AudioSource hits_player;
 	public AudioClip[] dor;
 	public AudioClip powerup;
+	public AudioClip mergulho;
 	
 	//Aqui eu tenho um vetor de sons de dores.
 	//Sorteio conforme os demais para naõ repetir.
@@ -48,6 +49,12 @@ public class AudioSelecter: MonoBehaviour {
 		int max = dor.Length;
 		int selecionado = (int) Random.Range (0.0f,max);
 		hits_player.clip = dor[selecionado];
+		hits_player.Play ();
+	}
+	
+	//Para tocar o som do mergulho
+	public void PlayMergulho(){
+		hits_player.clip = mergulho;
 		hits_player.Play ();
 	}
 	

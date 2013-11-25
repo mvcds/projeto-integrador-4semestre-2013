@@ -43,6 +43,8 @@ public class PlayerM : MonoBehaviour {
 	private DateTime dt = DateTime.Now;
     private bool startedTime = false;
 	
+	public AudioSelecter aud;
+	
 	// Use this for initialization
 	void Start () {
 		position = Position.Middle;
@@ -164,9 +166,10 @@ public class PlayerM : MonoBehaviour {
 	private void dive(){	
 		if (!diving && divingDelay > 1.0f && MainScript.folego >= 1 && PlayerStatus.powerUp != PlayerStatus.PowerUp.Boia){
 			
-		
 			rigidbody.AddForce(Vector3.down * diveForce);
 			diving = true;
+			
+			aud.PlayMergulho();
 			
 			empuxo = 20;
 			delay = 0;

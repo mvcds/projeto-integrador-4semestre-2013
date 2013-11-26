@@ -85,7 +85,7 @@ public class SpeachItem : MonoBehaviour {
 			Rect speachPosition = new Rect(ScreenUtil.FitOnWidth(position.x), ScreenUtil.FitOnHeight(position.y),
 				ScreenUtil.FitOnWidth(position.width), ScreenUtil.FitOnHeight(position.height));
 
-			GUI.Label(speachPosition, speach, MyFont);
+			GUI.Label(speachPosition, speach.Replace("\\n","\n"), MyFont);
 		}
 	}
 }

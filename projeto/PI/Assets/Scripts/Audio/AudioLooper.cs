@@ -1,7 +1,7 @@
 //---------------------------------------------------------------
 //--------------- SCRIPT DE AUDIOPLAYER DE MÚSICA ---------------
 //------------- ESCRITO POR RONY KETCHUM ------------------------
-//------------- VERSÃO 1.5.1 - 21/11/2013 -------------------------
+//------------- VERSÃO 1.6 - 26/11/2013 -------------------------
 //---------------------------------------------------------------
 
 using UnityEngine;
@@ -13,8 +13,8 @@ public class AudioLooper : MonoBehaviour {
 	//Esses arrays são para colocar as músicas do game
 	public AudioClip[] transicoes;
 	public AudioClip[] loops;
-	public AudioClip musica_isVictory;
-	public AudioClip musica_isGameOver;
+	public AudioClip Victory;
+	public AudioClip GameOver;
 	//Indicador para música atual
 	private int mus_atual;
 	//Variável para controle de troca externa
@@ -38,6 +38,8 @@ public class AudioLooper : MonoBehaviour {
 	private int indice_troca;
 	private bool fade_out;
 	private bool trans_alternativa;
+	private bool tocouend;
+	public AudioSource player_amb;
 
 	
 	int distancia;
@@ -49,13 +51,32 @@ public class AudioLooper : MonoBehaviour {
 		ja_trocou = true;
 		trocar = false;
 		time_pitch = 10;
-		player.volume = 0.6f;
+		player.volume = 0.20f;
+		tocouend = false;
 		
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	
+	void Update(){
+		//Pause
+		if(Director.Instance.isPaused){
+			player.volume = 0.05f;
+		}
+		else{
+			player.volume = 0.45f;
+		}
 		
+		if(Director.Instance.isGameOver){
+			TocaGameOver();
+		}
+		if(Director.Instance.isEnding || Director.Instance.isVictory){
+			TocaVictory();
+		}
+	}
+	
+	void FixedUpdate () {
+		print ("TOCOUEND: "+tocouend.ToString());
 		//Aqui eu coloco a velocidade da música conforme a velocidade do game.
 		if(MainScript.gameVelocity<MainScript.maxspeed){
 			velocidade_jogo = 0.90f + ((MainScript.gameVelocity-MainScript.minspeed)/50);
@@ -81,20 +102,6 @@ public class AudioLooper : MonoBehaviour {
 			ja_trocou = false;
 			trocar = false;
 		}
-		
-		//Pause
-		if(Director.Instance.isPaused){
-			player.volume = 0.1f;
-		}
-		else{
-			player.volume = 0.6f;
-		}
-		
-		if(Director.Instance.isVictory == true)
-			player.clip = musica_isVictory;
-		else if(Director.Instance.isGameOver == true)
-			player.clip = musica_isGameOver;
-		
 		
 		if(fazendo_transicao){
 			if(!ja_trocou){
@@ -223,6 +230,33 @@ public class AudioLooper : MonoBehaviour {
 		step_pitch = 0.0f;
 	}
 	
+	public void TocaGameOver(){
+		fazendo_transicao=false;
+		ja_trocou = true;
+		trocar = false;
+		player_amb.volume = 1.0f;
+		player.volume = 0.01f;
+		if(!tocouend){
+			player_amb.clip = GameOver;
+			player_amb.Play();
+			tocouend = true;
+			player_amb.loop = true;
+		}
+	}
+	
+	public void TocaVictory (){
+		fazendo_transicao=false;
+		ja_trocou = true;
+		trocar = false;
+		player_amb.volume = 1.0f;
+		player.volume = 0.01f;
+		if(!tocouend){
+			player_amb.clip = Victory;
+			player_amb.Play();
+			tocouend = true;
+			player_amb.loop = true;
+		}
+	}
 	//Seta um novo tempo para os Power-Ups, diferente do padrão (atualmente 10 segundos).
 	public void seta_tempo(int segundos){
 		this.time_pitch = segundos;

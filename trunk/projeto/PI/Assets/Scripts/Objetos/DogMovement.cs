@@ -6,7 +6,7 @@ public class DogMovement : MonoBehaviour {
 	
 	public float speed;
 	bool direction;
-	
+		
 	// Use this for initialization
 	void Start ()
 	{

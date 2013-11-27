@@ -45,7 +45,7 @@ public class GameControl : MonoBehaviour {
     void DeveloperCheat()
     {
         if (Debug.isDebugBuild)
-        {            
+        {
             if (Input.GetKeyDown(KeyCode.R))
                 Director.Instance.ResetLevel();
             else if (Input.GetKeyDown(KeyCode.E))

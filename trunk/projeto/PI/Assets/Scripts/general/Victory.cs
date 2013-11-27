@@ -27,7 +27,10 @@ public class Victory : MonoBehaviour {
     {
         Validate();
         FixPosition();
-        
+
+        if (!Director.Instance.isRunning)
+            return;
+
         if (conditions.Where(p => !p.hasWon).Count() == 0)
             Director.Instance.GameOver(true);
     }

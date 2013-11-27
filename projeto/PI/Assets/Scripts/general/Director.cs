@@ -19,7 +19,7 @@ public class Director
         {
             if (_instance == null)
                 _instance = new Director();
-
+            
             return _instance;
         }
     }
@@ -63,7 +63,6 @@ public class Director
             unblockedLevels.Add(DEFAULT_LEVEL_NAME, LevelStatus.First);            		
     }
 
-    [Obsolete("Not fully tested yet")]
     public bool canSkipDialog(SpeachEvent.Trigger on)
     {
         string level = Application.loadedLevelName;
@@ -151,6 +150,14 @@ public class Director
     public void ResetLevel()
     {
         LoadLevel(Application.loadedLevelName);
+    }
+
+    public string Status
+    {
+        get
+        {
+            return _status.ToString();
+        }
     }
 
     public bool isStarting

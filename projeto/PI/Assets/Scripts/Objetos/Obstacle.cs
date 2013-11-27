@@ -12,6 +12,7 @@ public class Obstacle : MonoBehaviour {
 		PlayerStatus.gotHit();
     }
 	
+	/*parte errada
 	void Update()
 	{
 		GameObject player = GameObject.Find("Player");
@@ -77,4 +78,5 @@ public class Obstacle : MonoBehaviour {
 			}
 		}
 	}
+	//*/
 }

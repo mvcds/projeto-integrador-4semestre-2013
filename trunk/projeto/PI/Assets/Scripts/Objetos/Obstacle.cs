@@ -5,7 +5,8 @@ using System.Collections;
 public class Obstacle : MonoBehaviour {
 	
 	private bool som = true;
-		
+	private float volume = 0.7f;
+	
 	void OnTriggerEnter(Collider other)
 	{
         Destroy(transform.gameObject);
@@ -25,7 +26,7 @@ public class Obstacle : MonoBehaviour {
 					AudioProx.playCachorro();
 					som = false;
 				} else {
-					AudioProx.setVolumeCachorro(1 - (Vector3.Distance( transform.position, player.transform.position) / 20));
+					AudioProx.setVolumeCachorro((1 - (Vector3.Distance( transform.position, player.transform.position) / 20)) * volume);
 				}
 			}
 			
@@ -37,7 +38,9 @@ public class Obstacle : MonoBehaviour {
 					AudioProx.playCaminhao();
 					som = false;
 				} else {
-					AudioProx.setVolumeCaminhao(1 - (Vector3.Distance( transform.position, player.transform.position) / 20));
+					print ("Volume: " + ((1 - (Vector3.Distance( transform.position, player.transform.position) / 20)) * volume));
+					
+					AudioProx.setVolumeCaminhao((1 - (Vector3.Distance( transform.position, player.transform.position) / 20)) * volume);
 				}
 			}
 			
@@ -49,7 +52,7 @@ public class Obstacle : MonoBehaviour {
 					AudioProx.playCarro1();
 					som = false;
 				} else {
-					AudioProx.setVolumeCarro1(1 - (Vector3.Distance( transform.position, player.transform.position) / 20));
+					AudioProx.setVolumeCarro1((1 - (Vector3.Distance( transform.position, player.transform.position) / 20)) * volume);
 				}
 			}
 			
@@ -61,7 +64,7 @@ public class Obstacle : MonoBehaviour {
 					AudioProx.playCarro2();
 					som = false;
 				} else {
-					AudioProx.setVolumeCarro2(1 - (Vector3.Distance( transform.position, player.transform.position) / 20));
+					AudioProx.setVolumeCarro2((1 - (Vector3.Distance( transform.position, player.transform.position) / 20)) * volume);
 				}
 			}
 			
@@ -73,7 +76,7 @@ public class Obstacle : MonoBehaviour {
 					AudioProx.playPortao();
 					som = false;
 				} else {
-					AudioProx.setVolumePortao(1 - (Vector3.Distance( transform.position, player.transform.position) / 20));
+					AudioProx.setVolumePortao((1 - (Vector3.Distance( transform.position, player.transform.position) / 20)) * volume);
 				}
 			}
 		}

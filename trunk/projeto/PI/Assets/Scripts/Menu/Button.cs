@@ -8,7 +8,7 @@ abstract public class Button : MonoBehaviour {
     public Menu _myMenu;
 	public AudioSource actived_sound,
 		hover_sound;
-	private AudioSource _sound;
+	private static string _lastButton = "";
 		
 	private Texture2D _shown_image;
 	
@@ -30,22 +30,26 @@ abstract public class Button : MonoBehaviour {
 	}
 	
 	void Update()
-    {
+	{
         place_size.x = place_size.x.FixForHundred();
         place_size.y = place_size.y.FixForHundred();
         place_size.width = place_size.width.FixForHundred();
         place_size.height = place_size.height.FixForHundred();
 	}
 	
-	private void PlaySound(AudioSource s){		
-		if (s == _sound)
-			return;
+	private void PlaySound(AudioSource s, bool once = false){		
+		
+		if (once)
+		{
+			if (_lastButton == name)
+				return;
+		}
 		
 		if (s != null)
 		{
 			s.Play();
 		}
-		_sound = s;
+		_lastButton = name;
 	}
 	
 	public void Show(bool show)
@@ -56,6 +60,7 @@ abstract public class Button : MonoBehaviour {
 
     protected virtual void Action()
     {
+		PlaySound(actived_sound);
         HideBottomUp();
     }
 
@@ -79,7 +84,10 @@ abstract public class Button : MonoBehaviour {
 		{
             Rect r = new Rect(place_size.x.FitOnWidth(), place_size.y.FitOnHeight(),
                 place_size.width.FitOnWidth(), place_size.height.FitOnHeight());
-            	
+            
+			if (r.Contains(new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y)))
+				PlaySound(hover_sound, true);
+			
 			if (GUI.Button(r, _shown_image, _style))
 				Action();
 		}

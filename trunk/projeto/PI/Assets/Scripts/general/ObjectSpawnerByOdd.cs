@@ -1,9 +1,12 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class ObjectSpawnerByOdd : MonoBehaviour {
-		
+	
+	public bool testOdd = false;
+	private Dictionary<string, int> dicObj = new Dictionary<string, int>();
 	public GameObject[] SpawnableObejcts;	
 	public float[] Odds;
 	
@@ -55,7 +58,30 @@ public class ObjectSpawnerByOdd : MonoBehaviour {
 			throw e;
 		}
 		
-		proportionalOdds = NormalizeOdds(Odds);			
+		proportionalOdds = NormalizeOdds(Odds);	
+		
+		if (testOdd)
+		{
+			if (Input.GetKeyDown(KeyCode.P) || (Director.Instance.isGameOver || Director.Instance.isEnding))
+				CheckOdd();
+		}
+	}
+	
+	private void CheckOdd()
+	{
+		if (!Debug.isDebugBuild)
+			return;
+			
+		float total = 0;
+		foreach(string n in dicObj.Keys)
+			total += dicObj[n];
+		
+		foreach(string n in dicObj.Keys)
+		{
+			Debug.Log("S:" + n + " - " + dicObj[n] + " - " + ((float)dicObj[n]/total).ToString() + "%");
+		}
+		
+		throw new System.Exception();
 	}
 	
 	/// <summary>
@@ -170,9 +196,13 @@ public class ObjectSpawnerByOdd : MonoBehaviour {
 			}
 			
 			cleanObjects = realSpawnables.ToArray();
+			GameObject obj = getObject(cleanObjects, NormalizeOdds(realOdd.ToArray()));
 			
-			if (cleanObjects.Length > 0)			
-				return getObject(cleanObjects, NormalizeOdds(realOdd.ToArray()));
+			if (cleanObjects.Length > 0)
+			{
+				FeedDictionary(obj);
+				return obj;
+			}
 			
 			return null;
 		}
@@ -197,8 +227,17 @@ public class ObjectSpawnerByOdd : MonoBehaviour {
 		
 		if (r < 0)
 			return null;
-		
-		
-		return (GameObject)(spawnables[r]);
+				
+		GameObject obj1 = (GameObject)spawnables[r];
+		FeedDictionary(obj1);
+		return obj1;
+	}
+	
+	void FeedDictionary(GameObject obj)
+	{
+		if (!dicObj.ContainsKey(obj.name))
+			dicObj.Add(obj.name, 1);
+		else
+			dicObj[obj.name]++;
 	}
 }

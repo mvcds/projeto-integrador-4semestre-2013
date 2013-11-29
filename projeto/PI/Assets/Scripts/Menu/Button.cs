@@ -41,15 +41,18 @@ abstract public class Button : MonoBehaviour {
 		
 		if (once)
 		{
-			if (_lastButton == name)
+			if (_lastButton.Contains(name + "."))
 				return;
 		}
 		
 		if (s != null)
-		{
+		{	
 			s.Play();
+			_lastButton =  name + "." + s.name;
 		}
-		_lastButton = name;
+		else
+			_lastButton = "";
+		
 	}
 	
 	public void Show(bool show)
@@ -87,6 +90,8 @@ abstract public class Button : MonoBehaviour {
             
 			if (r.Contains(new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y)))
 				PlaySound(hover_sound, true);
+			else if (_lastButton.Contains(name + "."))
+				PlaySound(null);
 			
 			if (GUI.Button(r, _shown_image, _style))
 				Action();

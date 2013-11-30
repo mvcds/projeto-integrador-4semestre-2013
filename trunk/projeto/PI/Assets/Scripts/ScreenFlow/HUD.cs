@@ -15,10 +15,6 @@ public class HUD : MonoBehaviour {
 	private Texture powerUpBarraCapivara;
 	private Texture powerUpFill;
 	private Texture powerUpFillRed;
-	
-	// Arrow
-	private Texture arrowUp;
-	private static float arrowUpTime;
     
     GUIStyle MyFont
     {
@@ -48,11 +44,7 @@ public class HUD : MonoBehaviour {
 		powerUpBarraPorta = (Texture)Resources.Load("Images/HUD/LifeBar/BarraPorta");
 		powerUpFill = (Texture)Resources.Load("Images/HUD/LifeBar/greenBar");
 		powerUpFillRed = (Texture)Resources.Load("Images/HUD/LifeBar/redBar");
-		
-		// Arrow 
-		arrowUp = (Texture)Resources.Load("Images/HUD/SetaCima");
-		arrowUpTime = 0;
-	}
+    }
 	
 	void OnGUI(){
 		if (!Director.Instance.isRunning)
@@ -94,18 +86,9 @@ public class HUD : MonoBehaviour {
 		drawImage(Screen.width - (lifeBar.width), Screen.height * 0.05f, lifeBar);
 		drawHeart(1);
 		drawHeart(2);
-		drawHeart(3);
+		drawHeart(3);		
+	}
 		
-		// ArrowUp
-		if (arrowUpTime > 0)
-			drawImage(Screen.width * 0.5f - (arrowUp.width / 2), Screen.height * 0.15f + (((arrowUp.height / 5) * ((arrowUpTime) % 2.51f))), arrowUp);
-	}
-	
-	void FixedUpdate()
-	{
-		arrowUpTime -= Time.deltaTime;	
-	}
-	
 	void drawHeart(int position){
 		if (PlayerStatus.vida >= position)
 			drawImage(Screen.width - (lifeBar.width / 2) - 180 + (position * 80), Screen.height * 0.065f, heartFull);
@@ -115,10 +98,5 @@ public class HUD : MonoBehaviour {
 	
 	void drawImage(float x, float y, Texture texture){
 		GUI.DrawTexture (new Rect (x, y, texture.width, texture.height), texture);
-	}
-	
-	public static void drawArrowUp()
-	{
-		arrowUpTime = 5;
 	}
 }

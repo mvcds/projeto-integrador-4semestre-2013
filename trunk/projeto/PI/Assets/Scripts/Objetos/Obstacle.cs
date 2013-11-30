@@ -38,8 +38,7 @@ public class Obstacle : MonoBehaviour {
 					AudioProx.playCaminhao();
 					som = false;
 				} else {
-					print ("Volume: " + ((1 - (Vector3.Distance( transform.position, player.transform.position) / 20)) * volume));
-					
+					//print ("Volume: " + ((1 - (Vector3.Distance( transform.position, player.transform.position) / 20)) * volume));
 					AudioProx.setVolumeCaminhao((1 - (Vector3.Distance( transform.position, player.transform.position) / 20)) * volume);
 				}
 			}

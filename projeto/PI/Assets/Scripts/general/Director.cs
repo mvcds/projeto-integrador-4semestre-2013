@@ -150,6 +150,7 @@ public class Director
     public void ResetLevel()
     {
         LoadLevel(Application.loadedLevelName);
+        GameRank = new Rank();
     }
 
     public string Status

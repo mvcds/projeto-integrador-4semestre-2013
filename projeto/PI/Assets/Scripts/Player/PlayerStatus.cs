@@ -87,8 +87,6 @@ public class PlayerStatus : MonoBehaviour {
 			block = 0;
 		}
 		
-		if (powerUp == PowerUp.Capivara)
-			HUD.drawArrowUp();
 		/*
 		if (powerUp == PowerUp.Porta)
 			gotDoor();*/

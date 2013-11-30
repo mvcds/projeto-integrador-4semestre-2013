@@ -76,7 +76,7 @@ public class AudioLooper : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-		print ("TOCOUEND: "+tocouend.ToString());
+		//print ("TOCOUEND: "+tocouend.ToString());
 		//Aqui eu coloco a velocidade da música conforme a velocidade do game.
 		if(MainScript.gameVelocity<MainScript.maxspeed){
 			velocidade_jogo = 0.90f + ((MainScript.gameVelocity-MainScript.minspeed)/50);

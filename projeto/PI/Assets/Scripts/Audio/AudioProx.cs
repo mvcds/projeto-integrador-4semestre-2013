@@ -33,7 +33,7 @@ public class AudioProx: MonoBehaviour {
 	// Plays
 	public static void playCachorro()
 	{
-		print ("Tocando Som do Cachorro");
+		//print ("Tocando Som do Cachorro");
 		sources[1].clip = cachorro;
 		sources[1].Play();
 	}

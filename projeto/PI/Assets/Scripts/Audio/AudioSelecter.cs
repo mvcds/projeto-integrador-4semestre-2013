@@ -162,7 +162,7 @@ public class AudioSelecter: MonoBehaviour {
 			
 			//Se colidir com algo estranho saberemos e não será tocado som
 			default:
-				Debug.Log(other.name);
+				//Debug.Log(other.name);
 				return;
 		}
 		//Se não sair no som estranho, toda vez será tocado um audio.

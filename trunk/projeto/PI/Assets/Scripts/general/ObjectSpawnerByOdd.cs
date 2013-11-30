@@ -6,7 +6,7 @@ using System.Linq;
 public class ObjectSpawnerByOdd : MonoBehaviour {
 	
 	public bool testOdd = false;
-	private Dictionary<string, int> dicObj = new Dictionary<string, int>();
+	private static Dictionary<string, int> dicObj;
 	public GameObject[] SpawnableObejcts;	
 	public float[] Odds;
 	
@@ -24,6 +24,11 @@ public class ObjectSpawnerByOdd : MonoBehaviour {
 	/// It's not showing exactly what it was supposed to, but it's working
 	/// </summary>
 	private GameObject[] cleanObjects;
+
+    void Start()
+    {
+        dicObj = new Dictionary<string, int>();
+    }
 
 	void Update ()
 	{
@@ -188,10 +193,7 @@ public class ObjectSpawnerByOdd : MonoBehaviour {
 			GameObject obj = getObject(cleanObjects, NormalizeOdds(realOdd.ToArray()));
 			
 			if (cleanObjects.Length > 0)
-			{
-				FeedDictionary(obj);
 				return obj;
-			}
 			
 			return null;
 		}
@@ -218,11 +220,10 @@ public class ObjectSpawnerByOdd : MonoBehaviour {
 			return null;
 				
 		GameObject obj1 = (GameObject)spawnables[r];
-		FeedDictionary(obj1);
 		return obj1;
 	}
 	
-	void FeedDictionary(GameObject obj)
+	public void FeedDictionary(GameObject obj)
 	{
 		if (!dicObj.ContainsKey(obj.name))
 			dicObj.Add(obj.name, 1);

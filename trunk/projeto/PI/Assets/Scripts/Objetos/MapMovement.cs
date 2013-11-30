@@ -38,27 +38,32 @@ public class MapMovement : MonoBehaviour {
 			MainScript.gameVelocity += (Time.deltaTime / 10);
 		}
 		
-		if (Time.time - delay > randomDelayTime){
+		if (Time.time - delay > randomDelayTime)
+        {
 			//for (int i = 0; i < 6; i++){
 			//	if (Objs[i] == null){
 					
 					GameObject spawn = odd.getObject();
+                    odd.FeedDictionary(spawn);
 						
 					if (spawn == null)
 						return;
 
-					if (spawn.CompareTag("DoubleObject")){
+					if (spawn.CompareTag("DoubleObject"))
+                    {
 						if (leftBlock <= 0 && middleBlock <= 0 && rightBlock <=0){
 							/*Objs[i] = (GameObject)*/ Instantiate(DoubleBlocks[Random.Range (0, DoubleBlocks.Length)],
 							new Vector3(getDuoRandomLane(), 0, 40), Quaternion.Euler(new Vector3(0,0,90)));
 						}	
-					} else if (spawn.CompareTag("Block")) {
+					} else if (spawn.CompareTag("Block"))
+                    {
 						if ((leftBlock <= 0 && middleBlock <=0) ||
 							(middleBlock <= 0 && rightBlock <=0) ||
 							(leftBlock <= 0 && rightBlock <=0))
 						Instantiate(spawn,
 						new Vector3(getAndBlockRandomLane(), 0, 45), Quaternion.Euler(new Vector3(0,0,0)));	
-					} else {
+					} else 
+                    {
 						if (leftBlock <= 0 || middleBlock <= 0 || rightBlock <=  0){
 						/*Objs[i] = (GameObject) */Instantiate(spawn,
 						new Vector3(getRandomLane(), 0, 40), Quaternion.Euler(new Vector3(0,0,0)));	
@@ -67,7 +72,8 @@ public class MapMovement : MonoBehaviour {
 					
 					delay = Time.time;
 			
-					if (PlayerStatus.powerUp == PlayerStatus.PowerUp.Boia){
+					if (PlayerStatus.powerUp == PlayerStatus.PowerUp.Boia)
+                    {
 						randomDelayTime = getRandomDelay() * MainScript.floatSpeed;
 					} else {
 						randomDelayTime = getRandomDelay();

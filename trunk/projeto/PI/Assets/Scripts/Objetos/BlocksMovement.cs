@@ -17,13 +17,16 @@ public class BlocksMovement : MonoBehaviour {
 		
 		GameObject spawn3 = odd.getObject();
 		lastBlock = (GameObject)Instantiate(spawn3, new Vector3(0, 0, 35.0f), Quaternion.Euler(new Vector3(0,0,0)));
-		
+        odd.FeedDictionary(spawn3);
+
 		GameObject spawn = odd.getObject();
 		middleBlock = (GameObject)Instantiate(spawn, new Vector3(0, 0, 60.0f), Quaternion.Euler(new Vector3(0,0,0)));
-		
+        odd.FeedDictionary(spawn);
+
 		GameObject spawn2 = odd.getObject();
 		currentBlock = (GameObject)Instantiate(spawn2, new Vector3(0, 0, 85.0f), Quaternion.Euler(new Vector3(0,0,0)));
-	}
+        odd.FeedDictionary(spawn2);
+    }
 	
 	void FixedUpdate () {
 		
@@ -42,6 +45,7 @@ public class BlocksMovement : MonoBehaviour {
 		if (lastBlock == null){
 			
 			GameObject spawn = odd.getObject();
+            odd.FeedDictionary(spawn);
 						
 			if (spawn == null)
 				return;

@@ -53,7 +53,7 @@ public class Director
     
     Dictionary<string, LevelStatus> unblockedLevels = new Dictionary<string, LevelStatus>();
 
-    private const string DEFAULT_PROFILE_NAME = "CAP";
+    private const string DEFAULT_PROFILE_NAME = "ZE";
 
     public void LoadProfile(string name = DEFAULT_PROFILE_NAME)
     {
@@ -305,7 +305,7 @@ public class Director
 
     #region Rank 
 
-    private const int RANK_LIMIT = 10;
+    public const int RANK_LIMIT = 5;
 
     public enum RankType
     {
@@ -314,15 +314,22 @@ public class Director
         ,Average
     }
 
+    private void DefaultTypes(ref List<RankType> types)
+    {
+        types.Add(RankType.Duck);
+        types.Add(RankType.Distance);
+    }
+
+    public List<RankType> Types = new List<RankType>();
     private Dictionary<RankType, List<RankPosition>> _rankByType = new Dictionary<RankType, List<RankPosition>>();
     	
 	public List<RankPosition> RankInLevel(RankType type)
 	{
 		string level = Application.loadedLevelName;
 		List<RankPosition> result = new List<RankPosition>();
-		
-		FixRank(ref _rankByType);
-				
+
+        FixRank(ref _rankByType);
+
 		foreach(RankPosition p in _rankByType[type])
 		{
 			if (p.Level == level || p.Level == null)
@@ -360,38 +367,41 @@ public class Director
 
         foreach (Rank r in list)
             result.Add(new RankPosition(DEFAULT_PROFILE_NAME, r, null));
-       
 
         return result;
     }
 		
 	private void FixRank(ref Dictionary<RankType, List<RankPosition>> list)
 	{
-        //*Initializing rank
-        if (!list.ContainsKey(RankType.Duck))
-            list.Add(RankType.Duck, DefaultList(RankType.Duck));
-        if (!list.ContainsKey(RankType.Distance))
-            list.Add(RankType.Distance, DefaultList(RankType.Distance));
+        DefaultTypes(ref Types);
+
+        //*Initializing rank by type
+        foreach (RankType type in Types)
+        {
+            if (!list.ContainsKey(type))
+                list.Add(type, DefaultList(type));
+        }
         //*/
-		
+
+
 		//*Size
-		foreach (RankType type in list.Keys)
+        foreach (RankType type in Types)
 			list[type] = list[type].Take(RANK_LIMIT).ToList();
 		//*/
 			
 		//*Type
-		foreach (RankType type in list.Keys)
+        foreach (RankType type in Types)
         {			
             switch (type)
             {
                 case RankType.Duck:
-                    list[type] = list[type].OrderBy(p => p.Ranking.Ducks).ToList();
+                    list[type] = list[type].OrderByDescending(p => p.Ranking.Ducks).ToList();
                     break;
                 case RankType.Distance:
-                    list[type] = list[type].OrderBy(p => p.Ranking.Distance).ToList();
+                    list[type] = list[type].OrderByDescending(p => p.Ranking.Distance).ToList();
                     break;
                 case RankType.Average:
-                    list[type] = list[type].OrderBy(p => (p.Ranking.Ducks + p.Ranking.Distance * 3) / 4).ToList();
+                    list[type] = list[type].OrderByDescending(p => (p.Ranking.Ducks + p.Ranking.Distance * 3) / 4).ToList();
                     break;
             }
         }

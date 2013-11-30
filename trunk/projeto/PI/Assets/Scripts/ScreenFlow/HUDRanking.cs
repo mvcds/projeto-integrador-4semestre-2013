@@ -11,7 +11,7 @@ public class HUDRanking : MonoBehaviour {
 	private int boxWidth = (int) (Screen.width * 0.6f);
 	private int boxHeight = (int) (Screen.height * 0.08f);
 
-    private List<RankPosition> ranks = new List<RankPosition>();
+    private List<RankPosition> ranks;
 	
 	private string title = "RANKING";
 	
@@ -31,19 +31,21 @@ public class HUDRanking : MonoBehaviour {
 	//Temporário
 	void Start () 
     {
-        for(int i = 0; i < Director.RANK_LIMIT; i++)
-            ranks.Add(new RankPosition("Name" + (i + 1), new Rank(0, 0)));
+        ranks = Director.Instance.RankInLevel(Director.RankType.Distance);
 	}
 	
 	void OnGUI()
     {
+        if (ranks == null)
+            return;
+
 		GUI.Box(new Rect(x + ((boxWidth - boxWidth * 0.75f) / 2), y + (paddingY * -2), boxWidth * 0.75f, boxHeight), title, MyFont);
 
         //TODO: nome?
         for(int i = 0; i < ranks.Count; i++)
         {
             Rank rank = ranks[i].Ranking;
-            string text = ranks[i].Profile + " Ducks: " + rank.Ducks + " Distance: " + rank.Distance;
+            string text = "#" + (i+1) + " " + ranks[i].Profile + " Ducks: " + rank.Ducks + " Distance: " + rank.Distance;
             GUI.Box(new Rect(x, y + (paddingY * i), boxWidth, boxHeight), text, MyFont);
         }
 	}

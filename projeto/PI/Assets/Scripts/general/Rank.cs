@@ -19,11 +19,6 @@ public class Rank {
     {
         Ducks++;
     }
-	
-	public void resetDucks()
-    {
-        Ducks = 0;
-    }
 
     public float Distance
     {

@@ -60,15 +60,15 @@ public class GameControl : MonoBehaviour {
             }
             else  if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                PlayerStatus.gotPowerUp(0);
+                PlayerStatus.gotPowerUp(PlayerStatus.PowerUp.Boia);
             }
             else  if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                PlayerStatus.gotPowerUp(1);
+                PlayerStatus.gotPowerUp(PlayerStatus.PowerUp.Porta);
             }
             else if (Input.GetKeyDown(KeyCode.Alpha4))
             {
-                PlayerStatus.gotPowerUp(3);
+                PlayerStatus.gotPowerUp(PlayerStatus.PowerUp.Capivara);
             }
         }
     }

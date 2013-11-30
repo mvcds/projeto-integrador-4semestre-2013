@@ -3,7 +3,7 @@ using UnityEngine;
 //[RequireComponent(typeof(ObjMovement))]
 public class PowerUp : MonoBehaviour {
 	
-	public int powerUpID;		
+	public PlayerStatus.PowerUp powerUpID;		
 		
 	void OnTriggerEnter(Collider other)
 	{

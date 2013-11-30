@@ -6,6 +6,7 @@ using System.Linq;
 public class ObjectSpawnerByOdd : MonoBehaviour {
 	
 	public bool testOdd = false;
+    private bool oddTested = false;
 	private static Dictionary<string, int> dicObj;
 	public GameObject[] SpawnableObejcts;	
 	public float[] Odds;
@@ -56,10 +57,18 @@ public class ObjectSpawnerByOdd : MonoBehaviour {
 		
 		if (testOdd)
 		{
-			if (Input.GetKeyDown(KeyCode.P) || (Director.Instance.isGameOver || Director.Instance.isEnding))
-				CheckOdd();
+            if (Input.GetKeyDown(KeyCode.P) || ShowOdd)
+                CheckOdd();
 		}
 	}
+
+    private bool ShowOdd
+    {
+        get
+        {
+            return (Director.Instance.isGameOver || Director.Instance.isEnding) && !oddTested;
+        }
+    }
 	
 	private void CheckOdd()
 	{
@@ -74,7 +83,8 @@ public class ObjectSpawnerByOdd : MonoBehaviour {
 		{
 			Debug.Log("S:" + n + " - " + dicObj[n] + " - " + ((float)dicObj[n]/total).ToString() + "%");
 		}
-		
+
+        oddTested = true;
 		throw new System.Exception();
 	}
 	

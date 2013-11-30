@@ -25,17 +25,6 @@ public class ObjectSpawnerByOdd : MonoBehaviour {
 	/// </summary>
 	private GameObject[] cleanObjects;
 
-    void Start()
-    {
-        if (!Director.Instance.canShowDialog)
-        {
-            if (Debug.isDebugBuild)
-                Director.Instance.ResetLevel();
-            else
-                Application.Quit();
-        }
-    }
-
 	void Update ()
 	{
 		//*User helper

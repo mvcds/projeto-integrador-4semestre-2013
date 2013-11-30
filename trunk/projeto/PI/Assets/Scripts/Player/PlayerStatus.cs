@@ -12,16 +12,16 @@ public class PlayerStatus : MonoBehaviour {
 	}
 	
 	public static PowerUp powerUp = PowerUp.Nada;
-	public static int vida = 3;
+	public static int vida;
 	public static int maxVida = 3;
 	public static int block = 0;
-	
-	public static float duration = 0;
+
+	public static float duration;
 	public static float maxDuration = 30;
 	
 	// Use this for initialization
 	void Start () {
-		reset ();
+		Reset();
 	}
 
 	// Update is called once per frame
@@ -91,7 +91,7 @@ public class PlayerStatus : MonoBehaviour {
 		if (powerUp == PowerUp.Porta)
 			gotDoor();*/
 		
-		duration = 30;
+		duration = maxDuration;
 	}
 	
 	// Caiu no Bueiro
@@ -107,17 +107,14 @@ public class PlayerStatus : MonoBehaviour {
 		Director.Instance.GameOver(false);
 	}
 	
-	private static void reset(){
-		vida = 3;
-		maxVida = 3;
-		block = 0;
-		powerUp = PowerUp.Nada;
-		
-		duration = 0;
-		maxDuration = 30;
+	private static void Reset()
+    {
+        vida = maxVida;
+        duration = maxDuration;
+        block = 0;
+        powerUp = PowerUp.Nada;
 		MainScript.gameVelocity = MainScript.minspeed;
 		MainScript.folego = MainScript.Maxfolego;
-		Director.Instance.GameRank.resetDucks();
 	}
 	
 	// HitAnimation

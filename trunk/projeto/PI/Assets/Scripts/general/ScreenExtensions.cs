@@ -30,6 +30,11 @@ public static class ScreenExtensions
 	{		
 		return ((int)variable * Screen.width) / 100;
 	}
+
+    public static float FitOnWidthF(this float variable)
+    {
+        return (variable * Screen.width) / 100;
+    }
 	
 	public static int FitOnHeight(this int variable)
 	{		
@@ -40,4 +45,9 @@ public static class ScreenExtensions
 	{		
 		return ((int)variable * Screen.height) / 100;
 	}
+
+    public static float FitOnHeightF(this float variable)
+    {
+        return (variable * Screen.height) / 100;
+    }
 }

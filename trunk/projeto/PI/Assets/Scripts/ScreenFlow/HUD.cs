@@ -12,9 +12,10 @@ public class HUD : MonoBehaviour {
 	
 	private Texture powerUpBarraPorta;
 	private Texture powerUpBarraBoia;
-	private Texture powerUpBarraCapivara;
-	private Texture powerUpFill;
-	private Texture powerUpFillRed;
+    private Texture powerUpBarraCapivara;
+    //TODO: get rid of it
+    private Texture powerUpFill,
+        powerUpFillRed;
     
     GUIStyle MyFont
     {
@@ -49,44 +50,39 @@ public class HUD : MonoBehaviour {
 	void OnGUI(){
 		if (!Director.Instance.isRunning)
 			return;
+
 			
-		//if (PlayerStatus.duration > 0)
-			//GUI.Box(new Rect(10, 10, 120, 25), "PowerUp: " + (int)(PlayerStatus.duration + 1) + " / " + PlayerStatus.maxDuration);
 		//GUI.Box(new Rect(Screen.width / 2 - 60, 10, 120, 25), "Velocidade: " + (int)MainScript.gameVelocity);
 		GUI.Box(new Rect(Screen.width - 250, Screen.height - 60, 200, 25), "Distancia Percorrida: " + (int) Director.Instance.GameRank.Distance);
-			
-		// Folego
-		if (MainScript.folego >= 1)
-			GUI.DrawTexture (new Rect (50 + 40, Screen.height * 0.912f, (MainScript.folego / MainScript.Maxfolego) * powerUpFill.width, powerUpFill.height), powerUpFill);
-		else 
-			GUI.DrawTexture (new Rect (50 + 40, Screen.height * 0.912f, (MainScript.folego / MainScript.Maxfolego) * powerUpFill.width, powerUpFill.height), powerUpFillRed);
-		drawImage(50, Screen.height * 0.9f, powerUpBarraBoia);
 		
+		//*Ducks
 		drawImage(0, Screen.height * 0.05f, duckBar);
-        //GUI.Label(new Rect(-280, Screen.height * 0.07f, 500, 50), "" + Director.Instance.GameRank.Ducks, myStyle);
-		GUI.Label(new Rect(-280, Screen.height * 0.065f, 500, 50), "" + Director.Instance.GameRank.Ducks, MyFont);
-		
+		GUI.Label(new Rect(-280, Screen.height * 0.065f, 500, 50), Director.Instance.GameRank.Ducks.ToString(), MyFont);
+		//*/
+
 		// PowerUp
 		if (PlayerStatus.powerUp != PlayerStatus.PowerUp.Nada){
 			
-			GUI.DrawTexture (new Rect (50 + 40, Screen.height * 0.812f, (PlayerStatus.duration / PlayerStatus.maxDuration) * powerUpFill.width, powerUpFill.height), powerUpFill);
+			GUI.DrawTexture (new Rect (50 + 40, Screen.height * 0.912f, (PlayerStatus.duration / PlayerStatus.maxDuration) * powerUpFill.width, powerUpFill.height), powerUpFill);
 			
-			//drawImage(50, Screen.height * 0.90f, powerUpFill);
+            //*
 			if (PlayerStatus.powerUp == PlayerStatus.PowerUp.Capivara)
-				drawImage(50, Screen.height * 0.80f, powerUpBarraCapivara);
+				drawImage(50, Screen.height * 0.90f, powerUpBarraCapivara);
 			
 			if (PlayerStatus.powerUp == PlayerStatus.PowerUp.Porta)
-				drawImage(50, Screen.height * 0.80f, powerUpBarraPorta);
+				drawImage(50, Screen.height * 0.90f, powerUpBarraPorta);
 			
 			if (PlayerStatus.powerUp == PlayerStatus.PowerUp.Boia)	
-				drawImage(50, Screen.height * 0.80f, powerUpBarraBoia);
+				drawImage(50, Screen.height * 0.90f, powerUpBarraBoia);
+            //*/
 		}
 		
-		// Life Bar
+		//* Life Bar
 		drawImage(Screen.width - (lifeBar.width), Screen.height * 0.05f, lifeBar);
 		drawHeart(1);
 		drawHeart(2);
-		drawHeart(3);		
+		drawHeart(3);	
+	    //*/
 	}
 		
 	void drawHeart(int position){

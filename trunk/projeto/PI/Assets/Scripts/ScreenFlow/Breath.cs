@@ -11,12 +11,14 @@ public class Breath : MonoBehaviour {
     [SerializeField]
     private Rect placeAndSize = new Rect(0, 0, 100, 100),
         _adjust = new Rect(0, 0, 0, 0);
+    [SerializeField]
+    float _red = 1;
 
     private Texture2D Bar
     {
         get
         {
-            if (MainScript.folego >= 1)
+            if (MainScript.folego >= _red)
                 return _full;
             return _reserve;
         }
@@ -46,7 +48,6 @@ public class Breath : MonoBehaviour {
             Draw();
     }
 
-    Rect test;
     protected virtual void Draw()
     {
         Rect bg, r, a;
@@ -61,8 +62,6 @@ public class Breath : MonoBehaviour {
                 (r.y + a.y).FitOnHeightF(),
                 (r.width + a.width).FitOnWidthF() * (MainScript.folego / MainScript.Maxfolego),
                 (r.height + a.height).FitOnHeightF());
-
-        test = r;
 
         GUI.DrawTexture(r, Bar);
         GUI.DrawTexture(bg, _background);

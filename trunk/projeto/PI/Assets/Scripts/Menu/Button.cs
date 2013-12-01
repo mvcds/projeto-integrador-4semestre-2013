@@ -23,20 +23,34 @@ abstract public class Button : MonoBehaviour {
 	
 	void Start()
 	{
-		time = DateTime.Now;
-		_style.normal.background = inactived;
-		_style.hover.background = hover;
-		_style.active.background = actived;
+        Init();
 	}
+
+    protected void Init()
+    {
+        time = DateTime.Now;
+
+        if (_style == null)
+            _style = new GUIStyle();
+
+        _style.normal.background = inactived;
+        _style.hover.background = hover;
+        _style.active.background = actived;
+    }
 	
 	void Update()
 	{
+        Fix();
+	}
+
+    protected void Fix()
+    {
         place_size.x = place_size.x.FixForHundred();
         place_size.y = place_size.y.FixForHundred();
         place_size.width = place_size.width.FixForHundred();
         place_size.height = place_size.height.FixForHundred();
-	}
-	
+    }
+    
 	private void PlaySound(AudioSource s, bool once = false){		
 		
 		if (once)
@@ -83,18 +97,21 @@ abstract public class Button : MonoBehaviour {
 		
 	void OnGUI()
 	{
-		if (show)
-		{
-            Rect r = new Rect(place_size.x.FitOnWidth(), place_size.y.FitOnHeight(),
+        if (show)
+            Draw();
+    }
+
+    protected virtual void Draw()
+    {
+        Rect r = new Rect(place_size.x.FitOnWidth(), place_size.y.FitOnHeight(),
                 place_size.width.FitOnWidth(), place_size.height.FitOnHeight());
-            
-			if (r.Contains(new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y)))
-				PlaySound(hover_sound, true);
-			else if (_lastButton.Contains(name + "."))
-				PlaySound(null);
-			
-			if (GUI.Button(r, _shown_image, _style))
-				Action();
-		}
-	}
+
+        if (r.Contains(new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y)))
+            PlaySound(hover_sound, true);
+        else if (_lastButton.Contains(name + "."))
+            PlaySound(null);
+
+        if (GUI.Button(r, _shown_image, _style))
+            Action();
+    }
 }

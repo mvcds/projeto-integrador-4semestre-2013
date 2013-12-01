@@ -65,9 +65,15 @@ public class Menu : MonoBehaviour {
     	
 	void OnGUI()
     {
-		GUI.depth = 0;
-		if (!canShow)
-			return;
+        if (!canShow)
+            return;
+
+        ShowAtGUI();
+	}
+
+    protected virtual void ShowAtGUI()
+    {
+        GUI.depth = 0;
 
         if (_bgMenu != null)
         {
@@ -76,7 +82,7 @@ public class Menu : MonoBehaviour {
         }
 
         Show();
-	}
+    }
 
     public void SetAble(bool able = true)
     {

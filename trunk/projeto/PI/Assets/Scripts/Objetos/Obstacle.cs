@@ -17,7 +17,7 @@ public class Obstacle : MonoBehaviour {
 	void Update()
 	{
 		GameObject player = GameObject.Find("Player");
-		
+		/*
 		if (gameObject.name.Equals("Cachorro"))
 		{
 			// Cachorro
@@ -25,8 +25,9 @@ public class Obstacle : MonoBehaviour {
 				if (som){
 					AudioProx.playCachorro();
 					som = false;
-				} else {
-					AudioProx.setVolumeCachorro((1 - (Vector3.Distance( transform.position, player.transform.position) / 20)) * volume);
+				} 
+				else {
+					AudioProx.setVolumeCachorro(((1 - (Vector3.Distance( transform.position, player.transform.position) / 20)) * volume)/3);
 				}
 			}
 			
@@ -37,9 +38,9 @@ public class Obstacle : MonoBehaviour {
 				if (som){
 					AudioProx.playCaminhao();
 					som = false;
-				} else {
-					//print ("Volume: " + ((1 - (Vector3.Distance( transform.position, player.transform.position) / 20)) * volume));
-					AudioProx.setVolumeCaminhao((1 - (Vector3.Distance( transform.position, player.transform.position) / 20)) * volume);
+				} 
+				else {
+					AudioProx.setVolumeCaminhao(((1 - (Vector3.Distance( transform.position, player.transform.position) / 20)) * volume)/3);
 				}
 			}
 			
@@ -50,8 +51,9 @@ public class Obstacle : MonoBehaviour {
 				if (som){
 					AudioProx.playCarro1();
 					som = false;
-				} else {
-					AudioProx.setVolumeCarro1((1 - (Vector3.Distance( transform.position, player.transform.position) / 20)) * volume);
+				} 
+				else {
+					AudioProx.setVolumeCarro1(((1 - (Vector3.Distance( transform.position, player.transform.position) / 20)) * volume)/3);
 				}
 			}
 			
@@ -62,8 +64,9 @@ public class Obstacle : MonoBehaviour {
 				if (som){
 					AudioProx.playCarro2();
 					som = false;
-				} else {
-					AudioProx.setVolumeCarro2((1 - (Vector3.Distance( transform.position, player.transform.position) / 20)) * volume);
+				} 
+				else {
+					AudioProx.setVolumeCarro2(((1 - (Vector3.Distance( transform.position, player.transform.position) / 20)) * volume)/3);
 				}
 			}
 			
@@ -75,10 +78,10 @@ public class Obstacle : MonoBehaviour {
 					AudioProx.playPortao();
 					som = false;
 				} else {
-					AudioProx.setVolumePortao((1 - (Vector3.Distance( transform.position, player.transform.position) / 20)) * volume);
+					AudioProx.setVolumePortao(((1 - (Vector3.Distance( transform.position, player.transform.position) / 20)) * volume)/3);
 				}
 			}
-		}
+		}*/
 	}
 	//*/
 }

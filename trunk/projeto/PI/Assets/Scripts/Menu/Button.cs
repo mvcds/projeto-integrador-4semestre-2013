@@ -105,12 +105,12 @@ abstract public class Button : MonoBehaviour {
     {
         Rect r = new Rect(place_size.x.FitOnWidth(), place_size.y.FitOnHeight(),
                 place_size.width.FitOnWidth(), place_size.height.FitOnHeight());
-
+		/*
         if (r.Contains(new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y)))
             PlaySound(hover_sound, true);
         else if (_lastButton.Contains(name + "."))
             PlaySound(null);
-
+		 */
         if (GUI.Button(r, _shown_image, _style))
             Action();
     }

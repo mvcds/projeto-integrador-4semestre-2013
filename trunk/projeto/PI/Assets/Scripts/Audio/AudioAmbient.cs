@@ -27,7 +27,7 @@ public class AudioAmbient : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		player.volume = 0.3f;
+		player.volume = 0.25f;
 		escolheu = false;
 		trovao = true;
 		chuva = false;
@@ -43,7 +43,7 @@ public class AudioAmbient : MonoBehaviour {
 			player.volume = 0.01f;
 		}
 		else{
-			player.volume = 0.3f;
+			player.volume = 0.25f;
 		}
 		
 		//Precisa estar dentro da condicional abaixo senão nun vai tocar nada

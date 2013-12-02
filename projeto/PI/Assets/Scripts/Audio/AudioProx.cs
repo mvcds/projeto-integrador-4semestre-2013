@@ -65,26 +65,56 @@ public class AudioProx: MonoBehaviour {
 	// Volumes
 	public static void setVolumeCachorro(float vol)
 	{
+		if(Director.Instance.isRunning){
+			
 		sources[1].volume = vol;
+		}
+		else{
+			sources[1].volume = 0.01f;
+		}
 	}
 	
 	public static void setVolumeCaminhao(float vol)
 	{
+		if(Director.Instance.isRunning){
+			
 		sources[2].volume = vol;
+		}
+		else{
+			sources[2].volume = 0.01f;
+		}
 	}
 	
 	public static void setVolumeCarro1(float vol)
 	{
+		if(Director.Instance.isRunning){
+			
 		sources[3].volume = vol;
+		}
+		else{
+			sources[3].volume = 0.01f;
+		}
 	}
 	
 	public static void setVolumeCarro2(float vol)
 	{
+		if(Director.Instance.isRunning){
+			
 		sources[4].volume = vol;
+		}
+		else{
+			sources[4].volume = 0.01f;
+		}
 	}
 	
 	public static void setVolumePortao(float vol)
 	{
+		if(Director.Instance.isRunning){
+			
 		sources[0].volume = vol;
+		}
+		else{
+			sources[0].volume = 0.01f;
+		}
 	}
 }

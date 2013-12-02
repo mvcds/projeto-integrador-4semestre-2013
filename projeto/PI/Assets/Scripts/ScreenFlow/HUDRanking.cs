@@ -14,6 +14,8 @@ public class HUDRanking : MonoBehaviour {
     private List<RankPosition> ranks;
 	
 	private string title = "RANKING";
+    [SerializeField]
+    string _fase;
 	
 	GUIStyle MyFont
     {
@@ -27,19 +29,21 @@ public class HUDRanking : MonoBehaviour {
 			return myStyle;
         }
     }
-	
-	//Temporário
-	void Start () 
+
+    void Update()
     {
-        ranks = Director.Instance.RankInLevel(Director.RankType.Distance);
-	}
+        ranks = Director.Instance.RecoverRankInLevel(Director.RankType.Duck);
+    }
 	
 	void OnGUI()
     {
         if (ranks == null)
             return;
 
-		GUI.Box(new Rect(x + ((boxWidth - boxWidth * 0.75f) / 2), y + (paddingY * -2), boxWidth * 0.75f, boxHeight), title, MyFont);
+        if (!Director.Instance.isShowingRank)
+            return;
+
+		GUI.Box(new Rect(x + ((boxWidth - boxWidth * 0.75f) / 2), y + (paddingY * -2), boxWidth * 0.75f, boxHeight), title + " " + _fase, MyFont);
 
         //TODO: nome?
         for(int i = 0; i < ranks.Count; i++)
@@ -48,5 +52,8 @@ public class HUDRanking : MonoBehaviour {
             string text = "#" + (i+1) + " " + ranks[i].Profile + " Ducks: " + rank.Ducks + " Distance: " + rank.Distance;
             GUI.Box(new Rect(x, y + (paddingY * i), boxWidth, boxHeight), text, MyFont);
         }
+
+        if (Input.GetKey(KeyCode.Escape))
+            Director.Instance.HideRank();
 	}
 }

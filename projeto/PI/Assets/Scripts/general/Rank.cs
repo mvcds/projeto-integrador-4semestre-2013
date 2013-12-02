@@ -26,7 +26,19 @@ public class Rank {
         set;
     }
 	
-    //TODO: Near Missings?
+    public float ValueBy(Director.RankType type)
+    {
+        switch (type)
+        {
+            case  Director.RankType.Duck:
+                return Ducks;
+            case Director.RankType.Distance:
+                return Distance;
+            case Director.RankType.Average:
+                return (Distance * 3 + Ducks)/4;
+        }
+        throw new System.Exception("Type not declared");
+    }
 }
 
 public class RankPosition
@@ -55,4 +67,5 @@ public class RankPosition
         get;
         private set;
     }
+
 }

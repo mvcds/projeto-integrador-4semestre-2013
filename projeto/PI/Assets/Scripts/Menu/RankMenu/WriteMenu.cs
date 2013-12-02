@@ -23,7 +23,7 @@ public class WriteMenu : Menu {
     {
         get
         {
-            return base.canShow;
+            return Director.Instance.isWriting;
         }
     }
 

@@ -99,25 +99,27 @@ public class SpeachEvent : MonoBehaviour {
             if (GUI.Button(left, _voidImage, _styleLeft))
 				Backward();
 		}
-		
+		 
 		if (_current < pages.Length - 1)
 		{
             if (GUI.Button(right, _voidImage, _styleRight))
 				Forward();
 		}
+		/*
 		else if (pages.Length > 0)
 		{
             canSkip = false;
             if (GUI.Button(right, _voidImage, _styleEnd))
 				Action();
-		}
-
-
-        if (canSkip || hasWon)
+		}*/
+		
+		//*
+        if (canSkip || hasWon || _current == pages.Length - 1)
         {
             if (GUI.Button(skip, _voidImage, _styleEnd))
                 Action();
         }
+		//*/
 	}
 
     private bool hasWon

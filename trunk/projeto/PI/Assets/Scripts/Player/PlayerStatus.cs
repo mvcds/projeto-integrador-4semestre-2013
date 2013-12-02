@@ -51,7 +51,6 @@ public class PlayerStatus : MonoBehaviour {
 				
 				powerUp = PowerUp.Nada;
 				duration = 0;
-				
 			}
 		} else {
 			vida--;
@@ -102,8 +101,6 @@ public class PlayerStatus : MonoBehaviour {
 	
 	// GameOver
 	private static void gameOver(){
-		//reset();
-        //Director.Instance.ResetLevel();
 		Director.Instance.GameOver(false);
 	}
 	

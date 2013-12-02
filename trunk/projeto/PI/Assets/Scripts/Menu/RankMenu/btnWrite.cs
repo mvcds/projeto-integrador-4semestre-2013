@@ -19,6 +19,8 @@ public class btnWrite : Button
     protected override void Action()
     {
         base.Action();
+        Director.Instance.WriteRank(btnLetra.Profile, Director.Instance.GameRank);
+        _myMenu.SetAble(false);
     }
     
     void Update()
@@ -32,7 +34,7 @@ public class btnWrite : Button
                 if (_myMenu.buttons.Length == WriteMenu.LETTERS + WriteMenu.EXTRA)
                 {
                     _myMenu.buttons[_myMenu.buttons.Length - 1] = this;
-                    _myMenu = null;
+                    //_myMenu = null;
                 }
             }
         }

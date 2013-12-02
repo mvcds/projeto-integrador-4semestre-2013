@@ -114,6 +114,7 @@ public class Director
         Run,
         Pause,
         RankWrite,
+        ShowingRank,
         Victory,
         GameOver,
         Exiting,
@@ -217,6 +218,14 @@ public class Director
         }
     }
 
+    public bool isShowingRank
+    {
+        get
+        {
+            return (_status == GameStatus.ShowingRank);
+        }
+    }
+
     public bool canShowDialog
     {
         get
@@ -245,16 +254,39 @@ public class Director
 
     public void GameOver(bool victory)
     {
+        bool write = false;
+        newPosition = new Dictionary<RankType, int>();
+        
+        foreach (RankType type in Types)
+        {
+            if (!newPosition.ContainsKey(type))
+                newPosition.Add(type, GetNewPosition(type, GameRank));
+
+            if (newPosition[type] < RANK_LIMIT)
+                write = true;
+        }
+        
         if (victory)
         {
-            SetWin();
-            _status = GameStatus.Ending;
+            WinLevelAsFirstTime();
+            KeepVictoryAfterWrite(write, GameStatus.Ending);
         }
         else
-            _status = GameStatus.GameOver;
+            KeepVictoryAfterWrite(write, GameStatus.GameOver);
     }
 
-    public void SetWin()
+    private void KeepVictoryAfterWrite(bool writing, GameStatus status)
+    {
+        if (writing)
+        {
+            _seeingRank = status;
+            _status = GameStatus.RankWrite;
+        }
+        else
+            _status = status;
+    }
+
+    public void WinLevelAsFirstTime()
     {
         string level = Application.loadedLevelName;
         if (!unblockedLevels.ContainsKey(level))
@@ -313,7 +345,7 @@ public class Director
         Distance
         ,Average
     }
-
+    
     private void DefaultTypes(ref List<RankType> types)
     {
         types.Add(RankType.Duck);
@@ -321,16 +353,17 @@ public class Director
     }
 
     public List<RankType> Types = new List<RankType>();
-    private Dictionary<RankType, List<RankPosition>> _rankByType = new Dictionary<RankType, List<RankPosition>>();
-    	
-	public List<RankPosition> RankInLevel(RankType type)
+    private Dictionary<RankType, List<RankPosition>> RankByType = new Dictionary<RankType, List<RankPosition>>();
+    private Dictionary<RankType, int> newPosition;
+
+	public List<RankPosition> RecoverRankInLevel(RankType type)
 	{
 		string level = Application.loadedLevelName;
 		List<RankPosition> result = new List<RankPosition>();
 
-        FixRank(ref _rankByType);
+        FixRank(ref RankByType);
 
-		foreach(RankPosition p in _rankByType[type])
+		foreach(RankPosition p in RankByType[type])
 		{
 			if (p.Level == level || p.Level == null)
 			{
@@ -383,7 +416,6 @@ public class Director
         }
         //*/
 
-
 		//*Size
         foreach (RankType type in Types)
 			list[type] = list[type].Take(RANK_LIMIT).ToList();
@@ -408,7 +440,47 @@ public class Director
 		//*/
 	}
 	//*/
-    
+
+    private GameStatus _seeingRank = GameStatus.None;
+
+    public void ShowRank()
+    {
+        _seeingRank = _status;
+        _status = GameStatus.ShowingRank;
+    }
+
+    public void HideRank()
+    {
+        _status = _seeingRank;
+        _seeingRank = GameStatus.None;
+    }
+
+    public void WriteRank(string profile, Rank newRank)
+    {
+        foreach (RankType type in newPosition.Keys)
+        {
+            RankPosition position = new RankPosition(profile, newRank, Application.loadedLevelName);
+            
+            RankByType[type].Add(position);
+            Debug.Log(type.ToString() + ": #" + (newPosition[type] + 1) + " " + newRank.ValueBy(type));
+        }
+        _status = GameStatus.ShowingRank;
+    }
+
+    public int GetNewPosition(RankType type, Rank newRank)
+    {
+        int i;
+        for (i = 0; i < RANK_LIMIT; i++)
+        {
+            Rank rank = RankByType[type][i].Ranking;
+
+            if (newRank.ValueBy(type) > rank.ValueBy(type))
+                return i;
+        }
+
+        return i;
+    }
+        
     #endregion
 
     #region Achiv

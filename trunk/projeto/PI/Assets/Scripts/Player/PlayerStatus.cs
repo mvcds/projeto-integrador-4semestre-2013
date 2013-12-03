@@ -19,6 +19,9 @@ public class PlayerStatus : MonoBehaviour {
 	public static float duration;
 	public static float maxDuration = 30;
 	
+	private static float invunerable = 0;
+	private static float invunerableTime = 2;
+	
 	// Use this for initialization
 	void Start () {
 		Reset();
@@ -26,6 +29,20 @@ public class PlayerStatus : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		
+		
+		GameObject playerMesh = GameObject.Find("PlayerMesh");
+		if (playerMesh != null){
+			if (invunerable > 0){
+				GameObject.Find("PlayerMesh").renderer.enabled = !GameObject.Find("PlayerMesh").renderer.enabled;
+			} else {
+				GameObject.Find("PlayerMesh").renderer.enabled = true;
+			}
+		}
+		
+		invunerable -= Time.deltaTime;
+		print (""+ invunerable);
+		
 		if (duration > 0){
 			duration -= Time.deltaTime;
 			
@@ -42,6 +59,7 @@ public class PlayerStatus : MonoBehaviour {
 	
 	// Acertado por um obstáculo
 	public static void gotHit(){
+		
 		if (block > 0){
 			block --;
 			if (block == 0){
@@ -53,12 +71,16 @@ public class PlayerStatus : MonoBehaviour {
 				duration = 0;
 			}
 		} else {
-			vida--;
-			if (vida < 1){
-				gameOver();
-			} else {
-				hitAnimation();
-			}
+			
+			if (invunerable < 0){
+				vida--;
+				invunerable = invunerableTime;
+				if (vida < 1){
+					gameOver();
+				} else {
+					hitAnimation();
+				}
+			} 
 		}
 	}
 
@@ -78,10 +100,10 @@ public class PlayerStatus : MonoBehaviour {
 		powerUp = gotten;
 		
 		// Blocks
-		if (powerUp == PowerUp.Boia || powerUp == PowerUp.Porta || powerUp == PowerUp.Capivara){
+		if (powerUp == PowerUp.Boia || powerUp == PowerUp.Capivara){
 			block = 1;
-		} else if (powerUp == PowerUp.Geladeira) {
-			block = 2;
+		} else if (powerUp == PowerUp.Porta) {
+			block = 3;
 		} else {
 			block = 0;
 		}

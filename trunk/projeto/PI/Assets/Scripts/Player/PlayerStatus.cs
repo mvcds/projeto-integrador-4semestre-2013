@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 	
 public class PlayerStatus : MonoBehaviour {
-
+		
 	public enum PowerUp {
 		Nada = -1,
 		Boia,
@@ -29,7 +29,6 @@ public class PlayerStatus : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		
 		
 		GameObject playerMesh = GameObject.Find("PlayerMesh");
 		if (playerMesh != null){
@@ -58,11 +57,13 @@ public class PlayerStatus : MonoBehaviour {
 	}
 	
 	// Acertado por um obstáculo
-	public static void gotHit(){
-		
-		if (block > 0){
+	public static void gotHit()
+	{
+		if (block > 0)
+		{
 			block --;
-			if (block == 0){
+			if (block == 0)
+			{
 				
 				if (powerUp == PowerUp.Boia)
 					MainScript.gameVelocity *= MainScript.floatSpeed;
@@ -72,15 +73,18 @@ public class PlayerStatus : MonoBehaviour {
 			}
 		} else {
 			
-			if (invunerable < 0){
+			if (invunerable < 0)
+			{
 				vida--;
 				invunerable = invunerableTime;
-				if (vida < 1){
+				if (vida < 0){
 					gameOver();
 				} else {
 					hitAnimation();
 				}
-			} 
+			}
+			else
+				invunerable += invunerable * 0.25f;
 		}
 	}
 
@@ -107,11 +111,7 @@ public class PlayerStatus : MonoBehaviour {
 		} else {
 			block = 0;
 		}
-		
-		/*
-		if (powerUp == PowerUp.Porta)
-			gotDoor();*/
-		
+				
 		duration = maxDuration;
 	}
 	
@@ -130,6 +130,7 @@ public class PlayerStatus : MonoBehaviour {
     {
         vida = maxVida;
         duration = maxDuration;
+		invunerable = 0;
         block = 0;
         powerUp = PowerUp.Nada;
 		MainScript.gameVelocity = MainScript.minspeed;

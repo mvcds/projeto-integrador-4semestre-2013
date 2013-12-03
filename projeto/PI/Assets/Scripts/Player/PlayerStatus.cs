@@ -22,6 +22,9 @@ public class PlayerStatus : MonoBehaviour {
 	private static float invunerable = 0;
 	private static float invunerableTime = 2;
 	
+	private static float gameOverDelay = 2;
+	public static bool gameOverBool = false;
+	
 	// Use this for initialization
 	void Start () {
 		Reset();
@@ -29,6 +32,18 @@ public class PlayerStatus : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		
+		if (gameOverBool)
+		{
+			if (gameOverDelay < 0)
+			{
+				MainScript.gameVelocity = MainScript.minspeed;
+				gameOverBool = false;
+				gameOver();
+			} else {
+				gameOverDelay -= Time.deltaTime;
+			}
+		}
 		
 		GameObject playerMesh = GameObject.Find("PlayerMesh");
 		if (playerMesh != null){
@@ -77,8 +92,10 @@ public class PlayerStatus : MonoBehaviour {
 			{
 				vida--;
 				invunerable = invunerableTime;
-				if (vida < 0){
-					gameOver();
+				if (vida < 1){
+					gameOverBool = true;
+					MainScript.gameVelocity = 0;
+					gameOverDelay = 2;
 				} else {
 					hitAnimation();
 				}
@@ -136,6 +153,7 @@ public class PlayerStatus : MonoBehaviour {
 		MainScript.gameVelocity = MainScript.minspeed;
 		MainScript.folego = MainScript.Maxfolego;
 		invunerable = 0;
+		gameOverDelay = 2;
 	}
 	
 	// HitAnimation

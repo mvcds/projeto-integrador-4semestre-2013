@@ -164,7 +164,7 @@ public class PlayerM : MonoBehaviour {
     }
     	
 	private void dive(){	
-		if (!diving && divingDelay > 1.0f && MainScript.folego >= 1 && PlayerStatus.powerUp != PlayerStatus.PowerUp.Boia){
+		if (!diving && divingDelay > 1.0f && MainScript.folego >= 1 && PlayerStatus.powerUp != PlayerStatus.PowerUp.Boia && PlayerStatus.powerUp != PlayerStatus.PowerUp.Porta){
 			
 			rigidbody.AddForce(Vector3.down * diveForce);
 			diving = true;

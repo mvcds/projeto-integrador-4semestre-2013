@@ -131,7 +131,7 @@ public class Director
 
     private DateTime gameStart;
     GameStatus _status = GameStatus.None;
-    public const string DEFAULT_LEVEL_NAME = "FaseTeste1";
+    public const string DEFAULT_LEVEL_NAME = "FASE-1-FECHADA";
 
     public void LoadLevel(string level)
     {

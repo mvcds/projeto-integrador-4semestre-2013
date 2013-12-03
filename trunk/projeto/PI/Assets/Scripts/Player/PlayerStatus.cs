@@ -130,11 +130,12 @@ public class PlayerStatus : MonoBehaviour {
     {
         vida = maxVida;
         duration = maxDuration;
-		invunerable = 0;
-        block = 0;
+		
+		block = 0;
         powerUp = PowerUp.Nada;
 		MainScript.gameVelocity = MainScript.minspeed;
 		MainScript.folego = MainScript.Maxfolego;
+		invunerable = 0;
 	}
 	
 	// HitAnimation

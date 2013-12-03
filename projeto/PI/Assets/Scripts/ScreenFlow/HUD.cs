@@ -13,6 +13,7 @@ public class HUD : MonoBehaviour {
 	private Texture powerUpBarraPorta;
 	private Texture powerUpBarraBoia;
 	private Texture powerUpBarraCapivara;
+	private Texture powerUpBarraFolego;
 	private Texture powerUpFill;
 	private Texture powerUpFillRed;
     
@@ -41,6 +42,7 @@ public class HUD : MonoBehaviour {
 		
 		powerUpBarraBoia = (Texture)Resources.Load("Images/HUD/LifeBar/BarraBoia");
 		powerUpBarraCapivara = (Texture)Resources.Load("Images/HUD/LifeBar/BarraCapivara");
+		powerUpBarraFolego = (Texture)Resources.Load("Images/HUD/LifeBar/BarraFolego");
 		powerUpBarraPorta = (Texture)Resources.Load("Images/HUD/LifeBar/BarraPorta");
 		powerUpFill = (Texture)Resources.Load("Images/HUD/LifeBar/greenBar");
 		powerUpFillRed = (Texture)Resources.Load("Images/HUD/LifeBar/redBar");
@@ -57,10 +59,10 @@ public class HUD : MonoBehaviour {
 			
 		// Folego
 		if (MainScript.folego >= 1)
-			GUI.DrawTexture (new Rect (50 + 40, Screen.height * 0.912f, (MainScript.folego / MainScript.Maxfolego) * powerUpFill.width, powerUpFill.height), powerUpFill);
+			GUI.DrawTexture (new Rect (50 + 40, Screen.height * 0.912f + 5, (MainScript.folego / MainScript.Maxfolego) * powerUpFill.width - 32, powerUpFill.height + 4.5f), powerUpFill);
 		else 
-			GUI.DrawTexture (new Rect (50 + 40, Screen.height * 0.912f, (MainScript.folego / MainScript.Maxfolego) * powerUpFill.width, powerUpFill.height), powerUpFillRed);
-		drawImage(50, Screen.height * 0.9f, powerUpBarraBoia);
+			GUI.DrawTexture (new Rect (50 + 40, Screen.height * 0.912f + 5, (MainScript.folego / MainScript.Maxfolego) * powerUpFill.width - 32, powerUpFill.height + 4.5f), powerUpFillRed);
+		drawImage(50, Screen.height * 0.90f, powerUpBarraFolego);
 		
 		drawImage(0, Screen.height * 0.05f, duckBar);
         //GUI.Label(new Rect(-280, Screen.height * 0.07f, 500, 50), "" + Director.Instance.GameRank.Ducks, myStyle);

@@ -22,7 +22,7 @@ public class btnContinuar : Button {
             }
             catch
             {
-                Director.Instance.LoadLevel("2-Menu");
+                Director.Instance.LoadLevel("0-Credito");
             }
             //*/
         }

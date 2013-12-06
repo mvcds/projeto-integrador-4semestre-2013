@@ -55,7 +55,6 @@ public class PlayerStatus : MonoBehaviour {
 		}
 		
 		invunerable -= Time.deltaTime;
-		print (""+ invunerable);
 		
 		if (duration > 0){
 			duration -= Time.deltaTime;

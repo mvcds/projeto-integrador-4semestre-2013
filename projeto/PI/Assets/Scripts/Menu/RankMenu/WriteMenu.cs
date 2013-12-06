@@ -29,8 +29,7 @@ public class WriteMenu : Menu {
     {
         get
         {
-            return true;
-			//return Director.Instance.isWriting;
+            return Director.Instance.isWriting;
         }
     }
 

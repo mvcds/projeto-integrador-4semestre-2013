@@ -30,7 +30,7 @@ public class BlocksMovement : MonoBehaviour {
 	
 	void FixedUpdate () {
 		
-		if (!Director.Instance.isRunning)
+		if (!Director.Instance.isRunning || PlayerStatus.hasGameOverHappend)
 			return;
 		
 		if (PlayerStatus.powerUp == PlayerStatus.PowerUp.Boia){

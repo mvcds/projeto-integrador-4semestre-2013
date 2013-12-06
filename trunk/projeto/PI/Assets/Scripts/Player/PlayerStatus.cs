@@ -23,7 +23,10 @@ public class PlayerStatus : MonoBehaviour {
 	private static float invunerableTime = 2;
 	
 	private static float gameOverDelay = 2;
-	public static bool gameOverBool = false;
+	
+	public static bool hasGameOverHappend {get; private set;}
+	
+	public static bool BadGameOver {get; private set;}
 	
 	// Use this for initialization
 	void Start () {
@@ -32,17 +35,15 @@ public class PlayerStatus : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		
-		if (gameOverBool)
+				
+		if (hasGameOverHappend && Director.Instance.isRunning)
 		{
 			if (gameOverDelay < 0)
 			{
-				MainScript.gameVelocity = MainScript.minspeed;
-				gameOverBool = false;
-				gameOver();
-			} else {
-				gameOverDelay -= Time.deltaTime;
+				Director.Instance.GameOver(!BadGameOver);
 			}
+			
+			gameOverDelay -= Time.deltaTime;
 		}
 		
 		GameObject playerMesh = GameObject.Find("PlayerMesh");
@@ -92,9 +93,7 @@ public class PlayerStatus : MonoBehaviour {
 				vida--;
 				invunerable = invunerableTime;
 				if (vida < 1){
-					gameOverBool = true;
-					MainScript.gameVelocity = 0;
-					gameOverDelay = 2;
+					EndGame(true);
 				} else {
 					hitAnimation();
 				}
@@ -144,6 +143,8 @@ public class PlayerStatus : MonoBehaviour {
 	
 	private static void Reset()
     {
+		BadGameOver = true;
+		hasGameOverHappend = false;
         vida = maxVida;
         duration = maxDuration;
 		
@@ -158,5 +159,15 @@ public class PlayerStatus : MonoBehaviour {
 	// HitAnimation
 	private static void hitAnimation(){
 		
+	}
+	
+	public static void EndGame(bool bad)
+	{		
+		BadGameOver = bad;
+		gameOverDelay = 2;
+		hasGameOverHappend = true;
+		
+		if (bad)
+			MainScript.gameVelocity = 0;
 	}
 }

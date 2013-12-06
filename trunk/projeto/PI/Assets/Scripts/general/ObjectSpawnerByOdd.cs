@@ -33,6 +33,10 @@ public class ObjectSpawnerByOdd : MonoBehaviour {
 
 	void Update ()
 	{
+		
+		if (PlayerStatus.hasGameOverHappend)
+			return;
+			
 		//*User helper
 		OddTotal = SumUp(Odds);
 		OddToHundred = 100 - OddTotal;

@@ -16,7 +16,7 @@ public class DogMovement : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate ()
 	{
-        if (!Director.Instance.isRunning)
+        if (!Director.Instance.isRunning || PlayerStatus.hasGameOverHappend)
             return;
 
 		if (transform.position.x > 4){

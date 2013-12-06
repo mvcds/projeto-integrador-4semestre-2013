@@ -38,8 +38,6 @@ public class Victory : MonoBehaviour {
 				break;
 			}
 		}
-		
-		print ("" + conditions[duckMissionIndex].value);
     }
 
     void Update()
@@ -51,7 +49,7 @@ public class Victory : MonoBehaviour {
             return;
 
         if (conditions.Where(p => !p.hasWon).Count() == 0)
-            Director.Instance.GameOver(true);
+			PlayerStatus.EndGame(false);
     }
 
     void Validate()

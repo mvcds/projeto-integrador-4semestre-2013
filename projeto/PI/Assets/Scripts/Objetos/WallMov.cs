@@ -21,7 +21,9 @@ public class WallMov : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-				
+		//if (PlayerStatus.hasGameOverHappend)
+			//return;
+		
 		if (rightCurrentBlock.transform.position.z < -10){
 			
 			Destroy(rightCurrentBlock);

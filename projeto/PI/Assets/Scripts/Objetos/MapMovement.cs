@@ -29,7 +29,7 @@ public class MapMovement : MonoBehaviour {
 	//TODO: tem como jogar esse movimento como os outros?
 	void FixedUpdate () {
 		
-		if (!Director.Instance.isRunning)
+		if (!Director.Instance.isRunning|| PlayerStatus.hasGameOverHappend)
 			return;
 		
 		if (PlayerStatus.powerUp == PlayerStatus.PowerUp.Boia){

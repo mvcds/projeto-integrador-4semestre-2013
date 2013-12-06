@@ -73,7 +73,7 @@ public class PlayerM : MonoBehaviour {
 		
 		folego();
 		
-        if (!Director.Instance.isRunning || PlayerStatus.gameOverBool)
+        if (!Director.Instance.isRunning || PlayerStatus.hasGameOverHappend)
             return;
         else if (!startedTime)
         {

@@ -20,12 +20,12 @@ public class UpArrow : MonoBehaviour {
         time = _times - 1;
 	}
 	
-	void Update () {
+	void FixedUpdate () {
         if (_y != null)
         {
             Show(ref _y);
 
-            if (Input.GetKey(KeyCode.UpArrow) && _destructionByJumping)
+            if ((Input.GetKey(KeyCode.UpArrow) && _destructionByJumping) || PlayerStatus.hasGameOverHappend)
                 End();
         }
 	}

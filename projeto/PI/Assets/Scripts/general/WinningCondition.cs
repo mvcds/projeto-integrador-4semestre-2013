@@ -92,7 +92,7 @@ public class WinningCondition : MonoBehaviour {
         }
     }
 
-    float getUnitValue
+    public float getUnitValue
     {
         get
         {

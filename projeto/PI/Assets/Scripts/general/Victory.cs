@@ -21,6 +21,45 @@ public class Victory : MonoBehaviour {
 	private Texture powerUpBarraFolego;
 	
 	private int duckMissionIndex = 0;
+	private int? _backNumberIndex = null;
+	private Texture2D fundoVerde, fundoVermelho;
+		
+	GUIStyle MyFont
+    {
+        get
+        {
+            GUIStyle myStyle = new GUIStyle();
+            myStyle.font = font;
+			if (Difference > 10)
+			{
+            	myStyle.normal.textColor = Color.black;
+			myStyle.normal.background = fundoVerde;
+			}
+			else				
+			{
+            	myStyle.normal.textColor = Color.white;
+				myStyle.normal.background = fundoVermelho;
+			}
+            myStyle.alignment = TextAnchor.MiddleCenter;
+            myStyle.fontSize = 20;
+
+            return myStyle;
+        }
+    }	
+	
+	int Difference
+	{
+		get
+		{	
+			if (_backNumberIndex == null)
+				return -1;
+			
+			int total = (int) conditions[(int)_backNumberIndex].value;
+			int atual = (int) conditions[(int)_backNumberIndex].getUnitValue;
+			
+			return (total - atual);
+		}
+	}
 
     void Start()
     {
@@ -29,13 +68,21 @@ public class Victory : MonoBehaviour {
 		
 		powerUpFill = (Texture)Resources.Load("Images/HUD/BarraObjetivo");
 		powerUpBarraFolego = (Texture)Resources.Load("Images/HUD/BordaObjetivo");
+		fundoVerde = (Texture2D)Resources.Load("Images/Menu/ranking/btn_generico");
+		fundoVermelho = (Texture2D)Resources.Load("Images/Menu/ranking/btn_genericoVermelho");
 		
 		for (int i = 0; i < conditions.Length; i++)
 		{
-			if (conditions[i].unit == WinningCondition.Unit.Duck)
+			switch (conditions[i].unit)
 			{
-				duckMissionIndex = i;
-				break;
+				case WinningCondition.Unit.Duck:
+					duckMissionIndex = i;
+					break;
+				case WinningCondition.Unit.Distance:
+				case WinningCondition.Unit.Seconds:
+					if (conditions[i].failable)
+						_backNumberIndex = i;
+					break;
 			}
 		}
     }
@@ -99,10 +146,20 @@ public class Victory : MonoBehaviour {
             GUI.Label(op, Objective, myStyle); 
 		}
 		//*/
+		Debug.Log(Difference);
+		
+		if (PlayerStatus.hasGameOverHappend)
+			return;
+	
 		float altura = ((Director.Instance.GameRank.Ducks / conditions[duckMissionIndex].value) * powerUpFill.height) * 0.90f;
 		GUI.DrawTexture (new Rect (Screen.width * 0.042f, Screen.height * 0.662f + 5 - altura, powerUpFill.width + 4.5f, altura), powerUpFill);
 		drawImage(Screen.width * 0.03f, Screen.height * 0.3f, powerUpBarraFolego);
 		//conditions[0].va
+		
+		//*Back
+		if (Difference >= 0)
+			GUI.Box(new Rect(Screen.width * 0.03f, Screen.height * 0.23f, powerUpBarraFolego.width, 50), Difference.ToString (), MyFont);
+		//*/
     }
 
 	void drawImage(float x, float y, Texture texture){

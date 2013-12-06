@@ -45,9 +45,10 @@ public class btnWrite : Button
     protected override void Draw()
     {
         base.Draw();
-
+		/*
         Rect r = new Rect(place_size.x.FitOnWidth(), place_size.y.FitOnHeight(),
-                place_size.width.FitOnWidth(), place_size.height.FitOnHeight());
+                place_size.width.FitOnWidth(), place_size.height.FitOnHeight());*/
+		Rect r = new Rect(Screen.width * 0.35f, Screen.height * 0.08f, 300, 200);
 
         GUI.Label(r, btnLetra.Profile, MyFont);
     }

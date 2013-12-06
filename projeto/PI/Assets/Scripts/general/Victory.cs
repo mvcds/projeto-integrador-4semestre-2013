@@ -16,11 +16,30 @@ public class Victory : MonoBehaviour {
     public float messageTime = 5;
     private float missionMessageTime;
     public int fase;
+	
+	private Texture powerUpFill;
+	private Texture powerUpBarraFolego;
+	
+	private int duckMissionIndex = 0;
 
     void Start()
     {
         Validate();
         missionMessageTime = messageTime * conditions.Length;
+		
+		powerUpFill = (Texture)Resources.Load("Images/HUD/BarraObjetivo");
+		powerUpBarraFolego = (Texture)Resources.Load("Images/HUD/BordaObjetivo");
+		
+		for (int i = 0; i < conditions.Length; i++)
+		{
+			if (conditions[i].unit == WinningCondition.Unit.Duck)
+			{
+				duckMissionIndex = i;
+				break;
+			}
+		}
+		
+		print ("" + conditions[duckMissionIndex].value);
     }
 
     void Update()
@@ -82,8 +101,16 @@ public class Victory : MonoBehaviour {
             GUI.Label(op, Objective, myStyle); 
 		}
 		//*/
+		float altura = ((Director.Instance.GameRank.Ducks / conditions[duckMissionIndex].value) * powerUpFill.height) * 0.90f;
+		GUI.DrawTexture (new Rect (Screen.width * 0.042f, Screen.height * 0.662f + 5 - altura, powerUpFill.width + 4.5f, altura), powerUpFill);
+		drawImage(Screen.width * 0.03f, Screen.height * 0.3f, powerUpBarraFolego);
+		//conditions[0].va
     }
 
+	void drawImage(float x, float y, Texture texture){
+		GUI.DrawTexture (new Rect (x, y, texture.width, texture.height), texture);
+	}
+	
     private string Objective
     {
         get

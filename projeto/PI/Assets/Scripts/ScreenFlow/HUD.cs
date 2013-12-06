@@ -16,6 +16,7 @@ public class HUD : MonoBehaviour {
 	private Texture powerUpBarraFolego;
 	private Texture powerUpFill;
 	private Texture powerUpFillRed;
+	private Texture2D botaoFundo;
     
     GUIStyle MyFont
     {
@@ -26,6 +27,21 @@ public class HUD : MonoBehaviour {
             myStyle.normal.textColor = Color.white;
             myStyle.alignment = TextAnchor.MiddleRight;
             myStyle.fontSize = 40;
+
+            return myStyle;
+        }
+    }
+	
+	GUIStyle MyFont2
+    {
+        get
+        {
+            GUIStyle myStyle = new GUIStyle();
+            myStyle.font = font;
+            myStyle.normal.textColor = Color.white;
+            myStyle.alignment = TextAnchor.MiddleCenter;
+			myStyle.normal.background = botaoFundo;
+            myStyle.fontSize = 20;
 
             return myStyle;
         }
@@ -46,6 +62,7 @@ public class HUD : MonoBehaviour {
 		powerUpBarraPorta = (Texture)Resources.Load("Images/HUD/LifeBar/BarraPorta");
 		powerUpFill = (Texture)Resources.Load("Images/HUD/LifeBar/greenBar");
 		powerUpFillRed = (Texture)Resources.Load("Images/HUD/LifeBar/redBar");
+		botaoFundo = (Texture2D)Resources.Load("Images/Menu/ranking/btn_generico");
     }
 	
 	void OnGUI(){
@@ -55,7 +72,7 @@ public class HUD : MonoBehaviour {
 		//if (PlayerStatus.duration > 0)
 			//GUI.Box(new Rect(10, 10, 120, 25), "PowerUp: " + (int)(PlayerStatus.duration + 1) + " / " + PlayerStatus.maxDuration);
 		//GUI.Box(new Rect(Screen.width / 2 - 60, 10, 120, 25), "Velocidade: " + (int)MainScript.gameVelocity);
-		GUI.Box(new Rect(Screen.width - 250, Screen.height - 60, 200, 25), "Distancia Percorrida: " + (int) Director.Instance.GameRank.Distance);
+		GUI.Box(new Rect(Screen.width - 250, Screen.height - 60, 300, 50), "Distancia: " + (int) Director.Instance.GameRank.Distance + "m", MyFont2);
 			
 		// Folego
 		if (MainScript.folego >= 1)
